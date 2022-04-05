@@ -54,7 +54,7 @@ data(study)
 
 `codebook` classifies all columns as one of four types and uses these categories to determine which descriptive statistics are given in the codebook document:
 
-1. Categorical with many different categories, for example `id` above     
-2. Categorical with few different categories, for example `gender` above     
-3. Time, for example `date` above    
-4. Numeric, for example `height` above    
+1. Categorical with many different categories, for example the `id` column of the `study` data frame.     
+2. Categorical with few different categories, for example the `gender` column of the `study` data frame.     
+3. Date, for example the `date` column of the `study` data frame.    
+4. Numeric, for example the `height` column of the `study` data frame.    

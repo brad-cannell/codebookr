@@ -18,29 +18,43 @@ You can install the development version of codebook like so:
 devtools::install_github("brad-cannell/codebook")
 ```
 
-## Example
+## Simple example
 
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-# library(codebook)
-## basic example code
-```
-
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+This simple example demonstrates how to use the `codebook` package to
+make a codebook from a **labeled** data frame.
 
 ``` r
-# summary(cars)
+library(codebook)
+library(dplyr, warn.conflicts = FALSE)
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/v1/examples>.
+### Load data
 
-You can also embed plots, for example:
+By default, `codebook` assumes that you want to make a codebook about a
+dataset file that you have saved somewhere, as opposed to a data frame
+you’re working on in an r session, but don’t intend to save. Therefore,
+the first thing you will need to do is read the data into the current R
+session.
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+For the purposes of making a self-contained example, the codebook
+package comes with a small example data frame that is intended to have
+some of the features of real study data. We will use it to demonstrate
+how to use `codebook` below.
+
+``` r
+# Load example data
+data(study)
+```
+
+### Column types
+
+`codebook` classifies all columns as one of four types and uses these
+categories to determine which descriptive statistics are given in the
+codebook document:
+
+1.  Categorical with many different categories, for example the `id`
+    column of the `study` data frame.  
+2.  Categorical with few different categories, for example the `gender`
+    column of the `study` data frame.  
+3.  Date, for example the `date` column of the `study` data frame.  
+4.  Numeric, for example the `height` column of the `study` data frame.
