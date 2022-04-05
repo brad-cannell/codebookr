@@ -30,33 +30,27 @@ devtools::install_github("brad-cannell/codebook")
 ```
 
 
-## Example
+## Simple example
 
-This is a basic example which shows you how to solve a common problem:
+This simple example demonstrates how to use the `codebook` package to make a codebook from a **labeled** data frame. 
 
 ```{r example}
-# library(codebook)
-## basic example code
+library(codebook)
+library(dplyr, warn.conflicts = FALSE)
 ```
 
-# Load data
+### Load data
 
 By default, `codebook` assumes that you want to make a codebook about a dataset file that you have saved somewhere, as opposed to a data frame you're working on in an r session, but don't intend to save. Therefore, the first thing you will need to do is read the data into the current R session.
 
-For the purposes of making a self-contained example, we will actually just create an example data frame in the code chunk below and use it to demonstrate how to use `codebook`
+For the purposes of making a self-contained example, the codebook package comes with a small example data frame that is intended to have some of the features of real study data. We will use it to demonstrate how to use `codebook` below. 
 
 ```{r}
-set.seed(123)
-df <- tibble(
-  id = factor(seq(1001, 1020, 1)),
-  gender = sample(c("Female", "Male"), 20, TRUE),
-  date = sample(seq.Date(as.Date("2015-09-15"), as.Date("2015-10-26"), "day"), 20, TRUE),
-  height = rnorm(20, 71, 10)
-) %>% 
-  print()
+# Load example data
+data(study)
 ```
 
-## Column types
+### Column types
 
 `codebook` classifies all columns as one of four types and uses these categories to determine which descriptive statistics are given in the codebook document:
 

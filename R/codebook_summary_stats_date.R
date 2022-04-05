@@ -1,4 +1,4 @@
-#' Compute Summary Statistics for Time Variables
+#' Compute Summary Statistics for Date Variables
 #'
 #' @param df Data frame of interest
 #' @param .x Column of interest
