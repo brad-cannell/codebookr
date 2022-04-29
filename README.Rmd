@@ -57,4 +57,38 @@ data(study)
 1. Categorical with many different categories, for example the `id` column of the `study` data frame.     
 2. Categorical with few different categories, for example the `gender` column of the `study` data frame.     
 3. Date, for example the `date` column of the `study` data frame.    
-4. Numeric, for example the `height` column of the `study` data frame.    
+4. Numeric, for example the `height` column of the `study` data frame. 
+
+### Add column attributes
+
+`codebook` adds arbitrary attributes to columns which can later be accessed to fill in the column attributes table. 
+A character vector of the same length as the variable is given.
+`codebook` lets the user know that an attribute is being added for the first if it doesn't already exist for at least one variable in the data frame.
+
+### Add description
+
+### Add section header
+`codebook` will create a formatted section header
+
+### Add summary statistics
+`codebook` will calculate appropriate summary statistics for each column type. `codebook` will check for type of variable
+1. Numerical, for example `height`
+2. Categorical with few categories, for example `gender`
+3. Categorical with many categories, for example `id`.
+
+If column type is not defined or undetermined, `codebook` will guess the column type where needed. The user can define column types on their own if guesses are inappropriate. 
+If `codebook` guesses column type:
+1. categorical: column will be defined categorical if variable is "logical", "character", or "factor". `codebook` will also determine if there are few categories or many categories based on the number of unique non-missing values generated.
+2. Numerical: column will be defined as numerical if variable is the number of non-mising values generated is greater than the "the number of categories?".
+
+### Add summary statistics for date
+### Add summary statistics for few categories
+### Add summary statistics for many categories
+### Add summary statistics for numeric
+### Convert summary statistics to flextable
+
+
+
+
+
+

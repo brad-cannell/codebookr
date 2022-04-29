@@ -183,7 +183,7 @@ codebook <- function(df, path = NA, title = NA, subtitle = NA, description = NA)
 
     # Get column attributes
     table_var_attributes <- df %>%
-      codebook_get_col_attributes(col_nms[[i]]) %>%
+      codebook_get_col_attributes(colums[[i]]) %>%
       flextable::regulartable() %>%
       codebook_theme_col_attr()
 
