@@ -16,6 +16,12 @@ study <- tibble(
   height = rnorm(20, 71, 10)
 )
 
+# Add missing values for testing
+study$id[3] <- NA
+study$sex[4] <- NA
+study$date[5] <- NA
+study$height[6] <- NA
+
 
 # Add the simulated data to the data directory.
 usethis::use_data(study, overwrite = TRUE)
