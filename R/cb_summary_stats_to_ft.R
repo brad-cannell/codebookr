@@ -4,7 +4,7 @@
 #' @param ... Other stuff
 #' @param col_width Set the width of the column that will appear in the Word table
 #'
-#' @return Flextbal object
+#' @return Flextable object
 # =============================================================================
 # S3 Generic function
 # =============================================================================
