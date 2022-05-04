@@ -18,12 +18,10 @@ cb_summary_stats_to_ft <- function(df, ...) {
 # =============================================================================
 # Method for class summary_numeric
 # =============================================================================
-#' @inheritParams cb_summary_stats_to_ft
 #' @export
 #' @rdname cb_summary_stats_to_ft
 
 cb_summary_stats_to_ft.summary_numeric <- function(df, col_width = 1.3) {
-
   ft <- df %>%
     flextable::regulartable() %>%
     # Set font to TNR 11
@@ -50,7 +48,6 @@ cb_summary_stats_to_ft.summary_numeric <- function(df, col_width = 1.3) {
 # =============================================================================
 # Method for class summary_many_cats
 # =============================================================================
-#' @inheritParams cb_summary_stats_to_ft
 #' @export
 #' @rdname cb_summary_stats_to_ft
 
@@ -90,12 +87,10 @@ cb_summary_stats_to_ft.summary_many_cats <- function(df, col_width = 1.62) {
 # =============================================================================
 # Method for class summary_few_cats
 # =============================================================================
-#' @inheritParams cb_summary_stats_to_ft
 #' @export
 #' @rdname cb_summary_stats_to_ft
 
 cb_summary_stats_to_ft.summary_few_cats <- function(df, col_width = 1.62) {
-
   ft <- df %>%
     flextable::regulartable() %>%
     # Change header text
@@ -129,7 +124,6 @@ cb_summary_stats_to_ft.summary_few_cats <- function(df, col_width = 1.62) {
 # =============================================================================
 # Method for class summary_time
 # =============================================================================
-#' @inheritParams cb_summary_stats_to_ft
 #' @export
 #' @rdname cb_summary_stats_to_ft
 
