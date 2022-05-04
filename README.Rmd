@@ -29,6 +29,11 @@ You can install the development version of codebook like so:
 devtools::install_github("brad-cannell/codebook")
 ```
 
+## Exported functions
+
+* codebook: The codebook function assists with the creation of a codebook for a given data frame.   
+
+* cb_add_col_attributes: Add arbitrary attributes to columns (e.g., description, source, column type). These attributes can later be accessed to fill in the column attributes table. Note: Column type is the type I say it is: categorical or numeric, Data type is what the computer says it is.
 
 ## Simple example
 
@@ -50,6 +55,10 @@ For the purposes of making a self-contained example, the codebook package comes 
 data(study)
 ```
 
+```{r}
+glimpse(study)
+```
+
 ### Column types
 
 `codebook` classifies all columns as one of four types and uses these categories to determine which descriptive statistics are given in the codebook document:
@@ -58,3 +67,61 @@ data(study)
 2. Categorical with few different categories, for example the `gender` column of the `study` data frame.     
 3. Date, for example the `date` column of the `study` data frame.    
 4. Numeric, for example the `height` column of the `study` data frame.    
+
+### Add column attributes
+
+```{r}
+# study <- 
+study %>% 
+  cb_add_col_attributes(
+    id,
+    description = "Study identification variable"
+  ) %>%
+
+  cb_add_col_attributes(
+    sex,
+    description = "Biological sex of the participant assigned at birth."
+  ) %>%
+  
+  cb_add_col_attributes(
+    date,
+    description = "Date of enrollment into study."
+  ) %>%
+  
+  cb_add_col_attributes(
+    height,
+    description = "Participant's height in inches at date of enrollment."
+  ) 
+```
+
+
+Get a chunk of code for each column in the data and then copy and paste below.
+
+```{r}
+for (i in seq_along(names(study))) {
+cat(paste0('
+  codebook_add_col_attributes( \n    ',
+    names(study)[i], ', \n    ',
+    'description = ""
+  ) %>%
+'))
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
