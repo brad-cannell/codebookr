@@ -4,7 +4,7 @@
 #' @param text Arbitrary text
 #'
 #' @return rdocx object
-codebook_add_text <- function(rdocx, text = NA) {
+cb_add_text <- function(rdocx, text = NA) {
 
   # ===========================================================================
   # Create text formats

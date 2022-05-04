@@ -4,7 +4,7 @@
 #' @param text Text of section header
 #'
 #' @return rdocx object
-codebook_add_section_header <- function(rdocx, text = NA) {
+cb_add_section_header <- function(rdocx, text = NA) {
 
   # ===========================================================================
   # Create text formats

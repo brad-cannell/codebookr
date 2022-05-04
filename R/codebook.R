@@ -73,7 +73,7 @@ codebook <- function(df, path = NA, title = NA, subtitle = NA, description = NA)
   # ===========================================================================
   # Optionally add title and subtitle to top of codebook
   # ===========================================================================
-  codebook_shell <- codebook_add_title(
+  cb_shell <- cb_add_title(
     rdocx = rdocx,
     title = title,
     subtitle = subtitle
@@ -146,7 +146,7 @@ codebook <- function(df, path = NA, title = NA, subtitle = NA, description = NA)
   ) %>%
     tidyr::gather() %>%  # Reorient the data frame vertically
     flextable::regulartable() %>% # Convert to flextable
-    codebook_theme_df_attributes() # Format
+    cb_theme_df_attributes() # Format
 
   # Add metadata to codebook
   rdocx <- rdocx %>%
@@ -158,11 +158,11 @@ codebook <- function(df, path = NA, title = NA, subtitle = NA, description = NA)
   if (!is.na(description)) {
     # Add Description header
     rdocx <- rdocx %>%
-      codebook_add_section_header("Description:")
+      cb_add_section_header("Description:")
 
     # Add dataset description to codebook
     rdocx <- rdocx %>%
-      codebook_add_description(description)
+      cb_add_description(description)
   }
 
   # ===========================================================================
@@ -172,7 +172,7 @@ codebook <- function(df, path = NA, title = NA, subtitle = NA, description = NA)
 
   # Add column Attributes header
   rdocx <- rdocx %>%
-    codebook_add_section_header("Column Attributes:")
+    cb_add_section_header("Column Attributes:")
 
   # Create vector of column names
   col_nms <- names(df)
@@ -183,9 +183,9 @@ codebook <- function(df, path = NA, title = NA, subtitle = NA, description = NA)
 
     # Get column attributes
     table_var_attributes <- df %>%
-      codebook_get_col_attributes(col_nms[[i]]) %>%
+      cb_get_col_attributes(col_nms[[i]]) %>%
       flextable::regulartable() %>%
-      codebook_theme_col_attr()
+      cb_theme_col_attr()
 
     # Add two blank lines above the attributes table
     rdocx <- rdocx %>%
@@ -198,8 +198,8 @@ codebook <- function(df, path = NA, title = NA, subtitle = NA, description = NA)
 
     # Get summary statistics
     summary_stats <- df %>%
-      codebook_add_summary_stats(col_nms[[i]]) %>%
-      codebook_summary_stats_to_ft()
+      cb_add_summary_stats(col_nms[[i]]) %>%
+      cb_summary_stats_to_ft()
 
     # Add summary statistics flextable to the codebook object
     rdocx <- rdocx %>%

@@ -3,7 +3,7 @@
 #' @param ft A flextable object
 #'
 #' @return A flextable object
-codebook_theme_df_attributes <- function(ft) {
+cb_theme_df_attributes <- function(ft) {
 
   ft <- ft %>%
     # Delete the header row

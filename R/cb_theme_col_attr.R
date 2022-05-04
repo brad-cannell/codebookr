@@ -3,7 +3,7 @@
 #' @param ft A flextable object
 #'
 #' @return A flextable object
-codebook_theme_col_attr <- function(ft) {
+cb_theme_col_attr <- function(ft) {
 
   # Set border attributes
   border_thick <- officer::fp_border(color = "black", width = 3)

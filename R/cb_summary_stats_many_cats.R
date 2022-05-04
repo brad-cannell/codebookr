@@ -5,7 +5,7 @@
 #' @param n_extreme_cats Number of extreme values to display
 #'
 #' @return A tibble
-codebook_summary_stats_many_cats <- function(df, .x, n_extreme_cats = 5) {
+cb_summary_stats_many_cats <- function(df, .x, n_extreme_cats = 5) {
 
   # ===========================================================================
   # Prevents R CMD check: "no visible binding for global variable ‘.’"

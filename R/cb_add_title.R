@@ -8,7 +8,7 @@
 #' @param subtitle Optional subtitle
 #'
 #' @return rdocx object
-codebook_add_title <- function(rdocx, title = NA, subtitle = NA) {
+cb_add_title <- function(rdocx, title = NA, subtitle = NA) {
 
   # ===========================================================================
   # Checks

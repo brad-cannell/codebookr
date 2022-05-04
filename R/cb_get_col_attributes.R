@@ -4,7 +4,7 @@
 #' @param .x Column of interest in df
 #'
 #' @return A tibble
-codebook_get_col_attributes <- function(df, .x) {
+cb_get_col_attributes <- function(df, .x) {
 
   # ===========================================================================
   # Variable management

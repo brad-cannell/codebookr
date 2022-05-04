@@ -5,7 +5,7 @@
 #' @param digits Number of digits after decimal to display
 #'
 #' @return A tibble
-codebook_summary_stats_numeric <- function(df, .x, digits = 2) {
+cb_summary_stats_numeric <- function(df, .x, digits = 2) {
 
   # ===========================================================================
   # Prevents R CMD check: "no visible binding for global variable ‘.’"

@@ -11,7 +11,7 @@
 #'
 #' @return Data frame
 #' @export
-codebook_add_col_attributes <- function(df, .x, ...) {
+cb_add_col_attributes <- function(df, .x, ...) {
 
   # ===========================================================================
   # Variable management

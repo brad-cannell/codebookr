@@ -8,7 +8,7 @@
 #' @param n_extreme_cats Number of extreme values to display
 #'
 #' @return A tibble of results
-codebook_add_summary_stats <- function(df, .x, many_cats = 10, num_to_cat = 4, digits = 2,
+cb_add_summary_stats <- function(df, .x, many_cats = 10, num_to_cat = 4, digits = 2,
                                        n_extreme_cats = 5) {
 
   # ===========================================================================
@@ -88,16 +88,16 @@ codebook_add_summary_stats <- function(df, .x, many_cats = 10, num_to_cat = 4, d
   # Create attributes data frame - will be converted to flextable
   # ===========================================================================
   if (col_type == "numeric") {
-    summary_df <- codebook_summary_stats_numeric(df, .x)
+    summary_df <- cb_summary_stats_numeric(df, .x)
     class(summary_df) <- c(class(summary_df), "summary_numeric")
   } else if (col_type == "many_cats") {
-    summary_df <- codebook_summary_stats_many_cats(df, .x, n_extreme_cats)
+    summary_df <- cb_summary_stats_many_cats(df, .x, n_extreme_cats)
     class(summary_df) <- c(class(summary_df), "summary_many_cats")
   } else if (col_type == "few_cats") {
-    summary_df <- codebook_summary_stats_few_cats(df, .x, digits)
+    summary_df <- cb_summary_stats_few_cats(df, .x, digits)
     class(summary_df) <- c(class(summary_df), "summary_few_cats")
   } else if (col_type == "time") {
-    summary_df <- codebook_summary_stats_time(df, .x)
+    summary_df <- cb_summary_stats_time(df, .x)
     class(summary_df) <- c(class(summary_df), "summary_time")
   } else {
     stop("Column ", .x, " is of unknown type. Please set the col_type attribute")
