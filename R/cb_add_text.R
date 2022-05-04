@@ -4,6 +4,7 @@
 #' @param text Arbitrary text
 #'
 #' @return rdocx object
+#' @importFrom dplyr %>%
 cb_add_text <- function(rdocx, text = NA) {
 
   # ===========================================================================

@@ -3,6 +3,7 @@
 #' @param ft A flextable object
 #'
 #' @return A flextable object
+#' @importFrom dplyr %>%
 cb_theme_df_attributes <- function(ft) {
 
   ft <- ft %>%

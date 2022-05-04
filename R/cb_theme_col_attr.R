@@ -3,6 +3,7 @@
 #' @param ft A flextable object
 #'
 #' @return A flextable object
+#' @importFrom dplyr %>%
 cb_theme_col_attr <- function(ft) {
 
   # Set border attributes

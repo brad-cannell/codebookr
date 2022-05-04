@@ -7,6 +7,7 @@
 #' @param description Text description of the dataset
 #'
 #' @return rdocx object
+#' @importFrom dplyr %>%
 cb_add_description <- function(rdocx, description) {
 
   # ===========================================================================

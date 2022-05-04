@@ -4,6 +4,7 @@
 #' @param .x Column of interest in df
 #'
 #' @return A tibble
+#' @importFrom dplyr %>%
 cb_get_col_attributes <- function(df, .x) {
 
   # ===========================================================================

@@ -16,6 +16,7 @@
 #' @param description Text description of the dataset
 #'
 #' @return An rdocx object that can be printed to a Word document
+#' @importFrom dplyr %>%
 #' @export
 #'
 #' @examples

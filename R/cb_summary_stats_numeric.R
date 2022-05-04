@@ -5,6 +5,7 @@
 #' @param digits Number of digits after decimal to display
 #'
 #' @return A tibble
+#' @importFrom dplyr %>%
 cb_summary_stats_numeric <- function(df, .x, digits = 2) {
 
   # ===========================================================================

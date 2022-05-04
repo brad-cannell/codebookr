@@ -5,6 +5,8 @@
 #' @param col_width Set the width of the column that will appear in the Word table
 #'
 #' @return Flextable object
+#' @importFrom dplyr %>%
+
 # =============================================================================
 # S3 Generic function
 # =============================================================================

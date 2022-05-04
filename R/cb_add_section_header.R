@@ -4,6 +4,7 @@
 #' @param text Text of section header
 #'
 #' @return rdocx object
+#' @importFrom dplyr %>%
 cb_add_section_header <- function(rdocx, text = NA) {
 
   # ===========================================================================

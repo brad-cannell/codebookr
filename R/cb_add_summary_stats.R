@@ -8,6 +8,7 @@
 #' @param n_extreme_cats Number of extreme values to display
 #'
 #' @return A tibble of results
+#' @importFrom dplyr %>%
 cb_add_summary_stats <- function(df, .x, many_cats = 10, num_to_cat = 4, digits = 2,
                                        n_extreme_cats = 5) {
 

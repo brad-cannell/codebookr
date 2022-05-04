@@ -8,6 +8,7 @@
 #' @param subtitle Optional subtitle
 #'
 #' @return rdocx object
+#' @importFrom dplyr %>%
 cb_add_title <- function(rdocx, title = NA, subtitle = NA) {
 
   # ===========================================================================

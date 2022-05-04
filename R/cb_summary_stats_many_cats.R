@@ -5,6 +5,7 @@
 #' @param n_extreme_cats Number of extreme values to display
 #'
 #' @return A tibble
+#' @importFrom dplyr %>%
 cb_summary_stats_many_cats <- function(df, .x, n_extreme_cats = 5) {
 
   # ===========================================================================
