@@ -42,7 +42,10 @@ cb_add_col_attributes <- function(df, .x, ...) {
   if (length(new_args) != 0) {
     message("The following attribute(s) are being added to a variable in ",
             "the data frame for the first time: ", new_args, ". ",
-            "Check for typos.")
+            "If you believe this/these attribute(s) were previously added,",
+            " then check for a typo in the attribute name.",
+            " If you are adding this/these attribute(s) for",
+            " the first time, you can probably safely ignore this message.")
   }
 
 
@@ -58,3 +61,14 @@ cb_add_col_attributes <- function(df, .x, ...) {
   # ===========================================================================
   df
 }
+
+# For testing
+# data(study)
+# cb_add_col_attributes(
+#   study,
+#   id,
+#   description = "Study identification variable",
+#   data_group = "Administrative"
+# ) %>%
+#   dplyr::pull(id) %>%
+#   attributes()
