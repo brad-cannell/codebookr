@@ -1,4 +1,4 @@
-Package: codebook
+Package: codebookr
 Title: Create Codebooks From Data Frames
 Version: 0.0.0.9000
 Authors@R: person("Brad", "Cannell", email = "brad.cannell@gmail.com",

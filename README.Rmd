@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# codebook
+# codebookr
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -40,13 +40,13 @@ devtools::install_github("brad-cannell/codebook")
 This simple example demonstrates how to use the `codebook` package to make a codebook from a **labeled** data frame. 
 
 ```{r example}
-library(codebook)
+library(codebookr)
 library(dplyr, warn.conflicts = FALSE)
 ```
 
 ### Load data
 
-By default, `codebook` assumes that you want to make a codebook about a dataset file that you have saved somewhere, as opposed to a data frame you're working on in an r session, but don't intend to save. Therefore, the first thing you will need to do is read the data into the current R session.
+By default, `codebookr` assumes that you want to make a codebook about a dataset file that you have saved somewhere, as opposed to a data frame you're working on in an r session, but don't intend to save. Therefore, the first thing you will need to do is read the data into the current R session.
 
 For the purposes of making a self-contained example, the codebook package comes with a small example data frame that is intended to have some of the features of real study data. We will use it to demonstrate how to use `codebook` below. 
 
