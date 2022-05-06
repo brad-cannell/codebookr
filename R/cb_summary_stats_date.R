@@ -14,19 +14,13 @@ cb_summary_stats_time <- function(df, .x, digits = 2) {
   Value = Frequency = Percentage = n = Statistic = NULL
 
   # ===========================================================================
-  # Variable management
-  # ===========================================================================
-  x <- rlang::sym(.x)
-  x_char <- rlang::quo_name(x)
-
-  # ===========================================================================
   # Get the minimum value, and the number and percentage of times that value occurs
   # ===========================================================================
   min <- df %>%
     dplyr::summarise(
       Statistic  = "Minimum",
-      Value      = min(df[[x_char]], na.rm = TRUE),
-      Frequency  = (df[[x_char]] == Value) %>% sum(),
+      Value      = min({{ .x }}, na.rm = TRUE),
+      Frequency  = ({{ .x }} == Value) %>% sum(na.rm = TRUE),
       Percentage = Frequency / nrow(df) * 100
     ) %>%
     # Format output
@@ -35,14 +29,13 @@ cb_summary_stats_time <- function(df, .x, digits = 2) {
       Percentage = round(Percentage, digits = digits),
       Percentage = format(Percentage, nsmal = digits)
     ) %>%
-    dplyr::mutate_all(as.character)
+    dplyr::mutate(dplyr::across(dplyr::everything(), as.character))
 
   # ===========================================================================
   # Get the mode value(s), and the number and percentage of times that value occurs
   # ===========================================================================
   counts <- df %>%
-    dplyr::group_by(!!x) %>%
-    dplyr::summarise(n = n()) %>%
+    dplyr::count({{ .x }}) %>%
     dplyr::pull(n)
 
   # ===========================================================================
@@ -61,17 +54,16 @@ cb_summary_stats_time <- function(df, .x, digits = 2) {
         Percentage = round(Percentage, digits = digits),
         Percentage = format(Percentage, nsmal = digits)
       )%>%
-      dplyr::mutate_all(as.character)
+      dplyr::mutate(dplyr::across(dplyr::everything(), as.character))
 
   } else {
     mode <- df %>%
-      dplyr::group_by(!!x) %>%
-      dplyr::summarise(Frequency = n()) %>%
+      dplyr::count({{ .x }}, name = "Frequency") %>%
       dplyr::filter(Frequency == max(Frequency)) %>%
       dplyr::mutate(
         Statistic = "Mode",
         Percentage = Frequency / nrow(df) * 100,
-        Value = !!x
+        Value = date
       ) %>%
       # Format output
       dplyr::mutate(
@@ -80,7 +72,7 @@ cb_summary_stats_time <- function(df, .x, digits = 2) {
         Percentage = format(Percentage, nsmal = digits)
       ) %>%
       dplyr::select(Statistic, Value, Frequency, Percentage) %>%
-      dplyr::mutate_all(as.character)
+      dplyr::mutate(dplyr::across(dplyr::everything(), as.character))
   }
 
   # ===========================================================================
@@ -89,8 +81,8 @@ cb_summary_stats_time <- function(df, .x, digits = 2) {
   max <- df %>%
     dplyr::summarise(
       Statistic  = "Maximum",
-      Value      = max(df[[x_char]], na.rm = TRUE),
-      Frequency  = (df[[x_char]] == Value) %>% sum(),
+      Value      = max({{ .x }}, na.rm = TRUE),
+      Frequency  = ({{ .x }} == Value) %>% sum(na.rm = TRUE),
       Percentage = Frequency / nrow(df) * 100
     ) %>%
     # Format output
@@ -99,7 +91,7 @@ cb_summary_stats_time <- function(df, .x, digits = 2) {
       Percentage = round(Percentage, digits = digits),
       Percentage = format(Percentage, nsmal = digits)
     ) %>%
-    dplyr::mutate_all(as.character)
+    dplyr::mutate(dplyr::across(dplyr::everything(), as.character))
 
   # ===========================================================================
   # Append the stats of interest into a single data frame and return
@@ -107,3 +99,7 @@ cb_summary_stats_time <- function(df, .x, digits = 2) {
   summary <- dplyr::bind_rows(min, mode, max)
   summary
 }
+
+# For testing
+# data(study)
+# cb_summary_stats_time(study, date, digits = 2)

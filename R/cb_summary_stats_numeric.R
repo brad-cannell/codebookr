@@ -16,21 +16,24 @@ cb_summary_stats_numeric <- function(df, .x, digits = 2) {
   # ===========================================================================
   # Calculate measures of interest
   # ===========================================================================
-  x <- rlang::sym(.x)
   summary <- df %>%
     dplyr::summarise(
-      Min    = min(!!x, na.rm = TRUE),
-      Mean   = mean(!!x, na.rm = TRUE),
-      Median = median(!!x, na.rm = TRUE),
-      Max    = max(!!x, na.rm = TRUE),
-      SD     = sd(!!x, na.rm = TRUE)
+      Min    = min({{ .x }}, na.rm = TRUE),
+      Mean   = mean({{ .x }}, na.rm = TRUE),
+      Median = median({{ .x }}, na.rm = TRUE),
+      Max    = max({{ .x }}, na.rm = TRUE),
+      SD     = sd({{ .x }}, na.rm = TRUE)
     ) %>%
     # Format output
-    dplyr::mutate_all(round, digits = digits) %>%
-    dplyr::mutate_all(format, nsmall = digits)
+    dplyr::mutate(dplyr::across(dplyr::everything(), round, digits = digits)) %>%
+    dplyr::mutate(dplyr::across(dplyr::everything(), format, nsmall = digits))
 
   # ===========================================================================
   # Return tibble of results
   # ===========================================================================
   summary
 }
+
+# For testing
+# data(study)
+# cb_summary_stats_numeric(study, height)

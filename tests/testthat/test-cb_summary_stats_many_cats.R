@@ -1,11 +1,8 @@
 df <- cb_summary_stats_many_cats(study, id)
 
 testthat::test_that("Dimensions of the object returned by cb_summary_stats_many_cats are as expected", {
-  rows    <- nrow(df)
-  columns <- ncol(df)
-
-  testthat::expect_equal(rows, 5L)
-  testthat::expect_equal(columns, 4L)
+  testthat::expect_equal(nrow(df), 5L)
+  testthat::expect_equal(ncol(df), 4L)
 })
 
 testthat::test_that("The expected column names are returned by cb_summary_stats_many_cats", {
