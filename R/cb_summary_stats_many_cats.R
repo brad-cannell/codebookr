@@ -14,11 +14,6 @@ cb_summary_stats_many_cats <- function(df, .x, n_extreme_cats = 5) {
   n = head = tail = lowest_cats = highest_cats = NULL
 
   # ===========================================================================
-  # Variable management
-  # ===========================================================================
-  x <- rlang::sym(.x)
-
-  # ===========================================================================
   # Create table shell
   # ===========================================================================
   summary <- tibble::tibble(
@@ -32,8 +27,7 @@ cb_summary_stats_many_cats <- function(df, .x, n_extreme_cats = 5) {
   # Get least prevalent categories
   # ===========================================================================
   lowest <- df %>%
-    dplyr::group_by(!!x) %>%
-    dplyr::summarise(n = n()) %>%
+    dplyr::count({{ .x }}) %>%
     dplyr::arrange(n) %>%
     head(n = n_extreme_cats)
 
@@ -41,8 +35,7 @@ cb_summary_stats_many_cats <- function(df, .x, n_extreme_cats = 5) {
   # Get most prevalent categories
   # ===========================================================================
   highest <- df %>%
-    dplyr::group_by(!!x) %>%
-    dplyr::summarise(n = n()) %>%
+    dplyr::count({{ .x }}) %>%
     dplyr::arrange(n) %>%
     tail(n = n_extreme_cats)
 
@@ -52,10 +45,18 @@ cb_summary_stats_many_cats <- function(df, .x, n_extreme_cats = 5) {
   summary[, 1:2] <- lowest[, 1:2]
   summary[, 3:4] <- highest[, 1:2]
   summary <- summary %>%
-    # Replace NA with "Missing"
+    # Change the category label for missing values from NA to "Missing"
+    # If .x is a factor, then replace_na() won't work. Have to change to
+    # character first.
     dplyr::mutate(
-      lowest_cats = tidyr::replace_na(lowest_cats, "Missing"),
+      lowest_cats  = as.character(lowest_cats),
+      lowest_cats  = tidyr::replace_na(lowest_cats, "Missing"),
+      highest_cats = as.character(highest_cats),
       highest_cats = tidyr::replace_na(highest_cats, "Missing")
     )
   summary
 }
+
+# For testing
+# data(study)
+# cb_summary_stats_many_cats(study, id)

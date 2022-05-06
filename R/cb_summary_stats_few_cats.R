@@ -22,7 +22,12 @@ cb_summary_stats_few_cats <- function(df, .x, digits = 2) {
     # "cat"
     dplyr::rename(cat = 1) %>%
     # Change the category label for missing values from NA to "Missing"
-    dplyr::mutate(cat = tidyr::replace_na(cat, "Missing")) %>%
+    # If .x is a factor, then replace_na() won't work. Have to change to
+    # character first.
+    dplyr::mutate(
+      cat = as.character(cat),
+      cat = tidyr::replace_na(cat, "Missing")
+    ) %>%
     # Calculate the cumulative total and percentage
     dplyr::mutate(
       cum_freq = cumsum(n),
