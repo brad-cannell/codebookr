@@ -5,11 +5,12 @@
 \alias{study}
 \title{Simulated study data.}
 \format{
-A data frame with 20 rows and 4 variables:
+A data frame with 20 rows and 5 variables:
 \describe{
 \item{id}{participant id}
 \item{sex}{participant sex, female/male}
 \item{date}{date of enrollment}
+\item{days}{number of days enrolled}
 \item{height}{participant height, in inches}
 }
 }
