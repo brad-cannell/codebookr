@@ -7,15 +7,26 @@
 # =============================================================================
 
 library(dplyr, warn.conflicts = FALSE)
+library(hms, warn.conflicts = FALSE)
 
 set.seed(123)
 study <- tibble(
-  id     = as.character(seq(1001, 1020, 1)),
-  sex    = factor(sample(c("Female", "Male"), 20, TRUE)),
-  date   = sample(seq.Date(as.Date("2021-09-15"), as.Date("2021-10-26"), "day"), 20, TRUE),
-  days   = sample(1L:21L, 20L, TRUE),
-  height = rnorm(20, 71, 10)
+  id      = as.character(seq(1001, 1020, 1)),
+  sex     = factor(sample(c("Female", "Male"), 20, TRUE)),
+  date    = sample(seq.Date(as.Date("2021-09-15"), as.Date("2021-10-26"), "day"), 20, TRUE),
+  sec     = sample(0:60, 20, TRUE),
+  min     = sample(0:60, 20, TRUE),
+  hour    = sample(8:16, 20, TRUE),
+  time    = hms(sec, min, hour),
+  days    = sample(1L:21L, 20L, TRUE),
+  height  = rnorm(20, 71, 10),
+  likert  = sample(1:5, 20, TRUE),
+  outcome = sample(c(TRUE, FALSE), 20, TRUE)
 )
+
+# Keep vars of interest
+study <- study %>%
+  select(-sec, -min, -hour)
 
 # Add missing values for testing
 study$id[3] <- NA
