@@ -9,14 +9,18 @@
 #'
 #' @return A tibble of results
 #' @importFrom dplyr %>%
-cb_add_summary_stats <- function(df, .x, many_cats = 10, num_to_cat = 4, digits = 2,
-                                       n_extreme_cats = 5) {
+cb_add_summary_stats <- function(df,
+                                 .x,
+                                 many_cats = 10,
+                                 num_to_cat = 4,
+                                 digits = 2,
+                                 n_extreme_cats = 5) {
 
   # ===========================================================================
   # Variable management
   # ===========================================================================
-  # x <- rlang::enquo(.x)
-  # x_char <- rlang::quo_name(x)
+  x <- rlang::enquo(.x)
+  x_char <- rlang::as_name(.x)
   attrs <- attributes(df[[.x]])
   col_type_attr <- tolower(attrs[["col_type"]])
 
@@ -90,16 +94,16 @@ cb_add_summary_stats <- function(df, .x, many_cats = 10, num_to_cat = 4, digits 
   # ===========================================================================
   if (col_type == "numeric") {
     summary_df <- cb_summary_stats_numeric(df, .x)
-    class(summary_df) <- c(class(summary_df), "summary_numeric")
+    class(summary_df) <- c("summary_numeric", class(summary_df))
   } else if (col_type == "many_cats") {
     summary_df <- cb_summary_stats_many_cats(df, .x, n_extreme_cats)
-    class(summary_df) <- c(class(summary_df), "summary_many_cats")
+    class(summary_df) <- c("summary_many_cats", class(summary_df))
   } else if (col_type == "few_cats") {
     summary_df <- cb_summary_stats_few_cats(df, .x, digits)
-    class(summary_df) <- c(class(summary_df), "summary_few_cats")
+    class(summary_df) <- c("summary_few_cats", class(summary_df))
   } else if (col_type == "time") {
     summary_df <- cb_summary_stats_time(df, .x)
-    class(summary_df) <- c(class(summary_df), "summary_time")
+    class(summary_df) <- c("summary_time", class(summary_df))
   } else {
     stop("Column ", .x, " is of unknown type. Please set the col_type attribute")
   }
@@ -109,3 +113,9 @@ cb_add_summary_stats <- function(df, .x, many_cats = 10, num_to_cat = 4, digits 
   # ===========================================================================
   summary_df
 }
+
+# For testing
+# Currently, the codebook function passes df to the df argument of cb_add_summary_stats
+# and a character string (e.g., "id") for each column in df to the .x argument
+# of cb_add_summary_stats
+# cb_add_summary_stats(study, "id")
