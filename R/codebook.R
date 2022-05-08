@@ -11,24 +11,26 @@
 #'
 #' @param df The saved file at `path`, read into memory as a data frame
 #' @param path The path to the saved dataset of interest
-#' @param title Optional title
-#' @param subtitle Optional subtitle
-#' @param description Text description of the dataset
+#' @param title An optional title that will appear at the top of the Word codebook document
+#' @param subtitle An optional subtitle that will appear at the top of the Word codebook document
+#' @param description An optional text description of the dataset that will appear on the first page of the Word codebook document
 #'
 #' @return An rdocx object that can be printed to a Word document
 #' @importFrom dplyr %>%
 #' @export
 #'
 #' @examples
-#' # codebook_detect_5wk <- codebook(
-#' #   df = detect_5wk %>% select(1:2),
-#' #   path = "../data/detect_5wk.csv",
-#' #   title = "Detection of Elder abuse Through Emergency Care Technicians (DETECT)",
-#' #   subtitle = "5-Week Pilot Study",
-#' #   description = description
-#' # ) %>%
-#' #   print(target = "example_officer_codebook.docx")
-codebook <- function(df, path = NA, title = NA, subtitle = NA, description = NA) {
+#' \dontrun{
+#' codebook_detect_5wk <- codebook(
+#'   df = detect_5wk %>% select(1:2),
+#'   path = "../data/detect_5wk.csv",
+#'   title = "Detection of Elder abuse Through Emergency Care Technicians (DETECT)",
+#'   subtitle = "5-Week Pilot Study",
+#'   description = description
+#' ) %>%
+#'   print(target = "example_officer_codebook.docx")
+#' }
+codebook <- function(df, title = NA, subtitle = NA, description = NA) {
 
   # ===========================================================================
   # Checks
@@ -45,26 +47,14 @@ codebook <- function(df, path = NA, title = NA, subtitle = NA, description = NA)
             "This can be caused by piping df into the get_df_attributes fucntion.")
   }
 
-  # Check for file path
-  if (is.na(path)) {
-    stop("Codebook expects that df is a data frame that you have read ",
-         "into memory from a saved data file. Please provide the path ",
-         "to the saved data file.")
-  }
-
-  # Check that file path is valid
-  if (!file.exists(path)) {
-    stop("The argument to 'path' is not a valid file path.")
-  }
-
   # ===========================================================================
   # Create an empty Word rdocx object
   # default template contains only an empty paragraph
   # Using cursor_begin and body_remove, we can delete it
   # ===========================================================================
   rdocx <- officer::read_docx() %>%
-    officer::cursor_begin() %>%
-    officer::body_remove()
+    officer::cursor_begin()
+    # officer::body_remove()
 
   # ===========================================================================
   # Optionally add title and subtitle to top of codebook
@@ -76,72 +66,30 @@ codebook <- function(df, path = NA, title = NA, subtitle = NA, description = NA)
   )
 
   # ===========================================================================
-  # Copy code from utils:::format.object_size
-  # Can't use ::: operator on CRAN
-  # ===========================================================================
-  format_object_size <- function (x, units = "b", standard = "auto", digits = 1L, ...) {
-    known_bases <- c(legacy = 1024, IEC = 1024, SI = 1000)
-    known_units <- list(
-      SI = c("B", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"),
-      IEC = c("B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"),
-      legacy = c("b", "Kb", "Mb", "Gb", "Tb", "Pb"),
-      LEGACY = c("B", "KB", "MB", "GB", "TB", "PB")
-    )
-    units <- match.arg(units, c("auto", unique(unlist(known_units), use.names = FALSE)))
-    standard <- match.arg(standard, c("auto", names(known_bases)))
-
-    if (standard == "auto") {
-      standard <- "legacy"
-      if (units != "auto") {
-        if (grepl("iB$", units)) {
-          standard <- "IEC"
-        } else if (grepl("b$", units)) {
-          standard <- "legacy"
-        } else if (units == "kB") {
-          stop("For SI units, specify 'standard = \"SI\"'")
-        }
-      }
-    }
-
-    base <- known_bases[[standard]]
-    units_map <- known_units[[standard]]
-
-    if (units == "auto") {
-      power <- if (x <= 0) {
-        0L
-      } else {
-        min(as.integer(log(x, base = base)), length(units_map) - 1L)
-      }
-    } else {
-      power <- match(toupper(units), toupper(units_map)) - 1L
-      if (is.na(power)) {
-        stop(gettextf(
-          "Unit \"%s\" is not part of standard \"%s\"",
-          sQuote(units), sQuote(standard)), domain = NA
-        )
-      }
-    }
-
-    unit <- units_map[power + 1L]
-    if (power == 0 && standard == "legacy") {
-      unit <- "bytes"
-    }
-    paste(round(x/base^power, digits = digits), unit)
-  }
-
-  # ===========================================================================
   # Add metadata to codebook shell
   # ===========================================================================
   # Create tibble of metadata
   meta <- tibble::tibble(
     `Dataset name:` = df_name,
-    `Dataset size:` = df %>% utils::object.size() %>% format_object_size(units = "auto"),
+    `Dataset size:` = df %>% utils::object.size() %>% format(units = "auto"),
     `Column count:` = df %>% ncol() %>% format(big.mark = ","),
-    `Row count:` = df %>% nrow() %>% format(big.mark = ","),
-    `Last modified date:` = file.mtime(path) %>% as.character()
-  ) %>%
-    tidyr::gather() %>%  # Reorient the data frame vertically
-    flextable::regulartable() %>% # Convert to flextable
+    `Row count:`    = df %>% nrow() %>% format(big.mark = ","),
+    `Updated date:` = Sys.Date()
+  )
+
+  # Pivot the metadata to a vertical orientation
+  # Must covert all values to character to pivot them into the same column
+  meta <- meta %>%
+    dplyr::mutate(dplyr::across(dplyr::everything(), as.character)) %>%
+    tidyr::pivot_longer(
+      cols = dplyr::everything(),
+      names_to = "key",
+      values_to = "value"
+    )
+
+  # Convert to flextable
+  meta <- meta %>%
+    flextable::regulartable() %>%
     cb_theme_df_attributes() # Format
 
   # Add metadata to codebook
