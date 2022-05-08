@@ -29,11 +29,12 @@ cb_add_summary_stats <- function(df,
   # Numerical
   # Categorical - many categories (e.g. participant id)
   # Categorical - few categories (e.g. gender)
+  # Time - including dates
   # ===========================================================================
   # Check the number of unique non-missing values
   n_unique_vals <- unique(df[[.x]]) %>% stats::na.exclude() %>% length()
 
-  # Check for defined col_type
+  # Check for user-set col_type
   if (length(col_type_attr) == 0) {
     col_type <- "guess"
   } else if (col_type_attr %in% c("numeric", "numerical")) {
