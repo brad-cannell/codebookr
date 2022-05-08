@@ -1,4 +1,9 @@
-df <- cb_summary_stats_few_cats(study, sex, digits = 2)
+# =============================================================================
+# Make sure to wrap column names in quotes because that's how it's being handed
+# down from codebook via cb_add_summary_stats
+# =============================================================================
+
+df <- cb_summary_stats_few_cats(study, "sex", digits = 2)
 
 testthat::test_that("Dimensions of the object returned by cb_summary_stats_few_cats are as expected", {
   testthat::expect_equal(nrow(df), 3L)

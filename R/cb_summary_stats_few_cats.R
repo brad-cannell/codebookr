@@ -11,7 +11,7 @@ cb_summary_stats_few_cats <- function(df, .x, digits = 2) {
   # ===========================================================================
   # Prevents R CMD check: "no visible binding for global variable ‘.’"
   # ===========================================================================
-  var = n = cum_freq = prop = percent = NULL
+  var = n = cum_freq = prop = percent = .data = NULL
 
   # ===========================================================================
   # Calculate measures of interest

@@ -9,8 +9,7 @@
 #' those attributes in a data frame, which is later turned into a flextable and
 #' added to the codebook document.
 #'
-#' @param df The saved file at `path`, read into memory as a data frame
-#' @param path The path to the saved dataset of interest
+#' @param df The data frame the codebook will describe
 #' @param title An optional title that will appear at the top of the Word codebook document
 #' @param subtitle An optional subtitle that will appear at the top of the Word codebook document
 #' @param description An optional text description of the dataset that will appear on the first page of the Word codebook document

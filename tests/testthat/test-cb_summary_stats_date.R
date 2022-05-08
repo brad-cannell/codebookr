@@ -1,4 +1,9 @@
-df <- cb_summary_stats_time(study, date, digits = 2)
+# =============================================================================
+# Make sure to wrap column names in quotes because that's how it's being handed
+# down from codebook via cb_add_summary_stats
+# =============================================================================
+
+df <- cb_summary_stats_time(study, "date", digits = 2)
 
 testthat::test_that("Dimensions of the object returned by cb_summary_stats_time are as expected", {
   testthat::expect_equal(nrow(df), 3L)
@@ -21,7 +26,7 @@ testthat::test_that("The expected default results are returned by cb_summary_sta
 
 testthat::test_that("The digits parameter of cb_summary_stats_time works as expected", {
   # Change the value of digits from 2 (default) to 3
-  df <- cb_summary_stats_time(study, date, digits = 3)
+  df <- cb_summary_stats_time(study, "date", digits = 3)
   testthat::expect_equal(df$Percentage, c("10.000", "15.000", "10.000"))
 })
 

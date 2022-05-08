@@ -7,15 +7,13 @@
 codebook(df, title = NA, subtitle = NA, description = NA)
 }
 \arguments{
-\item{df}{The saved file at \code{path}, read into memory as a data frame}
+\item{df}{The data frame the codebook will describe}
 
 \item{title}{An optional title that will appear at the top of the Word codebook document}
 
 \item{subtitle}{An optional subtitle that will appear at the top of the Word codebook document}
 
 \item{description}{An optional text description of the dataset that will appear on the first page of the Word codebook document}
-
-\item{path}{The path to the saved dataset of interest}
 }
 \value{
 An rdocx object that can be printed to a Word document

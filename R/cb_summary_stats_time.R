@@ -1,4 +1,4 @@
-#' Compute Summary Statistics for Date Variables
+#' Compute Summary Statistics for Date or Time Variables
 #'
 #' @param df Data frame of interest
 #' @param .x Column of interest
@@ -11,7 +11,15 @@ cb_summary_stats_time <- function(df, .x, digits = 2) {
   # ===========================================================================
   # Prevents R CMD check: "no visible binding for global variable ‘.’"
   # ===========================================================================
-  Value = Frequency = Percentage = n = Statistic = NULL
+  Value = Frequency = Percentage = n = Statistic = .data = NULL
+
+  # ===========================================================================
+  # Prevents Error in `dplyr::summarise()`:
+  # ! Problem while computing `Value = min(...)`.
+  # Caused by error in `.data[[<function() .Internal(date())>]]`:
+  # ! Must subset the data pronoun with a string, not a function.
+  # ===========================================================================
+  # .x <- rlang::as_name(rlang::enquo(.x))
 
   # ===========================================================================
   # Get the minimum value, and the number and percentage of times that value occurs

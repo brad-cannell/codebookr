@@ -8,26 +8,33 @@
 # x must be a vector, and is detailed here:
 # https://github.com/brad-cannell/codebookr/issues/3
 # =============================================================================
+
+# Numeric
 testthat::test_that("cb_add_summary_stats is adding the expected classes to each column", {
-  # Numeric
   testthat::expect_equal(
     class(cb_add_summary_stats(study, "height")),
     c("summary_numeric", "tbl_df", "tbl", "data.frame" )
   )
+})
 
-  # Many cats
+# Many cats
+testthat::test_that("cb_add_summary_stats is adding the expected classes to each column", {
   testthat::expect_equal(
     class(cb_add_summary_stats(study, "id")),
     c("summary_many_cats", "tbl_df", "tbl", "data.frame" )
   )
+})
 
-  # Few cats
+# Few cats
+testthat::test_that("cb_add_summary_stats is adding the expected classes to each column", {
   testthat::expect_equal(
     class(cb_add_summary_stats(study, "sex")),
     c("summary_few_cats", "tbl_df", "tbl", "data.frame" )
   )
+})
 
-  # Time
+# Time
+testthat::test_that("cb_add_summary_stats is adding the expected classes to each column", {
   testthat::expect_equal(
     class(cb_add_summary_stats(study, "date")),
     c("summary_time", "tbl_df", "tbl", "data.frame" )
@@ -150,7 +157,7 @@ testthat::test_that("The the flow logic of cb_add_summary_stats is working as ex
 testthat::test_that("The the flow logic of cb_add_summary_stats is working as expected", {
   # Coerce likert to a character vector for testing
   study <- study %>%
-    mutate(likert = as.character(likert))
+    dplyr::mutate(likert = as.character(likert))
   testthat::expect_equal(
     class(cb_add_summary_stats(study, "likert")),
     c("summary_few_cats", "tbl_df", "tbl", "data.frame" )
@@ -163,7 +170,7 @@ testthat::test_that("The the flow logic of cb_add_summary_stats is working as ex
 testthat::test_that("The the flow logic of cb_add_summary_stats is working as expected", {
   # Coerce days to a factor vector for testing
   study <- study %>%
-    mutate(days = factor(days))
+    dplyr::mutate(days = factor(days))
   testthat::expect_equal(
     class(cb_add_summary_stats(study, "days")),
     c("summary_many_cats", "tbl_df", "tbl", "data.frame" )
@@ -176,7 +183,7 @@ testthat::test_that("The the flow logic of cb_add_summary_stats is working as ex
 testthat::test_that("The the flow logic of cb_add_summary_stats is working as expected", {
   # Coerce likert to a factor vector for testing
   study <- study %>%
-    mutate(likert = factor(likert))
+    dplyr::mutate(likert = factor(likert))
   testthat::expect_equal(
     class(cb_add_summary_stats(study, "likert")),
     c("summary_few_cats", "tbl_df", "tbl", "data.frame" )
@@ -199,7 +206,7 @@ testthat::test_that("The the flow logic of cb_add_summary_stats is working as ex
 testthat::test_that("The the flow logic of cb_add_summary_stats is working as expected", {
   # Create a test variable that meets this criteria
   study <- study %>%
-    mutate(three_cats = sample(1L:3L, 20, TRUE))
+    dplyr::mutate(three_cats = sample(1L:3L, 20, TRUE))
   testthat::expect_equal(
     class(cb_add_summary_stats(study, "three_cats")),
     c("summary_few_cats", "tbl_df", "tbl", "data.frame" )
@@ -213,7 +220,7 @@ testthat::test_that("The the flow logic of cb_add_summary_stats is working as ex
 testthat::test_that("The the flow logic of cb_add_summary_stats is working as expected", {
   # Create a test variable that meets this criteria
   study <- study %>%
-    mutate(three_cats = sample(1:3, 20, TRUE))
+    dplyr::mutate(three_cats = sample(1:3, 20, TRUE))
   testthat::expect_equal(
     class(cb_add_summary_stats(study, "three_cats")),
     c("summary_few_cats", "tbl_df", "tbl", "data.frame" )
@@ -252,7 +259,7 @@ testthat::test_that("The the flow logic of cb_add_summary_stats is working as ex
 # AND class = "POSIXct"
 # THEN the col_type should be set to time
 testthat::test_that("The the flow logic of cb_add_summary_stats is working as expected", {
-  study <- study %>% mutate(date = as.POSIXct(date))
+  study <- study %>% dplyr::mutate(date = as.POSIXct(date))
   testthat::expect_equal(
     class(cb_add_summary_stats(study, "date")),
     c("summary_time", "tbl_df", "tbl", "data.frame" )
@@ -327,7 +334,7 @@ testthat::test_that("The num_to_cat argument is working as expected", {
   # Create a test variable that wouldn't meet this criteria without changing
   # num_to_cat
   study <- study %>%
-    mutate(three_cats = sample(1:3, 20, TRUE))
+    dplyr::mutate(three_cats = sample(1:3, 20, TRUE))
   testthat::expect_equal(
     class(cb_add_summary_stats(study, "three_cats", num_to_cat = 2)),
     c("summary_numeric", "tbl_df", "tbl", "data.frame" )
@@ -344,7 +351,7 @@ testthat::test_that("The num_to_cat argument is working as expected", {
 testthat::test_that("The num_to_cat argument is working as expected", {
   # Create a test variable that meets this criteria
   study <- study %>%
-    mutate(six_cats = sample(1:6, 20, TRUE))
+    dplyr::mutate(six_cats = sample(1:6, 20, TRUE))
   testthat::expect_equal(
     class(cb_add_summary_stats(study, "six_cats", num_to_cat = 10, many_cats = 5)),
     c("summary_many_cats", "tbl_df", "tbl", "data.frame" )

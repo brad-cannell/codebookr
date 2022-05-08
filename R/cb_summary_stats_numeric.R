@@ -11,7 +11,7 @@ cb_summary_stats_numeric <- function(df, .x, digits = 2) {
   # ===========================================================================
   # Prevents R CMD check: "no visible binding for global variable ‘.’"
   # ===========================================================================
-  median = sd = NULL
+  median = sd = .data = NULL
 
   # ===========================================================================
   # Calculate measures of interest
