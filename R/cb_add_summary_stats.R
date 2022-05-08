@@ -1,13 +1,70 @@
 #' Calculate Appropriate Statistics for Variable Type
 #'
+#' @description
+#' The input to cb_add_summary_stats is a data frame and a column from that
+#' data frame in the format cb_add_summary_stats(study, "id"). The column name
+#' is a character string because it is passed from a for loop in the `codebook`
+#' function. The purpose of cb_add_summary_stats is to attempt to figure out
+#' whether the column is:
+#' \enumerate{
+#'   \item Numeric (e.g., height)
+#'   \item Categorical - many categories (e.g. participant id)
+#'   \item Categorical - few categories (e.g. gender)
+#'   \item Time - including dates
+#' }
+#' This matters because the table of summary stats shown in the codebook
+#' document depends on the value cb_add_summary_stats chooses.
+#'
+#' @details
+#' The user can tell the cb_add_summary_stats function what to choose explicitly
+#' by giving the column a col_type attribute set to one of the following values:
+#' \enumerate{
+#'   \item Numerical (e.g., height)
+#'   \itemize{
+#'     \item `study <- cb_add_col_attributes(study, height, col_type = "numeric")`
+#'   }
+#'   \item Categorical
+#'   \itemize{
+#'     \item `study <- cb_add_col_attributes(study, id, col_type = "categorical")`
+#'   }
+#'   \item Time - few categories (e.g. gender)
+#'   \itemize{
+#'     \item `cb_add_col_attributes(study, date, col_type = "time")`
+#'   }
+#' }
+#'
+#' If the user does not explicitly set the col_type attribute to one of these
+#' values, then cb_add_summary_stats will guess which col_type attribute to
+#' assign to each column based on the column's class and the number of unique
+#' non-missing values the it has.
+#'
+#' However, the number of unique non-missing values isn't used in an absolute
+#' way (e.g., 10 or more unique values is ALWAYS many_cats). Instead, the number
+#' of unique non-missing values used relative to the values passed to the
+#' many_cats parameter and/or the num_to_cat parameter -- depending on the class
+#' of the column.
+#'
 #' @param df Data frame of interest
 #' @param .x Column of interest
-#' @param many_cats Set cutoff value for many categories/few categories
-#' @param num_to_cat Set cutoff value for guessing that a numeric variable is actually categorical
-#' @param digits Number of digits after decimal to display
-#' @param n_extreme_cats Number of extreme values to display
+#' @param many_cats The many_cats argument sets the cutoff value that partially
+#'   (i.e., along with the col_type attribute) determines whether
+#'   cb_add_summary_stats will categorize the variable as categorical with few
+#'   categories or categorical with many categories. The number of categories
+#'   that constitutes "many" is defined by the value passed to the many_cats
+#'   argument. The default is 10.
+#' @param num_to_cat The num_to_cat argument sets the cutoff value that partially
+#'   (i.e., along with the col_type attribute) determines whether
+#'   cb_add_summary_stats will categorize a numeric as categorical. If the
+#'   col_type attribute is not set for a column AND the number of unique
+#'   non-missing values is <= num_to_cat, then cb_add_summary_stats will guess
+#'   that the variable is categorical. The default value for num_to_cat is 4.
+#' @param digits Number of digits after the decimal to display
+#' @param n_extreme_cats Number of extreme values to display when the column is
+#'   classified as `many_cats`. By default, the 5 least frequently occurring
+#'   values and the 5 most frequently occurring values are displayed.
 #'
 #' @return A tibble of results
+#' @family add_summary_stats
 #' @importFrom dplyr %>%
 cb_add_summary_stats <- function(df,
                                  .x,

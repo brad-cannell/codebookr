@@ -19,3 +19,11 @@ A tibble
 \description{
 Compute Summary Statistics for Date or Time Variables
 }
+\seealso{
+Other add_summary_stats: 
+\code{\link{cb_add_summary_stats}()},
+\code{\link{cb_summary_stats_few_cats}()},
+\code{\link{cb_summary_stats_many_cats}()},
+\code{\link{cb_summary_stats_numeric}()}
+}
+\concept{add_summary_stats}

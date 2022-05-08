@@ -19,3 +19,11 @@ A tibble
 \description{
 Compute Summary Statistics for Categorical Variables with Many Categories
 }
+\seealso{
+Other add_summary_stats: 
+\code{\link{cb_add_summary_stats}()},
+\code{\link{cb_summary_stats_few_cats}()},
+\code{\link{cb_summary_stats_numeric}()},
+\code{\link{cb_summary_stats_time}()}
+}
+\concept{add_summary_stats}
