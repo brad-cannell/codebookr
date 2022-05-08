@@ -40,11 +40,20 @@ codebook <- function(df, title = NA, subtitle = NA, description = NA) {
     stop("Expecting df to be of class data.frame. Instead it was ", class(df))
   }
 
-  # Check to make sure the user is not piping in the dataset name
+  # Check to make sure the user is not piping in the data frame
+  # When they do, `Dataset name:` in the metadata table (below) is ".".
+  # Apparently, there is no way around this:
+  # https://stackoverflow.com/questions/30057278/get-lhs-object-name-when-piping-with-dplyr
   df_name <- deparse(substitute(df))
   if (df_name == ".") {
-    message("The function get_df_attributes is seeing '.' as the df name. ",
-            "This can be caused by piping df into the get_df_attributes fucntion.")
+    message(
+      "The codebook function currently sees the name of the data frame you ",
+      "passed to the `df` argument as '.'. This is probably because you used ",
+      "a pipe to pass the data frame name into the codebook function. If you ",
+      "want the actual name of the data frame to be printed in the `Dataset ",
+      "name:` row of the metadata table, do not use a pipe to pass the data ",
+      "frame name into the codebook function."
+    )
   }
 
   # ===========================================================================
