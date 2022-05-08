@@ -18,11 +18,11 @@ cb_summary_stats_numeric <- function(df, .x, digits = 2) {
   # ===========================================================================
   summary <- df %>%
     dplyr::summarise(
-      Min    = min({{ .x }}, na.rm = TRUE),
-      Mean   = mean({{ .x }}, na.rm = TRUE),
-      Median = median({{ .x }}, na.rm = TRUE),
-      Max    = max({{ .x }}, na.rm = TRUE),
-      SD     = sd({{ .x }}, na.rm = TRUE)
+      Min    = min(.data[[.x]], na.rm = TRUE),
+      Mean   = mean(.data[[.x]], na.rm = TRUE),
+      Median = median(.data[[.x]], na.rm = TRUE),
+      Max    = max(.data[[.x]], na.rm = TRUE),
+      SD     = sd(.data[[.x]], na.rm = TRUE)
     ) %>%
     # Format output
     dplyr::mutate(dplyr::across(dplyr::everything(), round, digits = digits)) %>%

@@ -19,8 +19,8 @@ cb_summary_stats_time <- function(df, .x, digits = 2) {
   min <- df %>%
     dplyr::summarise(
       Statistic  = "Minimum",
-      Value      = min({{ .x }}, na.rm = TRUE),
-      Frequency  = ({{ .x }} == Value) %>% sum(na.rm = TRUE),
+      Value      = min(.data[[.x]], na.rm = TRUE),
+      Frequency  = (.data[[.x]] == Value) %>% sum(na.rm = TRUE),
       Percentage = Frequency / nrow(df) * 100
     ) %>%
     # Format output
@@ -35,7 +35,7 @@ cb_summary_stats_time <- function(df, .x, digits = 2) {
   # Get the mode value(s), and the number and percentage of times that value occurs
   # ===========================================================================
   counts <- df %>%
-    dplyr::count({{ .x }}) %>%
+    dplyr::count(.data[[.x]]) %>%
     dplyr::pull(n)
 
   # ===========================================================================
@@ -58,7 +58,7 @@ cb_summary_stats_time <- function(df, .x, digits = 2) {
 
   } else {
     mode <- df %>%
-      dplyr::count({{ .x }}, name = "Frequency") %>%
+      dplyr::count(.data[[.x]], name = "Frequency") %>%
       dplyr::filter(Frequency == max(Frequency)) %>%
       dplyr::mutate(
         Statistic = "Mode",
@@ -81,8 +81,8 @@ cb_summary_stats_time <- function(df, .x, digits = 2) {
   max <- df %>%
     dplyr::summarise(
       Statistic  = "Maximum",
-      Value      = max({{ .x }}, na.rm = TRUE),
-      Frequency  = ({{ .x }} == Value) %>% sum(na.rm = TRUE),
+      Value      = max(.data[[.x]], na.rm = TRUE),
+      Frequency  = (.data[[.x]] == Value) %>% sum(na.rm = TRUE),
       Percentage = Frequency / nrow(df) * 100
     ) %>%
     # Format output

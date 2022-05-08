@@ -54,7 +54,7 @@ cb_summary_stats_to_ft.summary_numeric <- function(df, col_width = 1.3) {
 cb_summary_stats_to_ft.summary_many_cats <- function(df, col_width = 1.62) {
   ft <- df %>%
     # Set all variables to character first to prevent adding trailing zeros
-    dplyr::mutate_all(as.character) %>%
+    dplyr::mutate(across(everything(), as.character)) %>%
     flextable::regulartable() %>%
     # Change header text
     flextable::set_header_labels(

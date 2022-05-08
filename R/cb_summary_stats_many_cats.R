@@ -27,7 +27,7 @@ cb_summary_stats_many_cats <- function(df, .x, n_extreme_cats = 5) {
   # Get least prevalent categories
   # ===========================================================================
   lowest <- df %>%
-    dplyr::count({{ .x }}) %>%
+    dplyr::count(.data[[.x]]) %>%
     dplyr::arrange(n) %>%
     head(n = n_extreme_cats)
 
@@ -35,7 +35,7 @@ cb_summary_stats_many_cats <- function(df, .x, n_extreme_cats = 5) {
   # Get most prevalent categories
   # ===========================================================================
   highest <- df %>%
-    dplyr::count({{ .x }}) %>%
+    dplyr::count(.data[[.x]]) %>%
     dplyr::arrange(n) %>%
     tail(n = n_extreme_cats)
 
@@ -59,4 +59,4 @@ cb_summary_stats_many_cats <- function(df, .x, n_extreme_cats = 5) {
 
 # For testing
 # data(study)
-# cb_summary_stats_many_cats(study, id)
+# cb_summary_stats_many_cats(study, "id")

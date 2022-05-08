@@ -17,7 +17,7 @@ cb_summary_stats_few_cats <- function(df, .x, digits = 2) {
   # Calculate measures of interest
   # ===========================================================================
   summary <- df %>%
-    dplyr::count({{ .x }}) %>%
+    dplyr::count(.data[[.x]]) %>%
     # Rename the first column from the name of the variable being analyzed to
     # "cat"
     dplyr::rename(cat = 1) %>%
