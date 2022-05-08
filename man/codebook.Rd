@@ -4,18 +4,18 @@
 \alias{codebook}
 \title{Automate creation of a data codebook}
 \usage{
-codebook(df, path = NA, title = NA, subtitle = NA, description = NA)
+codebook(df, title = NA, subtitle = NA, description = NA)
 }
 \arguments{
 \item{df}{The saved file at \code{path}, read into memory as a data frame}
 
+\item{title}{An optional title that will appear at the top of the Word codebook document}
+
+\item{subtitle}{An optional subtitle that will appear at the top of the Word codebook document}
+
+\item{description}{An optional text description of the dataset that will appear on the first page of the Word codebook document}
+
 \item{path}{The path to the saved dataset of interest}
-
-\item{title}{Optional title}
-
-\item{subtitle}{Optional subtitle}
-
-\item{description}{Text description of the dataset}
 }
 \value{
 An rdocx object that can be printed to a Word document
@@ -32,12 +32,14 @@ those attributes in a data frame, which is later turned into a flextable and
 added to the codebook document.
 }
 \examples{
-# codebook_detect_5wk <- codebook(
-#   df = detect_5wk \%>\% select(1:2),
-#   path = "../data/detect_5wk.csv",
-#   title = "Detection of Elder abuse Through Emergency Care Technicians (DETECT)",
-#   subtitle = "5-Week Pilot Study",
-#   description = description
-# ) \%>\%
-#   print(target = "example_officer_codebook.docx")
+\dontrun{
+study_codebook <- codebook(
+  df = study,
+  title = "My Example Study",
+  subtitle = "A Subtitle for My Example Study Codebook",
+  description = "Brief (or long) description of the data."
+)
+
+print(study_codebook, path = "study_codebook.docx")
+}
 }
