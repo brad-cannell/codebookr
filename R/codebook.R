@@ -21,14 +21,14 @@
 #'
 #' @examples
 #' \dontrun{
-#' codebook_detect_5wk <- codebook(
-#'   df = detect_5wk %>% select(1:2),
-#'   path = "../data/detect_5wk.csv",
-#'   title = "Detection of Elder abuse Through Emergency Care Technicians (DETECT)",
-#'   subtitle = "5-Week Pilot Study",
-#'   description = description
-#' ) %>%
-#'   print(target = "example_officer_codebook.docx")
+#' study_codebook <- codebook(
+#'   df = study,
+#'   title = "My Example Study",
+#'   subtitle = "A Subtitle for My Example Study Codebook",
+#'   description = "Brief (or long) description of the data."
+#' )
+#'
+#' print(study_codebook, path = "study_codebook.docx")
 #' }
 codebook <- function(df, title = NA, subtitle = NA, description = NA) {
 
