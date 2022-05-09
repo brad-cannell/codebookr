@@ -53,7 +53,7 @@ cb_summary_stats_time <- function(df, .x, digits = 2) {
   if (length(unique(counts)) == 1) {
     mode <- tibble::tibble(
       Statistic  = "Mode",
-      Value      = paste("All ", format(length(counts), big.mark = ","), "values"),
+      Value      = paste("All", format(length(counts), big.mark = ","), "values"),
       Frequency  = unique(counts),
       Percentage = Frequency / nrow(df) * 100
     ) %>%
