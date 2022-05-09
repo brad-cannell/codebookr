@@ -8,7 +8,7 @@ cb_theme_df_attributes <- function(ft) {
 
   ft <- ft %>%
     # Delete the header row
-    flextable::set_header_labels(key = NULL, value = NULL) %>%
+    flextable::delete_part(part = "header") %>%
     # Set font to TNR 11
     flextable::font(fontname = "Times New Roman") %>%
     flextable::fontsize(size = 11) %>%
