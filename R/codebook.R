@@ -59,12 +59,9 @@ codebook <- function(df, title = NA, subtitle = NA, description = NA) {
 
   # ===========================================================================
   # Create an empty Word rdocx object
-  # default template contains only an empty paragraph
-  # Using cursor_begin and body_remove, we can delete it
   # ===========================================================================
   rdocx <- officer::read_docx() %>%
     officer::cursor_begin()
-    # officer::body_remove()
 
   # ===========================================================================
   # Optionally add title and subtitle to top of codebook
