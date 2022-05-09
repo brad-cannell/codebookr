@@ -1,7 +1,7 @@
 #' Automate creation of a data codebook
 #'
 #' The codebook function assists with the creation of a codebook for a given
-#'  data frame.
+#' data frame.
 #'
 #' Codebook expects that `df ` is a data frame that you have read into memory
 #' from a saved data file. Please provide the path to the saved data file. This
@@ -19,7 +19,6 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' study_codebook <- codebook(
 #'   df = study,
 #'   title = "My Example Study",
@@ -27,6 +26,9 @@
 #'   description = "Brief (or long) description of the data."
 #' )
 #'
+#' \dontrun{
+#'
+#' # Create the Word codebook document
 #' print(study_codebook, path = "study_codebook.docx")
 #' }
 codebook <- function(df, title = NA, subtitle = NA, description = NA) {

@@ -30,7 +30,6 @@ those attributes in a data frame, which is later turned into a flextable and
 added to the codebook document.
 }
 \examples{
-\dontrun{
 study_codebook <- codebook(
   df = study,
   title = "My Example Study",
@@ -38,6 +37,9 @@ study_codebook <- codebook(
   description = "Brief (or long) description of the data."
 )
 
+\dontrun{
+
+# Create the Word codebook document
 print(study_codebook, path = "study_codebook.docx")
 }
 }
