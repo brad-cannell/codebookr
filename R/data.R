@@ -3,7 +3,7 @@
 #' This is the code to create the study data - a simulated dataset that can be
 #' used to demonstrate how to use the codebook package.
 #'
-#' @format A data frame with 20 rows and 5 variables:
+#' @format A data frame with 20 rows and 8 variables:
 #' \describe{
 #'   \item{id}{Participant id}
 #'   \item{sex}{Participant sex, female/male}

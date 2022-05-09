@@ -5,7 +5,7 @@
 \alias{study}
 \title{Simulated study data.}
 \format{
-A data frame with 20 rows and 5 variables:
+A data frame with 20 rows and 8 variables:
 \describe{
 \item{id}{Participant id}
 \item{sex}{Participant sex, female/male}
