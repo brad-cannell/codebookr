@@ -29,7 +29,7 @@ You can install the development version of codebookr like so:
 devtools::install_github("brad-cannell/codebook")
 ```
 
-## Exported functions (i.e., functions for end users like you)
+## codebookr functions
 
 * **codebook:** The codebook function assists with the creation of a codebook for a given data frame.   
 
@@ -37,40 +37,7 @@ devtools::install_github("brad-cannell/codebook")
 
 ## Example 1: The most basic use case
 
-We will start by demonstrating a complete, bare minimum example without any modification to any of the default values is our example data or in the `codebook` function. After viewing this example, we will demonstrate several ways to improve the codebook document by adding attributes to our data frame. We will also demonstrate the effects of adjusting some of `codebook`s default values as well as demonstrate some techniques to make the codebook creation process more efficient in a couple of common use cases.
-
-### Load data
-
-For the purposes of making a self-contained example, the `codebookr` package comes with a small example data frame that is intended to have some of the features of real study data. We will use it to demonstrate how to use `codebookr` below. 
-
-```{r}
-# Load example data
-data(study)
-```
-
-```{r}
-glimpse(study)
-```
-
-### Pass the data frame to the `codebook` function
-
-```{r}
-study_codebook <- codebook(study)
-```
-
-### Create the Word codebook document
-
-```{r eval=FALSE}
-print(study_codebook, "study_codebook.docx")
-```
-
-🔴 Add a screenshot of the codebook. Say something about improving on the results below. 
-
-
-
-## Example 2: A few more details
-
-This simple example demonstrates how to use the `codebookr` package to make a codebook from a **labeled** data frame. 
+We will start by demonstrating a complete, bare minimum example without any modification to any of the default values is our example data or in the `codebook()` function. After viewing this example, we will demonstrate several ways to improve the codebook document by adding attributes to our data frame. We will also demonstrate the effects of adjusting some of `codebook()`s default values as well as demonstrate some techniques to make the codebook creation process more efficient in a couple of common use cases.
 
 ```{r example}
 library(codebookr)
@@ -90,18 +57,76 @@ data(study)
 glimpse(study)
 ```
 
+### Pass the data frame to the `codebook` function
+
+In this first example, we will simply pass the `study` data frame to the `codebook()` function without making any alterations. We will save the resulting `rdocx` object (described in greater detail below) in our global environment as the `study_codebook` object. 
+
+```{r}
+study_codebook <- codebook(study)
+```
+
+### Create the Word codebook document
+
+Finally, we will pass the `study_codebook` object we just created to the `print()` function along with the path to Word document we want to create. We have to make 
+
+```{r eval=FALSE}
+print(study_codebook, "basic_study_codebook.docx")
+```
+
+The code above produces the following document, which you can click to view/download on Dropbox. You may also download it from the files pane above.
+
+[![](img/screenshot_basic_codebook.png)](https://www.dropbox.com/s/qcijxgyeh4ib4d3/basic_study_codebook.docx?dl=0)
+
+## Example 2: A few more details
+
+The previous example gave us a complete codebook, but there's a lot of room for improvement. This example is still pretty simple, but it demonstrates how to use the `codebookr` package to make a codebook from a **labeled** data frame. 
+
+Once again, we will begin by loading the example `study` data.
+
+```{r}
+# Load example data
+data(study)
+```
+
+```{r}
+glimpse(study)
+```
+
 ### Column types
 
-Although R recognizes may different column types, most of which the `study` data contains, `codebook` classifies all columns as one of four types and uses these categories to determine which descriptive statistics to use in the codebook document:
+Although R recognizes many different column types, most of which the `study` data contains, `codebook` classifies all columns as one of four types and uses these categories to determine which descriptive statistics to use in the codebook document:
 
 1. **Categorical with many different categories**, for example the `id` column of the `study` data frame.     
 2. **Categorical with few different categories**, for example the `gender` column of the `study` data frame.     
 3. **Time**, for example the `date` column of the `study` data frame.    
 4. **Numeric**, for example the `height` column of the `study` data frame.    
 
-Do I want to have this explanation here or move it to below a complete example?
+Here are the default summary statistics returned by the `codebook()` function for each of the column types list above:
 
-🔴 Show the stats that each type returns by default.
+#### Categorical variables with many different categories
+
+```{r echo=FALSE}
+codebookr:::cb_summary_stats_many_cats(study, "id") %>% knitr::kable()
+```
+
+#### Categorical variables with few different categories
+
+```{r echo=FALSE}
+codebookr:::cb_summary_stats_few_cats(study, "sex") %>% knitr::kable()
+```
+
+#### Date/Time variables
+
+```{r echo=FALSE}
+codebookr:::cb_summary_stats_time(study, "date") %>% knitr::kable()
+```
+
+#### Numeric variables
+
+```{r echo=FALSE}
+codebookr:::cb_summary_stats_numeric(study, "height") %>% knitr::kable()
+```
+
 
 ### Add column attributes to the data frame you want to document with a codebook
 
@@ -113,44 +138,39 @@ The arguments to `cb_add_col_attributes()` are:
 * **.x:** The name of the column you want to add the attribute to in `df`.    
 * **...:** Arbitrary list of attributes (i.e., attribute = "value").    
 
-🔴 Some of these 
+🔴 Mention the special attributes and add attributes to the rest of the columns.
 
 ```{r}
-# study <- study %>%
-#   cb_add_col_attributes(
-#     id,
-#     description = "Study identification variable"
-#   ) %>%
-# 
-#   cb_add_col_attributes(
-#     sex,
-#     description = "Biological sex of the participant assigned at birth.",
-#     col_type = "Categorical"
-#   ) %>%
-#   
-#   cb_add_col_attributes(
-#     date,
-#     description = "Date of enrollment into study."
-#   ) %>%
-#   
-#   cb_add_col_attributes(
-#     height,
-#     description = "Participant's height in inches at date of enrollment."
-#   ) 
-```
+study <- study %>%
+  cb_add_col_attributes(
+    id,
+    description = "Study identification variable"
+  ) %>%
 
-🔴 **Note:** these attributes are added to codebook automatically. (fill this in.)
+  cb_add_col_attributes(
+    sex,
+    description = "Biological sex of the participant assigned at birth.",
+    col_type = "Categorical"
+  ) %>%
+
+  cb_add_col_attributes(
+    date,
+    description = "Date of enrollment into study."
+  ) %>%
+
+  cb_add_col_attributes(
+    height,
+    description = "Participant's height in inches at date of enrollment."
+  )
+```
 
 ### Create a Word codebook document
 
-Now that the data frame we want to document in our codebook contains attributes that Under the hood, `codebookr` uses the [flextable](https://ardata-fr.github.io/flextable-book/) and [officer](https://davidgohel.github.io/officer/index.html) packages to create the Word codebook. 
+Now that we've added a couple of attributes the data frame we want to document in our codebook contains attributes that Under the hood, `codebookr` uses the [flextable](https://ardata-fr.github.io/flextable-book/) and [officer](https://davidgohel.github.io/officer/index.html) packages to create the Word codebook. 
 
 The arguments to the `codebook()` function are:
 
-🔴 These arguments need to be updated
-
 * **df:** The saved file at `path`, read into memory as a data frame.      
-* **path:** The path to the saved dataset of interest.    
 * **title:** An optional title that will appear at the top of the Word codebook document.    
 * **subtitle:** An optional subtitle that will appear at the top of the Word codebook document.    
 * **description:** An optional text description of the dataset that will appear on the first page of the Word codebook document.     
@@ -169,7 +189,7 @@ print(x = study_codebook, target = "study_codebook.docx")
 
 Where `x` is the rdocx object and `target` is a path for the Word document you want to create (which may or may not already exist). The code above produces the following document, which you can click to view/download on Dropbox. You may also download it from the files pane above.
 
-[![](img/study_codebook_screenshot.png)](https://www.dropbox.com/s/8is7q8rk2me3b7u/study_codebook.docx?dl=0)
+
 
 🔴 **Note:** `Column type` is the type _you_ say it is (e.g., categorical or numeric), `Data type` is what the _computer_ says it is (e.g., character, integer). (show example in Word table)
 
@@ -263,5 +283,8 @@ print(codebook_detect_5wk, target = "codebook_detect_5wk.docx")
 
 
 
+```{r}
+rm(study, study_codebook, summary_df)
+```
 
 
