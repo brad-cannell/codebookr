@@ -12,7 +12,7 @@ cb_theme_col_attr <- function(ft) {
 
   ft <- ft %>%
     # Delete the header row
-    flextable::set_header_labels(Attribute = NULL, value = NULL) %>%
+    flextable::delete_part(part = "header") %>%
     # Set the width of both columns
     flextable::width(width = c(2.31, 4.18)) %>%
 
