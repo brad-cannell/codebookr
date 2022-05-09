@@ -61,7 +61,7 @@ cb_summary_stats_to_ft.summary_many_cats <- function(df, col_width = 1.62) {
       lowest_cats  = "Categories with Smallest Values",
       lowest_freq  = "Frequency",
       highest_cats = "Categories with Largest Values",
-      highest_freq = "Frequeny"
+      highest_freq = "Frequency"
     ) %>%
     # Set font to TNR 11
     flextable::font(fontname = "Times New Roman", part = "all") %>%
