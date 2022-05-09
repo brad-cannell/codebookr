@@ -8,6 +8,11 @@
 cb_get_col_attributes <- function(df, .x) {
 
   # ===========================================================================
+  # Prevents R CMD check: "no visible binding for global variable ‘.’"
+  # ===========================================================================
+  value = NULL
+
+  # ===========================================================================
   # Variable management
   # ===========================================================================
   x <- rlang::sym(.x)
@@ -25,7 +30,11 @@ cb_get_col_attributes <- function(df, .x) {
   # ===========================================================================
   # Create attributes data frame - will be converted to flextable
   # ===========================================================================
-  data_type <- class(df[[.x]])
+  data_type <- class(df[[.x]]) %>%
+    # Some columns have more than one class (e.g., study$time). That causes
+    # two rows to appear in the column attribute table. The paste code fixes
+    # the problem
+    paste(collapse = ", ")
   data_type <- stringr::str_replace(
     data_type,
     stringr::str_extract(data_type, "^\\w{1}"),
@@ -45,6 +54,12 @@ cb_get_col_attributes <- function(df, .x) {
     # Format output
     dplyr::mutate_if(is.numeric, format, big.mark = ",") %>%
     tidyr::gather(key = "Attribute")
+
+  # ===========================================================================
+  # Delete unused attribute rows
+  # ===========================================================================
+  attr_df <- attr_df %>%
+    dplyr::filter(!is.na(value))
 
   # ===========================================================================
   # Return data frame
