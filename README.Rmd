@@ -144,23 +144,23 @@ The arguments to `cb_add_col_attributes()` are:
 study <- study %>%
   cb_add_col_attributes(
     id,
-    description = "Study identification variable"
+    description = "Participant's study identification number"
   ) %>%
 
   cb_add_col_attributes(
     sex,
-    description = "Biological sex of the participant assigned at birth.",
+    description = "Biological sex of the participant assigned at birth",
     col_type = "Categorical"
   ) %>%
 
   cb_add_col_attributes(
     date,
-    description = "Date of enrollment into study."
+    description = "Participant's date of enrollment"
   ) %>%
 
   cb_add_col_attributes(
     height,
-    description = "Participant's height in inches at date of enrollment."
+    description = "Participant's height in inches at date of enrollment"
   )
 ```
 
