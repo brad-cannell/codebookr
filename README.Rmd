@@ -230,7 +230,10 @@ cat(paste0('
 
 ### What if the variables already have labels? {#already-labeled}
 
-It's possible that you've already added column attributes to your data that you want `codebook` to use. More likely, you have a data frame that was imported from a binary file created by statistical analysis apllication other than R and useful attributes (e.g. variable labels) were imported with the data.  
+It's possible that you've already added column attributes to your data that you want `codebook` to use. More likely, you have a data frame that was imported from a binary file created by statistical analysis application other than R and useful attributes (e.g. variable labels) were imported with the data.  
+
+
+
 
 
 ### Setting the col_type manually
