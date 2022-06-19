@@ -4,3 +4,5 @@
 ^LICENSE\.md$
 ^README\.Rmd$
 ^data-raw$
+^flow\.png$
+^codebookr_graphics\.pptx$
