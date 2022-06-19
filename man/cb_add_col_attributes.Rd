@@ -19,6 +19,6 @@ Data frame
 \description{
 Add arbitrary attributes to columns (e.g., description, source, column type).
 These attributes can later be accessed to fill in the column attributes table.
-Note: Column type is the type I say it is: categorical or numeric, Data type
+Note: Column type is the type you say it is: categorical or numeric, Data type
 is what the computer says it is.
 }
