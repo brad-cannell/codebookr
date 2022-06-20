@@ -19,15 +19,16 @@
 #' The user can tell the cb_add_summary_stats function what to choose explicitly
 #' by giving the column a col_type attribute set to one of the following values:
 #' \enumerate{
-#'   \item Numerical (e.g., height)
+#'   \item Numeric. For example, height and/or weight.
 #'   \itemize{
 #'     \item `study <- cb_add_col_attributes(study, height, col_type = "numeric")`
 #'   }
-#'   \item Categorical
+#'   \item Categorical. We describe how many categories vs few categories is
+#'   determined below.
 #'   \itemize{
 #'     \item `study <- cb_add_col_attributes(study, id, col_type = "categorical")`
 #'   }
-#'   \item Time - few categories (e.g. gender)
+#'   \item Time. Dates, times, and datetimes.
 #'   \itemize{
 #'     \item `cb_add_col_attributes(study, date, col_type = "time")`
 #'   }
