@@ -19,7 +19,7 @@ Brad Cannell
 
 
 // Import data
-import delimited "/Users/bradcannell/Dropbox/R/Packages/codebookr/inst/extdata/study.csv", delimiter("", collapse) encoding(ISO-8859-2
+import delimited "/Users/bradcannell/Dropbox/R/Packages/codebookr/inst/extdata/study.csv", delimiter("", collapse) encoding(ISO-8859-2)
 
 // Convert NA to missing
 replace id = "" if id == "NA"
@@ -46,10 +46,10 @@ la var id "Participant's study identification number"
 la var sex "Biological sex of the participant assigned at birth"
 la var date "Participant's date of enrollment"
 la var time "Participant's time of enrollemnt"
-la var days "Number of days the participant was enrolled in the study"
+la var days "Total number of days the participant was enrolled in the study"
 la var height "Participant's height in inches at date of enrollment"
-la var likert "Hypothetical likert scale item, 1-5" 
+la var likert "An example likert scale item" 
 la var outcome "Participant experienced the outcome of interest"
 
 // Save data 
-save "inst/extdata/study.dta"
+save "inst/extdata/study.dta", replace
