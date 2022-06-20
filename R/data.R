@@ -8,10 +8,10 @@
 #'   \item{id}{Participant's study identification number}
 #'   \item{sex}{Biological sex of the participant assigned at birth, female/male}
 #'   \item{date}{Participant's date of enrollment}
-#'   \item{time}{Participant's time of enrollemnt}
+#'   \item{time}{Participant's time of enrollment}
 #'   \item{days}{Total number of days the participant was enrolled in the study}
 #'   \item{height}{Participant's height in inches at date of enrollment}
-#'   \item{likert}{An example likert scale item, 1-5}
+#'   \item{likert}{An example Likert scale item, 1-5}
 #'   \item{outcome}{Participant experienced the outcome of interest, TRUE or FALSE}
 #' }
 "study"
