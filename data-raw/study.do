@@ -19,7 +19,7 @@ Brad Cannell
 
 
 // Import data
-import delimited "/Users/bradcannell/Dropbox/R/Packages/codebookr/inst/extdata/study.csv", delimiter("", collapse) encoding(ISO-8859-2)
+import delimited "/Users/bradcannell/Dropbox/R/Packages/codebookr/inst/extdata/study.csv", delimiter("", collapse) encoding(ISO-8859-2) clear
 
 // Convert NA to missing
 replace id = "" if id == "NA"
@@ -40,6 +40,13 @@ format time2 %tcHH:MM:SS
 drop time
 rename time2 time
 order time, after(date)
+
+// Coerce sex to 1's and 2's and then add value lables so that R will add
+// the class haven_labeled on import. 
+encode sex, gen(sex2)
+drop sex
+rename sex2 sex
+order sex, after(id)
 
 // Add labels to the data
 la var id "Participant's study identification number"
