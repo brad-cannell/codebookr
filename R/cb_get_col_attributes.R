@@ -1,5 +1,8 @@
 #' Get Column Attributes
 #'
+#' @description Used in codebook() to create the top half of the column attributes
+#' table.
+#'
 #' @param df Data frame of interest
 #' @param .x Column of interest in df
 #'
@@ -18,13 +21,31 @@ cb_get_col_attributes <- function(df, .x) {
   x <- rlang::sym(.x)
 
   # ===========================================================================
-  # Setting attributes to NA if not set by user
+  # Using Haven labels
+  # When we import data from Stata, SAS, or SPSS with labels, the attributes
+  # are called $label for variable labels and $labels for value labels.
+  # Currently, codebook() cannot automatically make use of those attributes
+  # because it only recognizes the attributes description, source, and col_type.
+  # It's relatively easy to manually set the value of the description attribute
+  # to the value of the label attribute. However, because Haven labeled data is
+  # so common, we decided to specifically look for $label and $labels here.
   # ===========================================================================
-  attribs <- c("description", "source", "col_type")
-  for (i in seq_along(attribs)) {
-    if (is.null(attributes(df[[.x]])[[attribs[i]]])) {
-      attr(df[[.x]], attribs[i]) <- NA
-    }
+
+  # Set description to label if label exists
+  attr(df[[.x]], "description") <- attr(df[[.x]], "label")
+
+  # Set val_labels to labels if labels exists
+  # By default, labels are a named vector. For example:
+  # $labels
+  # Female   Male
+  #      1      2
+  # Without some manipulation, only the values (i.e., 1 and 2) will end up in
+  # the column attributes table. We need to convert the values and value labels
+  # into a more human readable format.
+  val_labels <- attr(df[[.x]], "labels")
+  if (!is.null(val_labels)) {
+    val_nms    <- names(val_labels)
+    val_labels <- paste(val_labels, val_nms, sep = " = ")
   }
 
   # ===========================================================================
@@ -49,11 +70,30 @@ cb_get_col_attributes <- function(df, .x) {
       `Column type:`                    = attributes(df[[.x]])[["col_type"]],
       `Data type:`                      = data_type,
       `Unique non-missing value count:` = unique(!!x) %>% stats::na.exclude() %>% length(),
-      `Missing value count:`            = is.na(!!x) %>% sum()
+      `Missing value count:`            = is.na(!!x) %>% sum(),
+      `Value labels:`                   = val_labels
     ) %>%
     # Format output
     dplyr::mutate_if(is.numeric, format, big.mark = ",") %>%
     tidyr::gather(key = "Attribute")
+
+  # ===========================================================================
+  # Delete duplicate attribute rows
+  # When there is more than one value label, the only way to get each value
+  # label to appear on a separate line of the column attributes table (the most
+  # readable output for humans) is to create a separate row in the data frame
+  # for each value label. However, R's recycling rules then automatically
+  # create the same number of rows for every other attribute. The  code below
+  # cleans that up.
+  # ===========================================================================
+  # Keep one row for each unique combination of `Attribute` and `value`
+  attr_df <- dplyr::distinct(attr_df)
+  # Keep only the first instance of `Attribute`.
+  # This is so that "Value labels:" is only printed once as opposed to once for
+  # each value label.
+  attr_df <- attr_df %>%
+    dplyr::group_by(Attribute) %>%
+    dplyr::mutate(Attribute = dplyr::if_else(dplyr::row_number() == 1, Attribute, ""))
 
   # ===========================================================================
   # Delete unused attribute rows
@@ -66,3 +106,22 @@ cb_get_col_attributes <- function(df, .x) {
   # ===========================================================================
   attr_df
 }
+
+
+# For testing
+# Using the Stata version of study
+# devtools::load_all()
+# cb_get_col_attributes(study, "id")
+
+
+
+
+
+
+
+
+
+
+
+
+
