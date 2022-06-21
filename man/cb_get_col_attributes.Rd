@@ -15,5 +15,6 @@ cb_get_col_attributes(df, .x)
 A tibble
 }
 \description{
-Get Column Attributes
+Used in codebook() to create the top half of the column attributes
+table.
 }
