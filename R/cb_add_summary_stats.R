@@ -117,6 +117,17 @@ cb_add_summary_stats <- function(df,
 
     # Get class
     x_class <- class(df[[.x]])
+
+    # haven_labeled
+    # When you import data from SAS, Stata, or SPSS using Haven, it adds two
+    # classes to variables with value labels:  `haven_labelled` and `vctrs_vctr`.
+    # Passing these columns to `codebook()` results in an error.
+    # One way to get around this is simply to set the `col_type` attribute.
+    # However, because Haven labeled data is so common, we decided to specifically
+    # look for and remove those classes in this section of code that is trying to
+    # determine the column type. It should not remove those class from the column
+    # generally.
+    x_class <- x_class[!x_class %in% c("haven_labelled", "vctrs_vctr")]
     x_class
 
     # Logical, character, and factor are categorical
@@ -135,7 +146,7 @@ cb_add_summary_stats <- function(df,
       } else {
         col_type <- "few_cats"
       }
-    } else if ("integer" %in% x_class || "numeric" %in% x_class) {
+    } else if ("integer" %in% x_class || "double" %in% x_class || "numeric" %in% x_class) {
       # Integer and numeric may be numeric or categorical (e.g. likert)
       # Use num_to_cat as a cut-off value for determining if a numeric variable
       # is really categorical
@@ -192,4 +203,5 @@ cb_add_summary_stats <- function(df,
 # Currently, the codebook function passes df to the df argument of cb_add_summary_stats
 # and a character string (e.g., "id") for each column in df to the .x argument
 # of cb_add_summary_stats
-# cb_add_summary_stats(study, "id")
+# devtools::load_all()
+# codebookr:::cb_add_summary_stats(study, "sex")
