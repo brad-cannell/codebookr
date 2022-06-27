@@ -102,8 +102,16 @@ cb_get_col_attributes <- function(df, .x) {
   # so common, we decided to specifically look for $label and $labels here.
   # ===========================================================================
 
-  # Set description to label if label exists
-  attr(df[[.x]], "description") <- attr(df[[.x]], "label")
+  # Label vs. Description
+  # See issue #12. If both "label" and "description" exist, then "description"
+  # should win. The idea is that if I have taken the time to manually type out
+  # a description, it should win out over whatever happened to be in label.
+  # If there is no description attribute, but there is a label attribute, then
+  # "description" should be set to "label".
+  description <- attributes(df[[.x]])[["description"]]
+  if (is.null(description)) {
+    attr(df[[.x]], "description") <- attr(df[[.x]], "label")
+  }
 
   # Set val_labels to labels if labels exists
   # By default, labels are a named vector. For example:

@@ -735,7 +735,7 @@ attribute. Which one will end up in the codebook document?
 
 ``` r
 study <- study %>% 
-  cb_add_col_attributes(id, description = "Test description")
+  cb_add_col_attributes(id, description = "My new description")
 #> The following attribute(s) are being added to a variable in the data frame for the first time: description. If you believe this/these attribute(s) were previously added, then check for a typo in the attribute name. If you are adding this/these attribute(s) for the first time, you can probably safely ignore this message.
 ```
 
@@ -748,7 +748,7 @@ attributes(study$id)
 #> [1] "%9s"
 #> 
 #> $description
-#> [1] "Test description"
+#> [1] "My new description"
 ```
 
 ``` r
@@ -767,5 +767,9 @@ above.
 
 As shown in the screenshot above, the `Column description` portion of
 the column attributes table is still automatically populated with the
-value of the each column’s `label` attribute. So, when a column has both
-a `label` and a `description` attribute, the `label` attribute wins out.
+value of the each column’s `label` attribute – **except where we
+manually added a description attribute**. So, when a column has both a
+`label` and a `description` attribute, the `description` attribute wins
+out. The idea is that if we have taken the time to manually type out a
+`description`, it should win out over whatever happened to be in
+`label`.
