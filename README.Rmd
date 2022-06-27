@@ -398,7 +398,7 @@ For example, the `id` column below was imported with a `label` attribute. In the
 
 ```{r}
 study <- study %>% 
-  cb_add_col_attributes(id, description = "Test description")
+  cb_add_col_attributes(id, description = "My new description")
 ```
 
 ```{r}
@@ -417,5 +417,5 @@ The code above produces the following document, which you can click to view/down
 
 [![](img/stata_codebook_2.png)](https://www.dropbox.com/s/05myqf3mqbig43s/stata_codebook_2.png?dl=0)
 
-As shown in the screenshot above, the `Column description` portion of the column attributes table is still automatically populated with the value of the each column's `label` attribute. So, when a column has both a `label` and a `description` attribute, the `label` attribute wins out. 
+As shown in the screenshot above, the `Column description` portion of the column attributes table is still automatically populated with the value of the each column's `label` attribute -- **except where we manually added a description attribute**. So, when a column has both a `label` and a `description` attribute, the `description` attribute wins out. The idea is that if we have taken the time to manually type out a `description`, it should win out over whatever happened to be in `label`.
 
