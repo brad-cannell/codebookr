@@ -104,7 +104,7 @@ The code above produces the following document, which you can click to
 view/download on Dropbox. You may also download it from the files pane
 above.
 
-[![](img/screenshot_basic_codebook.png)](https://www.dropbox.com/s/qcijxgyeh4ib4d3/basic_study_codebook.docx?dl=0)
+[![](img/basic_codebook.png)](https://www.dropbox.com/s/qcijxgyeh4ib4d3/basic_study_codebook.docx?dl=0)
 
 As you may see in the example document above, the default codebook
 document includes two major sections. They are:
@@ -233,7 +233,7 @@ The arguments to `cb_add_col_attributes()` are:
     `attribute = "value"`.
 
 Although the `cb_add_col_attributes()` function will allow you to add
-any attributes you want, there are currently **only four** special
+any attributes you want, there are currently **only five** special
 attributes that the `codebook()` function will recognize and add to the
 column attributes table of the codebook document. They are:
 
@@ -322,6 +322,15 @@ column attributes table of the codebook document. They are:
         overwrite the imported value labels for any column by adding a
         `value_labels` attribute as shown in the example below.
 
+-   **skip_pattern**: Although you may add any text you desire to the
+    `skip_pattern` attribute, it is intended to be used describe skip
+    patterns in the data collection tools that impacts which study
+    participants were exposed to each study item. For example, If the
+    `likert` question in our hypothetical study data was only asked of
+    participants who were enrolled in the study for at least 10 days,
+    then you may want to add a note like “Not asked if days \< 10” to
+    the skip pattern section of the column attributes table.
+
 ``` r
 study <- study %>%
   cb_add_col_attributes(
@@ -371,7 +380,8 @@ study <- study %>%
       "Neither satisfied nor dissatisfied" = 3,
       "Somewhat satisfied" = 4,
       "Very satisfied" = 5
-    )
+    ),
+    skip_pattern = "Not asked if days < 10"
   ) %>% 
     
   cb_add_col_attributes(
@@ -380,7 +390,7 @@ study <- study %>%
     source = "Adjudicated outcomes data"
   )
 #> The following attribute(s) are being added to a variable in the data frame for the first time: description, source, other_attribute. If you believe this/these attribute(s) were previously added, then check for a typo in the attribute name. If you are adding this/these attribute(s) for the first time, you can probably safely ignore this message.
-#> The following attribute(s) are being added to a variable in the data frame for the first time: value_labels. If you believe this/these attribute(s) were previously added, then check for a typo in the attribute name. If you are adding this/these attribute(s) for the first time, you can probably safely ignore this message.
+#> The following attribute(s) are being added to a variable in the data frame for the first time: value_labels, skip_pattern. If you believe this/these attribute(s) were previously added, then check for a typo in the attribute name. If you are adding this/these attribute(s) for the first time, you can probably safely ignore this message.
 ```
 
 Notice that `codebook()` will print a message to screen the first time
@@ -447,7 +457,7 @@ code above produces the following document, which you can click to
 view/download on Dropbox. You may also download it from the files pane
 above.
 
-[![](img/screenshot_study_codebook_1.png)](https://www.dropbox.com/s/tjzayqh0sdytjz4/study_codebook_1.docx?dl=0)
+[![](img/study_codebook_1.png)](https://www.dropbox.com/s/tjzayqh0sdytjz4/study_codebook_1.docx?dl=0)
 
 In the example above, the title and metadata table are unchanged
 compared to [Example 1](#example-1-the-most-basic-use-case). However,
@@ -462,10 +472,11 @@ the column attributes tables now look a little different.
     attribute to the `id` column when we [added column attributes
     above](#add-column-attributes-to-the-data-frame-you-want-to-document-with-a-codebook).
     That attribute is still attached to the `id` column, but it is
-    ignored by `codebook()`. Again, there are currently **only four**
+    ignored by `codebook()`. Again, there are currently **only five**
     special attributes that the `codebook()` function will recognize and
     add to the column attributes table of the codebook document –
-    `description`, `source`, `col_type` and `value_labels`.
+    `description`, `source`, `col_type`, `value_labels`, and
+    `skip_pattern`.
 
 -   Notice that `codebook()` guessed what type of values were contained
     in each column and returned the most useful descriptive statistics
@@ -496,7 +507,7 @@ The code above produces the following document, which you can click to
 view/download on Dropbox. You may also download it from the files pane
 above.
 
-[![](img/screenshot_study_codebook_2.png)](https://www.dropbox.com/s/l2mph09x48q5cya/screenshot_study_codebook_2.png?dl=0)
+[![](img/study_codebook_2.png)](https://www.dropbox.com/s/l2mph09x48q5cya/study_codebook_2.png?dl=0)
 
 As shown in the codebook above, the bottom half of the column attributes
 table now shows the frequency, cumulative frequency, and percentage for
@@ -534,7 +545,7 @@ The code above produces the following document, which you can click to
 view/download on Dropbox. You may also download it from the files pane
 above.
 
-[![](img/screenshot_study_codebook_3.png)](https://www.dropbox.com/s/ysz53v23kinr9ht/screenshot_study_codebook_3.png?dl=0)
+[![](img/study_codebook_3.png)](https://www.dropbox.com/s/ysz53v23kinr9ht/study_codebook_3.png?dl=0)
 
 As shown in the codebook above, the codebook now contains a title,
 subtitle, and description.
@@ -747,7 +758,7 @@ The code above produces the following document, which you can click to
 view/download on Dropbox. You may also download it from the files pane
 above.
 
-[![](img/screenshot_stata_codebook_1.png)](https://www.dropbox.com/s/0ny97mwqhrc0eom/stata_codebok.png?dl=0)
+[![](img/stata_codebook_1.png)](https://www.dropbox.com/s/0ny97mwqhrc0eom/stata_codebok.png?dl=0)
 
 As shown in the codebook above, the `Column description` portion of the
 column attributes table is automatically populated with the value of the
@@ -792,7 +803,7 @@ The code above produces the following document, which you can click to
 view/download on Dropbox. You may also download it from the files pane
 above.
 
-[![](img/screenshot_stata_codebook_2.png)](https://www.dropbox.com/s/05myqf3mqbig43s/stata_codebook_2.png?dl=0)
+[![](img/stata_codebook_2.png)](https://www.dropbox.com/s/05myqf3mqbig43s/stata_codebook_2.png?dl=0)
 
 As shown in the codebook above, the `Column description` portion of the
 column attributes table is still automatically populated with the value
@@ -847,7 +858,7 @@ The code above produces the following document, which you can click to
 view/download on Dropbox. You may also download it from the files pane
 above.
 
-[![](img/screenshot_study_codebook_4.png)](https://www.dropbox.com/s/bnkz2hqc2huqa3e/study_codebook_4.docx?dl=0)
+[![](img/study_codebook_4.png)](https://www.dropbox.com/s/bnkz2hqc2huqa3e/study_codebook_4.docx?dl=0)
 
 As shown in the screenshot above, all rows of the column attributes
 table now exist in the codebook document for each column of the data

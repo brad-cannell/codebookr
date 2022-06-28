@@ -31,7 +31,7 @@ testthat::test_that("Column attributes returned by cb_get_col_attributes are as 
 df <- cb_get_col_attributes(study, "id", keep_blank_attributes = TRUE)
 
 testthat::test_that("Dimensions of the df returned by cb_get_col_attributes are as expected", {
-  testthat::expect_equal(nrow(df), 8L)
+  testthat::expect_equal(nrow(df), 9L)
   testthat::expect_equal(ncol(df), 2L)
 })
 
@@ -41,12 +41,12 @@ testthat::test_that("Column attributes returned by cb_get_col_attributes are as 
     c(
       "Column name:", "Column description:", "Source information:", "Column type:",
       "Data type:", "Unique non-missing value count:", "Missing value count:",
-      "Value labels:"
+      "Value labels:", "Skip pattern:"
     )
   )
   testthat::expect_equal(
     df$value,
-    c("id", "", "", "", "Character", "19", "1", "")
+    c("id", "", "", "", "Character", "19", "1", "", "")
   )
 })
 

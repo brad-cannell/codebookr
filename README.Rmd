@@ -80,7 +80,7 @@ print(study_codebook, "basic_study_codebook.docx")
 
 The code above produces the following document, which you can click to view/download on Dropbox. You may also download it from the files pane above.
 
-[![](img/screenshot_basic_codebook.png)](https://www.dropbox.com/s/qcijxgyeh4ib4d3/basic_study_codebook.docx?dl=0)
+[![](img/basic_codebook.png)](https://www.dropbox.com/s/qcijxgyeh4ib4d3/basic_study_codebook.docx?dl=0)
 
 As you may see in the example document above, the default codebook document includes two major sections. They are:
 
@@ -150,7 +150,7 @@ The arguments to `cb_add_col_attributes()` are:
 * **.x:** The name of the column you want to add the attribute to in `df`.    
 * **...:** Arbitrary list of attributes in the form `attribute = "value"`.    
 
-Although the `cb_add_col_attributes()` function will allow you to add any attributes you want, there are currently **only four** special attributes that the `codebook()` function will recognize and add to the column attributes table of the codebook document. They are:
+Although the `cb_add_col_attributes()` function will allow you to add any attributes you want, there are currently **only five** special attributes that the `codebook()` function will recognize and add to the column attributes table of the codebook document. They are:
 
 * **description**: Although you may add any text you desire to the `description` attribute, it is intended to be used describe the question/process that generated the data contained in the column. Many statistical software packages refer to this as a variable label. 
 
@@ -167,6 +167,8 @@ Although the `cb_add_col_attributes()` function will allow you to add any attrib
   - Add value labels to columns as a named vector to the `value_labels` attribute. For example, `value_labels` = c("No" = 0, "Yes" = 1). As another example, you may view hypothetical value labels added to the `likert` column below. 
   
   - As [demonstrated below]({#already-labeled}), if the data was imported from SAS, Stata, or SPSS with value labels using the `haven` package, `codebook` will automatically recognize them. There is no need to manually create them. However, you may overwrite the imported value labels for any column by adding a `value_labels` attribute as shown in the example below.
+  
+* **skip_pattern**: Although you may add any text you desire to the `skip_pattern` attribute, it is intended to be used describe skip patterns in the data collection tools that impacts which study participants were exposed to each study item. For example, If the `likert` question in our hypothetical study data was only asked of participants who were enrolled in the study for at least 10 days, then you may want to add a note like "Not asked if days < 10" to the skip pattern section of the column attributes table.
 
 ```{r}
 study <- study %>%
@@ -217,7 +219,8 @@ study <- study %>%
       "Neither satisfied nor dissatisfied" = 3,
       "Somewhat satisfied" = 4,
       "Very satisfied" = 5
-    )
+    ),
+    skip_pattern = "Not asked if days < 10"
   ) %>% 
     
   cb_add_col_attributes(
@@ -254,13 +257,13 @@ print(x = study_codebook, target = "study_codebook_1.docx")
 
 Where `x` is the rdocx object and `target` is a path for the Word document you want to create (which may or may not already exist). The code above produces the following document, which you can click to view/download on Dropbox. You may also download it from the files pane above.
 
-[![](img/screenshot_study_codebook_1.png)](https://www.dropbox.com/s/tjzayqh0sdytjz4/study_codebook_1.docx?dl=0)
+[![](img/study_codebook_1.png)](https://www.dropbox.com/s/tjzayqh0sdytjz4/study_codebook_1.docx?dl=0)
 
 In the example above, the title and metadata table are unchanged compared to [Example 1][Example 1: The most basic use case]. However, the column attributes tables now look a little different. 
 
 * Notice that the **column attributes tables** for each variable now includes the description and source information that we [added as column attributes above][Add column attributes to the data frame you want to document with a codebook]. 
 
-* Notice that we added an `other_attribute = "What happens?"` attribute to the `id` column when we [added column attributes above][Add column attributes to the data frame you want to document with a codebook]. That attribute is still attached to the `id` column, but it is  ignored by `codebook()`. Again, there are currently **only four** special attributes that the `codebook()` function will recognize and add to the column attributes table of the codebook document -- `description`, `source`, `col_type` and `value_labels`.
+* Notice that we added an `other_attribute = "What happens?"` attribute to the `id` column when we [added column attributes above][Add column attributes to the data frame you want to document with a codebook]. That attribute is still attached to the `id` column, but it is  ignored by `codebook()`. Again, there are currently **only five** special attributes that the `codebook()` function will recognize and add to the column attributes table of the codebook document -- `description`, `source`, `col_type`, `value_labels`, and `skip_pattern`.
 
 * Notice that `codebook()` guessed what type of values were contained in each column and returned the most useful descriptive statistics for that type. In this case we are may be very happy with these guesses. But what if we weren't? For example, what if we would prefer for `codebook()` to treat the `likert` column as categorical data instead of numeric data? We can do so by simply adding the `col_type = "Categorical"` attribute as demonstrated below.
 
@@ -282,7 +285,7 @@ print(x = study_codebook, target = "study_codebook_2.docx")
 
 The code above produces the following document, which you can click to view/download on Dropbox. You may also download it from the files pane above.
 
-[![](img/screenshot_study_codebook_2.png)](https://www.dropbox.com/s/l2mph09x48q5cya/screenshot_study_codebook_2.png?dl=0)
+[![](img/study_codebook_2.png)](https://www.dropbox.com/s/l2mph09x48q5cya/study_codebook_2.png?dl=0)
 
 As shown in the codebook above, the bottom half of the column attributes table now shows the frequency, cumulative frequency, and percentage for each value in the `likert` column. You may also notice that the `value_labels` we applied above are also displayed in column attributes table.
 
@@ -307,7 +310,7 @@ print(x = study_codebook, target = "study_codebook_3.docx")
 
 The code above produces the following document, which you can click to view/download on Dropbox. You may also download it from the files pane above.
 
-[![](img/screenshot_study_codebook_3.png)](https://www.dropbox.com/s/ysz53v23kinr9ht/screenshot_study_codebook_3.png?dl=0)
+[![](img/study_codebook_3.png)](https://www.dropbox.com/s/ysz53v23kinr9ht/study_codebook_3.png?dl=0)
 
 As shown in the codebook above, the codebook now contains a title, subtitle, and description.
 
@@ -401,7 +404,7 @@ print(stata_codebook, "stata_codebook_1.docx")
 
 The code above produces the following document, which you can click to view/download on Dropbox. You may also download it from the files pane above.
 
-[![](img/screenshot_stata_codebook_1.png)](https://www.dropbox.com/s/0ny97mwqhrc0eom/stata_codebok.png?dl=0)
+[![](img/stata_codebook_1.png)](https://www.dropbox.com/s/0ny97mwqhrc0eom/stata_codebok.png?dl=0)
 
 As shown in the codebook above, the `Column description` portion of the column attributes table is automatically populated with the value of the each column's `label` attribute. Additionally, the `Value labels` portion of the column attributes table is automatically populated with the value of each column's `labels` attribute; although, only the `sex` column has a `labels` attribute in this data frame. 
 
@@ -428,7 +431,7 @@ print(stata_codebook, "stata_codebook_2.docx")
 
 The code above produces the following document, which you can click to view/download on Dropbox. You may also download it from the files pane above.
 
-[![](img/screenshot_stata_codebook_2.png)](https://www.dropbox.com/s/05myqf3mqbig43s/stata_codebook_2.png?dl=0)
+[![](img/stata_codebook_2.png)](https://www.dropbox.com/s/05myqf3mqbig43s/stata_codebook_2.png?dl=0)
 
 As shown in the codebook above, the `Column description` portion of the column attributes table is still automatically populated with the value of the each column's `label` attribute -- **except where we manually added a description attribute**. So, when a column has both a `label` and a `description` attribute, the `description` attribute wins out. The idea is that if we have taken the time to manually type out a `description`, it should win out over whatever happened to be in `label`.
 
@@ -455,6 +458,6 @@ print(study_codebook, "study_codebook_4.docx")
 
 The code above produces the following document, which you can click to view/download on Dropbox. You may also download it from the files pane above.
 
-[![](img/screenshot_study_codebook_4.png)](https://www.dropbox.com/s/bnkz2hqc2huqa3e/study_codebook_4.docx?dl=0)
+[![](img/study_codebook_4.png)](https://www.dropbox.com/s/bnkz2hqc2huqa3e/study_codebook_4.docx?dl=0)
 
 As shown in the screenshot above, all rows of the column attributes table now exist in the codebook document for each column of the data frame. However, the values are blank where relevant attributes were not set.

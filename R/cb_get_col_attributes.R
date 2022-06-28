@@ -198,6 +198,7 @@ cb_get_col_attributes <- function(df, .x, keep_blank_attributes = keep_blank_att
     if (is.null(attr(df[[.x]], "source"))) attr(df[[.x]], "source") <- ""
     if (is.null(attr(df[[.x]], "col_type"))) attr(df[[.x]], "col_type") <- ""
     if (is.null(value_labels)) value_labels <- ""
+    if (is.null(attr(df[[.x]], "skip_pattern"))) attr(df[[.x]], "skip_pattern") <- ""
   }
 
   attr_df <- df %>%
@@ -209,7 +210,8 @@ cb_get_col_attributes <- function(df, .x, keep_blank_attributes = keep_blank_att
       `Data type:`                      = data_type,
       `Unique non-missing value count:` = unique(!!x) %>% stats::na.exclude() %>% length(),
       `Missing value count:`            = is.na(!!x) %>% sum(),
-      `Value labels:`                   = value_labels
+      `Value labels:`                   = value_labels,
+      `Skip pattern:`                   = attributes(df[[.x]])[["skip_pattern"]]
     ) %>%
     # Format output
     dplyr::mutate_if(is.numeric, format, big.mark = ",") %>%
@@ -241,4 +243,4 @@ cb_get_col_attributes <- function(df, .x, keep_blank_attributes = keep_blank_att
 
 # For testing
 # devtools::load_all()
-# cb_get_col_attributes(study, "sex", keep_blank_attributes = FALSE)
+# cb_get_col_attributes(study, "likert", keep_blank_attributes = FALSE)
