@@ -286,8 +286,8 @@ column attributes table of the codebook document. They are:
         column with one of the following values: `Numeric`,
         `Categorical`, or `Time`.
 
--   **val_labels**: Although you may add any text you desire to the
-    `val_labels` attribute, it is intended to inform your data users
+-   **value_labels**: Although you may add any text you desire to the
+    `value_labels` attribute, it is intended to inform your data users
     about how to correctly interpret numerically coded categorical
     variables. For example, you may have a column of 0’s and 1’s that
     represent discrete categories (i.e., “No” and “Yes”) instead of
@@ -309,6 +309,18 @@ column attributes table of the codebook document. They are:
     inform your data users about how to correctly interpret numerically
     coded categorical variables. Adding value labels to your codebook is
     one way of doing so.
+
+    -   Add value labels to columns as a named vector to the
+        `value_labels` attribute. For example, `value_labels` = c(“No” =
+        0, “Yes” = 1). As another example, you may view hypothetical
+        value labels added to the `likert` column below.
+
+    -   As [demonstrated below](%7B#already-labeled%7D), if the data was
+        imported from SAS, Stata, or SPSS with value labels using the
+        `haven` package, `codebook` will automatically recognize them.
+        There is no need to manually create them. However, you may
+        overwrite the imported value labels for any column by adding a
+        `value_labels` attribute as shown in the example below.
 
 ``` r
 study <- study %>%
@@ -352,7 +364,14 @@ study <- study %>%
   cb_add_col_attributes(
     likert,
     description = "An example Likert scale item",
-    source = "Exposure questionnaire"
+    source = "Exposure questionnaire",
+    value_labels = c(
+      "Very dissatisfied" = 1, 
+      "Somewhat dissatisfied" = 2,
+      "Neither satisfied nor dissatisfied" = 3,
+      "Somewhat satisfied" = 4,
+      "Very satisfied" = 5
+    )
   ) %>% 
     
   cb_add_col_attributes(
@@ -361,6 +380,7 @@ study <- study %>%
     source = "Adjudicated outcomes data"
   )
 #> The following attribute(s) are being added to a variable in the data frame for the first time: description, source, other_attribute. If you believe this/these attribute(s) were previously added, then check for a typo in the attribute name. If you are adding this/these attribute(s) for the first time, you can probably safely ignore this message.
+#> The following attribute(s) are being added to a variable in the data frame for the first time: value_labels. If you believe this/these attribute(s) were previously added, then check for a typo in the attribute name. If you are adding this/these attribute(s) for the first time, you can probably safely ignore this message.
 ```
 
 Notice that `codebook()` will print a message to screen the first time
@@ -445,7 +465,7 @@ the column attributes tables now look a little different.
     ignored by `codebook()`. Again, there are currently **only four**
     special attributes that the `codebook()` function will recognize and
     add to the column attributes table of the codebook document –
-    `description`, `source`, `col_type` and `val_labels`.
+    `description`, `source`, `col_type` and `value_labels`.
 
 -   Notice that `codebook()` guessed what type of values were contained
     in each column and returned the most useful descriptive statistics
@@ -478,9 +498,11 @@ above.
 
 [![](img/screenshot_study_codebook_2.png)](https://www.dropbox.com/s/l2mph09x48q5cya/screenshot_study_codebook_2.png?dl=0)
 
-As shown in the screenshot above, the bottom half of the column
-attributes table now shows the frequency, cumulative frequency, and
-percentage for each value in the `likert` column.
+As shown in the codebook above, the bottom half of the column attributes
+table now shows the frequency, cumulative frequency, and percentage for
+each value in the `likert` column. You may also notice that the
+`value_labels` we applied above are also displayed in column attributes
+table.
 
 ### Add title, subtitle, and description
 
@@ -514,7 +536,7 @@ above.
 
 [![](img/screenshot_study_codebook_3.png)](https://www.dropbox.com/s/ysz53v23kinr9ht/screenshot_study_codebook_3.png?dl=0)
 
-As shown in the screenshot above, the codebook now cantains a title,
+As shown in the codebook above, the codebook now contains a title,
 subtitle, and description.
 
 ## What if you have a lot of variables?
@@ -715,9 +737,9 @@ above.
 
 [![](img/screenshot_stata_codebook_1.png)](https://www.dropbox.com/s/0ny97mwqhrc0eom/stata_codebok.png?dl=0)
 
-As shown in the screenshot above, the `Column description` portion of
-the column attributes table is automatically populated with the value of
-the each column’s `label` attribute. Additionally, the `Value labels`
+As shown in the codebook above, the `Column description` portion of the
+column attributes table is automatically populated with the value of the
+each column’s `label` attribute. Additionally, the `Value labels`
 portion of the column attributes table is automatically populated with
 the value of each column’s `labels` attribute; although, only the `sex`
 column has a `labels` attribute in this data frame.
@@ -760,13 +782,25 @@ above.
 
 [![](img/screenshot_stata_codebook_2.png)](https://www.dropbox.com/s/05myqf3mqbig43s/stata_codebook_2.png?dl=0)
 
-As shown in the screenshot above, the `Column description` portion of
-the column attributes table is still automatically populated with the
-value of the each column’s `label` attribute – **except where we
-manually added a description attribute**. So, when a column has both a
-`label` and a `description` attribute, the `description` attribute wins
-out. The idea is that if we have taken the time to manually type out a
+As shown in the codebook above, the `Column description` portion of the
+column attributes table is still automatically populated with the value
+of the each column’s `label` attribute – **except where we manually
+added a description attribute**. So, when a column has both a `label`
+and a `description` attribute, the `description` attribute wins out. The
+idea is that if we have taken the time to manually type out a
 `description`, it should win out over whatever happened to be in
+`label`.
+
+### What happens if there is a labels and a value_labels attribute?
+
+The `labels` and `value_labels` attributes behave similarly to the
+`label` and `descripion` attributes shown above. The `Value labels:`
+portion of the column attributes table will automatically be populated
+with the value of the each column’s `labels` attribute – **except where
+we manually add a value_labels attribute**. So, when a column has both a
+`labels` and a `value_labels` attribute, the `value_labels` attribute
+wins out. The idea is that if we have taken the time to manually type
+out `value_labels`, it should win out over whatever happened to be in
 `label`.
 
 ## Manually filling in the column attributes table

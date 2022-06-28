@@ -67,7 +67,7 @@ testthat::test_that("Column description is as expected", {
   )
 })
 
-testthat::test_that("Value labels: is as expected", {
+testthat::test_that("Value labels are as expected", {
   testthat::expect_equal(
     df$value[df$Attribute == "Value labels:"],
     "1 = Female"
@@ -82,6 +82,7 @@ testthat::test_that("Value labels: is as expected", {
 # =============================================================================
 # Test overwriting
 # When "label" and "description" both exist, description should win.
+# When "labels" and "value_labels" both exist, value_labels should win.
 # =============================================================================
 study <- haven::read_dta(system.file("extdata", "study.dta", package = "codebookr"))
 
@@ -95,6 +96,111 @@ testthat::test_that("Column description is as expected", {
     "Test"
   )
 })
+
+# Add value_labels attribute
+attr(study$sex, "value_labels") <- c("no" = 1, "yes" = 2)
+df <- cb_get_col_attributes(study, "sex", keep_blank_attributes = FALSE)
+
+testthat::test_that("Value labels are as expected", {
+  testthat::expect_equal(
+    df$value[df$Attribute == "Value labels:"],
+    "1 = no"
+  )
+  testthat::expect_equal(
+    df$value[df$Attribute == ""],
+    "2 = yes"
+  )
+})
+
+
+# =============================================================================
+# Test values passed to value_labels
+# Check to make sure value_labels is a named vector/list with no missing
+# =============================================================================
+study <- haven::read_dta(system.file("extdata", "study.dta", package = "codebookr"))
+
+# Named vector should work
+attr(study$sex, "value_labels") <- c("Male" = 1, "Female" = 2)
+df <- cb_get_col_attributes(study, "sex", keep_blank_attributes = FALSE)
+testthat::test_that("Value labels error as expected", {
+  testthat::expect_equal(
+    df$value[df$Attribute == "Value labels:"],
+    "1 = Male"
+  )
+  testthat::expect_equal(
+    df$value[df$Attribute == ""],
+    "2 = Female"
+  )
+})
+
+# Named list should work
+attr(study$sex, "value_labels") <- list("Male" = 1, "Female" = 2)
+df <- cb_get_col_attributes(study, "sex", keep_blank_attributes = FALSE)
+testthat::test_that("Value labels error as expected", {
+  testthat::expect_equal(
+    df$value[df$Attribute == "Value labels:"],
+    "1 = Male"
+  )
+  testthat::expect_equal(
+    df$value[df$Attribute == ""],
+    "2 = Female"
+  )
+})
+
+# Unnamed vector should not work
+attr(study$sex, "value_labels") <- c(0, 1)
+testthat::test_that("Value labels error as expected", {
+  testthat::expect_error(
+    cb_get_col_attributes(study, "sex", keep_blank_attributes = FALSE)
+  )
+})
+
+# Partially named vector should not work
+attr(study$sex, "value_labels") <- c("no" = 0, 1)
+testthat::test_that("Value labels error as expected", {
+  testthat::expect_error(
+    cb_get_col_attributes(study, "sex", keep_blank_attributes = FALSE)
+  )
+})
+
+# Non-vector/non-list object should not work
+attr(study$sex, "value_labels") <- matrix(c(1, 1, 1, 1))
+testthat::test_that("Value labels error as expected", {
+  testthat::expect_error(
+    cb_get_col_attributes(study, "sex", keep_blank_attributes = FALSE)
+  )
+})
+
+# Issue #16: Make sure the values in all unique column values appear
+# somewhere in the value_labels.
+# Exact match between values in the column and values in value_labels should work.
+# Already tested above.
+# Values in value_labels that don't exist in the column should work.
+attr(study$sex, "value_labels") <- c("Female" = 1, "Male" = 2, "Other" = 3)
+df <- cb_get_col_attributes(study, "sex", keep_blank_attributes = FALSE)
+testthat::test_that("Value labels error as expected", {
+  testthat::expect_equal(
+    df$value[df$Attribute == "Value labels:"],
+    "1 = Female"
+  )
+  testthat::expect_equal(
+    df$value[df$Attribute == ""][1],
+    "2 = Male"
+  )
+  testthat::expect_equal(
+    df$value[df$Attribute == ""][2],
+    "3 = Other"
+  )
+})
+
+# Values in the column that don't exist in value_labels should throw an error.
+study$sex[[1]] <- 7
+testthat::test_that("Value labels error as expected", {
+  testthat::expect_error(
+    cb_get_col_attributes(study, "sex", keep_blank_attributes = FALSE)
+  )
+})
+
 
 # =============================================================================
 # Clean up

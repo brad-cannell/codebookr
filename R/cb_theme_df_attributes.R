@@ -18,9 +18,15 @@ cb_theme_df_attributes <- function(ft) {
     flextable::bold(j = 1) %>%
     # Set the width of both columns
     flextable::width(width = 3.25) %>%
-    # Add borders all around
-    flextable::border_outer(part = "all", border = officer::fp_border()) %>%
-    flextable::border_inner_v(part = "all", border = officer::fp_border())
+
+    # Format borders
+    # Remove default borders
+    flextable::border_remove() %>%
+    # Add thick bottom border to header (not actually the header)
+    flextable::hline(i = 1, border = officer::fp_border()) %>%
+    # Add light gray vertical line
+    flextable::vline(j = 1, border = officer::fp_border()) %>%
+    flextable::border_outer(part = "all", border = officer::fp_border())
 
   # Return formatted flextable
   ft

@@ -76,7 +76,7 @@ user can directly tell \code{cb_add_summary_stats()} which summary stats to
 calculate by providing by adding a \code{col_type} attribute to a column with
 one of the following values: \code{Numeric}, \code{Categorical}, or \code{Time}.
 }
-\item \strong{val_labels}: Although you may add any text you desire to the \code{val_labels}
+\item \strong{value_labels}: Although you may add any text you desire to the \code{value_labels}
 attribute, it is intended to inform your data users about how to correctly
 interpret numerically coded categorical variables. For example, you may have
 a column of 0's and 1's that represent discrete categories (i.e., "No" and

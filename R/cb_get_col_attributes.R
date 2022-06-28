@@ -53,7 +53,7 @@
 #'  calculate by providing by adding a `col_type` attribute to a column with
 #'  one of the following values: `Numeric`, `Categorical`, or `Time`.
 #'
-#' * **val_labels**: Although you may add any text you desire to the `val_labels`
+#' * **value_labels**: Although you may add any text you desire to the `value_labels`
 #' attribute, it is intended to inform your data users about how to correctly
 #' interpret numerically coded categorical variables. For example, you may have
 #' a column of 0's and 1's that represent discrete categories (i.e., "No" and
@@ -122,18 +122,59 @@ cb_get_col_attributes <- function(df, .x, keep_blank_attributes = keep_blank_att
     description <- attr(df[[.x]], "label")
   }
 
-  # Set val_labels to labels if labels exists
-  # By default, labels are a named vector. For example:
-  # $labels
-  # Female   Male
-  #      1      2
-  # Without some manipulation, only the values (i.e., 1 and 2) will end up in
-  # the column attributes table. We need to convert the values and value labels
-  # into a more human readable format.
-  val_labels <- attr(df[[.x]], "labels")
-  if (!is.null(val_labels)) {
-    val_nms    <- names(val_labels)
-    val_labels <- paste(val_labels, val_nms, sep = " = ")
+  # Value labels
+  #-------------
+  # First, test to see if there is a `value_labels` or `labels` attribute.
+  # If not, move on.
+  if (!is.null(attr(df[[.x]], "value_labels")) || !is.null(attr(df[[.x]], "labels"))) {
+    # By default, labels are a named vector. For example:
+    # $labels
+    # Female   Male
+    #      1      2
+    # value_labels should also be a named vector or list.
+    # First, see if there are user defined value labels, if not add haven labels.
+    # User defined win if both exist.
+    value_labels <- attr(df[[.x]], "value_labels")
+    if (is.null(value_labels)) {
+      value_labels <- attr(df[[.x]], "labels")
+    }
+    # Next, check to make sure value_labels is a named vector/list with no missing
+    # name values
+    # Check to make sure labels or value_labels is a vector or list
+    if (!is.vector(value_labels)) {
+      stop(
+        "Codebook expects value_labels to contain a named vector (or list). ",
+        .x, " has a class of ", paste0(class(value_labels), sep = " ")
+      )
+    }
+    # Make sure the vector/list is named with no missing names
+    val_nms <- names(value_labels)
+    if (is.null(val_nms) || any(val_nms == "")) {
+      stop(
+        "Codebook expects value_labels to contain a named vector (or list) ",
+        "without any missing name values. The name values for ", .x, " are: ",
+        paste0(val_nms, sep = " "), ". If there aren't any values listed, ",
+        "it may be because all of the names are blank/missing."
+      )
+    }
+    # Issue #16: Make sure the values in all unique column values appear
+    # somewhere in the value_labels.
+    vals_in_col <- sort(stats::na.omit(unique(df[[.x]])))
+    if (!all(vals_in_col %in% value_labels)) {
+      stop(
+        "Codebook expects all unique nonmissing values for a column to be ",
+        "included in the value_labels attribute if the value_labels attribute exists. ",
+        .x, " has the following unique values ", paste0(vals_in_col, sep = " "),
+        " and the value_labels attribute has the following unique values ",
+        paste0(value_labels, sep = " ")
+      )
+    }
+    # Without some manipulation, only the values (i.e., 1 and 2) will end up in
+    # the column attributes table. We need to convert the values and value labels
+    # into a more human readable format.
+    value_labels <- paste(value_labels, val_nms, sep = " = ")
+  } else {
+    value_labels <- NULL
   }
 
   # ===========================================================================
@@ -156,7 +197,7 @@ cb_get_col_attributes <- function(df, .x, keep_blank_attributes = keep_blank_att
     if (is.null(description)) description <- ""
     if (is.null(attr(df[[.x]], "source"))) attr(df[[.x]], "source") <- ""
     if (is.null(attr(df[[.x]], "col_type"))) attr(df[[.x]], "col_type") <- ""
-    if (is.null(val_labels)) val_labels <- ""
+    if (is.null(value_labels)) value_labels <- ""
   }
 
   attr_df <- df %>%
@@ -168,7 +209,7 @@ cb_get_col_attributes <- function(df, .x, keep_blank_attributes = keep_blank_att
       `Data type:`                      = data_type,
       `Unique non-missing value count:` = unique(!!x) %>% stats::na.exclude() %>% length(),
       `Missing value count:`            = is.na(!!x) %>% sum(),
-      `Value labels:`                   = val_labels
+      `Value labels:`                   = value_labels
     ) %>%
     # Format output
     dplyr::mutate_if(is.numeric, format, big.mark = ",") %>%
@@ -198,20 +239,6 @@ cb_get_col_attributes <- function(df, .x, keep_blank_attributes = keep_blank_att
   attr_df
 }
 
-
 # For testing
 # devtools::load_all()
-# cb_get_col_attributes(study, "sex", keep_blank_attributes = TRUE)
-
-
-
-
-
-
-
-
-
-
-
-
-
+# cb_get_col_attributes(study, "sex", keep_blank_attributes = FALSE)
