@@ -243,6 +243,13 @@ column attributes table of the codebook document. They are:
     Many statistical software packages refer to this as a variable
     label.
 
+    -   As [demonstrated below](%7B#already-labeled%7D), if the data was
+        imported from SAS, Stata, or SPSS with variable labels using the
+        `haven` package, `codebook` will automatically recognize them.
+        There is no need to manually create them. However, you may
+        overwrite the imported variable label for any column by adding a
+        `description` attribute as shown in the example below.
+
 -   **source**: Although you may add any text you desire to the `source`
     attribute, it is intended to be used describe where the data
     contained in the column originally came from. For example, if the
@@ -718,7 +725,7 @@ The code above produces the following document, which you can click to
 view/download on Dropbox. You may also download it from the files pane
 above.
 
-[![](img/stata_codebook_1.png)](https://www.dropbox.com/s/0ny97mwqhrc0eom/stata_codebok.png?dl=0)
+[![](img/screenshot_stata_codebook_1.png)](https://www.dropbox.com/s/0ny97mwqhrc0eom/stata_codebok.png?dl=0)
 
 As shown in the screenshot above, the `Column description` portion of
 the column attributes table is automatically populated with the value of
@@ -763,7 +770,7 @@ The code above produces the following document, which you can click to
 view/download on Dropbox. You may also download it from the files pane
 above.
 
-[![](img/stata_codebook_2.png)](https://www.dropbox.com/s/05myqf3mqbig43s/stata_codebook_2.png?dl=0)
+[![](img/screenshot_stata_codebook_2.png)](https://www.dropbox.com/s/05myqf3mqbig43s/stata_codebook_2.png?dl=0)
 
 As shown in the screenshot above, the `Column description` portion of
 the column attributes table is still automatically populated with the
@@ -773,3 +780,42 @@ manually added a description attribute**. So, when a column has both a
 out. The idea is that if we have taken the time to manually type out a
 `description`, it should win out over whatever happened to be in
 `label`.
+
+## Manually filling in the column attributes table
+
+By default, `codebook()` will drop `Column description:`,
+`Source information:`, `Column type:`, and/or `Value labels:` from the
+column attributes table if values for those attributes don’t exist in
+the data frame. However, some users have requested the option to keep
+them in the Word codebook document with blank values so that that they
+can be filled in manually. We believe that this is typically a bad
+practice because any change to the data may require you to create a new
+codebook and fill-in the Word document manually from scratch again.
+However, changing the value of `keep_blank_attributes` from `FALSE` to
+`TRUE` will cause `codebook()` to keep `Column description:`,
+`Source information:`, `Column type:`, and `Value labels:` in the column
+attributes table even if those attributes don’t exist in the data frame.
+
+``` r
+# Refresh data
+data(study)
+```
+
+``` r
+study_codebook <- codebook(study, keep_blank_attributes = TRUE)
+```
+
+``` r
+print(study_codebook, "study_codebook_4.docx")
+```
+
+The code above produces the following document, which you can click to
+view/download on Dropbox. You may also download it from the files pane
+above.
+
+[![](img/screenshot_study_codebook_4)](https://www.dropbox.com/s/bnkz2hqc2huqa3e/study_codebook_4.docx?dl=0)
+
+As shown in the screenshot above, all rows of the column attributes
+table now exist in the codebook document for each column of the data
+frame. However, the values are blank where relevant attributes were not
+set.

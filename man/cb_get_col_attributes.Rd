@@ -4,12 +4,21 @@
 \alias{cb_get_col_attributes}
 \title{Get Column Attributes}
 \usage{
-cb_get_col_attributes(df, .x)
+cb_get_col_attributes(df, .x, keep_blank_attributes = keep_blank_attributes)
 }
 \arguments{
 \item{df}{Data frame of interest}
 
 \item{.x}{Column of interest in df}
+
+\item{keep_blank_attributes}{By default, the column attributes table will omit
+the Column description, Source information, Column type, and value labels
+rows from the column attributes table in the codebook document if those
+attributes haven't been set. In other words, it won't show blank rows for
+those attributes. Passing \code{TRUE} to the keep_blank_attributes argument
+will cause the opposite to happen. The column attributes table will include
+a Column description, Source information, Column type, and value labels
+row for every column in the data frame - even if they don't have a value.}
 }
 \value{
 A tibble of column attributes

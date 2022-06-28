@@ -76,10 +76,18 @@
 #'
 #' @param df Data frame of interest
 #' @param .x Column of interest in df
+#' @param keep_blank_attributes By default, the column attributes table will omit
+#'   the Column description, Source information, Column type, and value labels
+#'   rows from the column attributes table in the codebook document if those
+#'   attributes haven't been set. In other words, it won't show blank rows for
+#'   those attributes. Passing `TRUE` to the keep_blank_attributes argument
+#'   will cause the opposite to happen. The column attributes table will include
+#'   a Column description, Source information, Column type, and value labels
+#'   row for every column in the data frame - even if they don't have a value.
 #'
 #' @return A tibble of column attributes
 #' @importFrom dplyr %>%
-cb_get_col_attributes <- function(df, .x) {
+cb_get_col_attributes <- function(df, .x, keep_blank_attributes = keep_blank_attributes) {
 
   # ===========================================================================
   # Prevents R CMD check: "no visible binding for global variable ‘.’"
@@ -103,6 +111,7 @@ cb_get_col_attributes <- function(df, .x) {
   # ===========================================================================
 
   # Label vs. Description
+  # ---------------------
   # See issue #12. If both "label" and "description" exist, then "description"
   # should win. The idea is that if I have taken the time to manually type out
   # a description, it should win out over whatever happened to be in label.
@@ -110,7 +119,7 @@ cb_get_col_attributes <- function(df, .x) {
   # "description" should be set to "label".
   description <- attributes(df[[.x]])[["description"]]
   if (is.null(description)) {
-    attr(df[[.x]], "description") <- attr(df[[.x]], "label")
+    description <- attr(df[[.x]], "label")
   }
 
   # Set val_labels to labels if labels exists
@@ -141,10 +150,19 @@ cb_get_col_attributes <- function(df, .x) {
     toupper(stringr::str_extract(data_type, "^\\w{1}"))
   )
 
+  # Issue 13. Keep blank rows in the column attributes table if
+  # keep_blank_attributes = TRUE
+  if (keep_blank_attributes == TRUE) {
+    if (is.null(description)) description <- ""
+    if (is.null(attr(df[[.x]], "source"))) attr(df[[.x]], "source") <- ""
+    if (is.null(attr(df[[.x]], "col_type"))) attr(df[[.x]], "col_type") <- ""
+    if (is.null(val_labels)) val_labels <- ""
+  }
+
   attr_df <- df %>%
     dplyr::summarise(
       `Column name:`                    = .x,
-      `Column description:`             = attributes(df[[.x]])[["description"]],
+      `Column description:`             = description,
       `Source information:`             = attributes(df[[.x]])[["source"]],
       `Column type:`                    = attributes(df[[.x]])[["col_type"]],
       `Data type:`                      = data_type,
@@ -182,9 +200,8 @@ cb_get_col_attributes <- function(df, .x) {
 
 
 # For testing
-# Using the Stata version of study
 # devtools::load_all()
-# cb_get_col_attributes(study, "id")
+# cb_get_col_attributes(study, "sex", keep_blank_attributes = TRUE)
 
 
 
