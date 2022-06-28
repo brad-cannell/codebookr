@@ -13,6 +13,14 @@
 #' @param title An optional title that will appear at the top of the Word codebook document
 #' @param subtitle An optional subtitle that will appear at the top of the Word codebook document
 #' @param description An optional text description of the dataset that will appear on the first page of the Word codebook document
+#' @param keep_blank_attributes By default, the column attributes table will omit
+#'   the Column description, Source information, Column type, and value labels
+#'   rows from the column attributes table in the codebook document if those
+#'   attributes haven't been set. In other words, it won't show blank rows for
+#'   those attributes. Passing `TRUE` to the keep_blank_attributes argument
+#'   will cause the opposite to happen. The column attributes table will include
+#'   a Column description, Source information, Column type, and value labels
+#'   row for every column in the data frame - even if they don't have a value.
 #'
 #' @return An rdocx object that can be printed to a Word document
 #' @importFrom dplyr %>%
@@ -31,7 +39,7 @@
 #' # Create the Word codebook document
 #' print(study_codebook, path = "study_codebook.docx")
 #' }
-codebook <- function(df, title = NA, subtitle = NA, description = NA) {
+codebook <- function(df, title = NA, subtitle = NA, description = NA, keep_blank_attributes = FALSE) {
 
   # ===========================================================================
   # Checks
@@ -134,7 +142,7 @@ codebook <- function(df, title = NA, subtitle = NA, description = NA) {
 
     # Get column attributes
     table_var_attributes <- df %>%
-      cb_get_col_attributes(col_nms[[i]]) %>%
+      cb_get_col_attributes(col_nms[[i]], keep_blank_attributes = keep_blank_attributes) %>%
       flextable::regulartable() %>%
       cb_theme_col_attr()
 

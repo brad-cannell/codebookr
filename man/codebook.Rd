@@ -4,7 +4,13 @@
 \alias{codebook}
 \title{Automate creation of a data codebook}
 \usage{
-codebook(df, title = NA, subtitle = NA, description = NA)
+codebook(
+  df,
+  title = NA,
+  subtitle = NA,
+  description = NA,
+  keep_blank_attributes = FALSE
+)
 }
 \arguments{
 \item{df}{The data frame the codebook will describe}
@@ -14,6 +20,15 @@ codebook(df, title = NA, subtitle = NA, description = NA)
 \item{subtitle}{An optional subtitle that will appear at the top of the Word codebook document}
 
 \item{description}{An optional text description of the dataset that will appear on the first page of the Word codebook document}
+
+\item{keep_blank_attributes}{By default, the column attributes table will omit
+the Column description, Source information, Column type, and value labels
+rows from the column attributes table in the codebook document if those
+attributes haven't been set. In other words, it won't show blank rows for
+those attributes. Passing \code{TRUE} to the keep_blank_attributes argument
+will cause the opposite to happen. The column attributes table will include
+a Column description, Source information, Column type, and value labels
+row for every column in the data frame - even if they don't have a value.}
 }
 \value{
 An rdocx object that can be printed to a Word document
