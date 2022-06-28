@@ -20,7 +20,7 @@ You can install the development version of codebookr like so:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("brad-cannell/codebook")
+devtools::install_github("brad-cannell/codebookr")
 ```
 
 ## codebookr functions
@@ -562,23 +562,14 @@ for(i in admin_vars) {
 
 ``` r
 attributes(study$id)
-#> $description
-#> [1] "Participant's study identification number"
-#> 
 #> $source
 #> [1] "Administrative data"
-#> 
-#> $other_attribute
-#> [1] "What happens?"
 ```
 
 ``` r
 attributes(study$date)
 #> $class
 #> [1] "Date"
-#> 
-#> $description
-#> [1] "Participant's date of enrollment"
 #> 
 #> $source
 #> [1] "Administrative data"
@@ -591,9 +582,6 @@ attributes(study$time)
 #> 
 #> $class
 #> [1] "hms"      "difftime"
-#> 
-#> $description
-#> [1] "Participant's time of enrollemnt"
 #> 
 #> $source
 #> [1] "Administrative data"
@@ -813,7 +801,7 @@ The code above produces the following document, which you can click to
 view/download on Dropbox. You may also download it from the files pane
 above.
 
-[![](img/screenshot_study_codebook_4)](https://www.dropbox.com/s/bnkz2hqc2huqa3e/study_codebook_4.docx?dl=0)
+[![](img/screenshot_study_codebook_4.png)](https://www.dropbox.com/s/bnkz2hqc2huqa3e/study_codebook_4.docx?dl=0)
 
 As shown in the screenshot above, all rows of the column attributes
 table now exist in the codebook document for each column of the data

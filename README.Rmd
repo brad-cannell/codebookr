@@ -28,7 +28,7 @@ You can install the development version of codebookr like so:
 
 ```{r eval=FALSE}
 # install.packages("devtools")
-devtools::install_github("brad-cannell/codebook")
+devtools::install_github("brad-cannell/codebookr")
 ```
 
 ## codebookr functions
@@ -440,6 +440,6 @@ print(study_codebook, "study_codebook_4.docx")
 
 The code above produces the following document, which you can click to view/download on Dropbox. You may also download it from the files pane above.
 
-[![](img/screenshot_study_codebook_4)](https://www.dropbox.com/s/bnkz2hqc2huqa3e/study_codebook_4.docx?dl=0)
+[![](img/screenshot_study_codebook_4.png)](https://www.dropbox.com/s/bnkz2hqc2huqa3e/study_codebook_4.docx?dl=0)
 
 As shown in the screenshot above, all rows of the column attributes table now exist in the codebook document for each column of the data frame. However, the values are blank where relevant attributes were not set.
