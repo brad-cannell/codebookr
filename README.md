@@ -584,14 +584,23 @@ for(i in admin_vars) {
 
 ``` r
 attributes(study$id)
+#> $description
+#> [1] "Participant's study identification number"
+#> 
 #> $source
 #> [1] "Administrative data"
+#> 
+#> $other_attribute
+#> [1] "What happens?"
 ```
 
 ``` r
 attributes(study$date)
 #> $class
 #> [1] "Date"
+#> 
+#> $description
+#> [1] "Participant's date of enrollment"
 #> 
 #> $source
 #> [1] "Administrative data"
@@ -604,6 +613,9 @@ attributes(study$time)
 #> 
 #> $class
 #> [1] "hms"      "difftime"
+#> 
+#> $description
+#> [1] "Participant's time of enrollemnt"
 #> 
 #> $source
 #> [1] "Administrative data"
