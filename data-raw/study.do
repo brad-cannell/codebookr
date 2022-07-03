@@ -41,6 +41,12 @@ drop time
 rename time2 time
 order time, after(date)
 
+gen date_time2 = clock(date_time, "YMD#hms#")
+format date_time2 %tcCCYY-NN-DD_HH:MM:SS
+drop date_time
+rename date_time2 date_time
+order date_time, after(time)
+
 // Coerce sex to 1's and 2's and then add value lables so that R will add
 // the class haven_labeled on import. 
 encode sex, gen(sex2)
@@ -53,6 +59,7 @@ la var id "Participant's study identification number"
 la var sex "Biological sex of the participant assigned at birth"
 la var date "Participant's date of enrollment"
 la var time "Participant's time of enrollment"
+la var date_time "Participant's date and time of enrollment"
 la var days "Total number of days the participant was enrolled in the study"
 la var height "Participant's height in inches at date of enrollment"
 la var likert "An example Likert scale item" 

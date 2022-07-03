@@ -72,7 +72,7 @@ cb_summary_stats_time <- function(df, .x, digits = 2) {
       dplyr::mutate(
         Statistic = "Mode",
         Percentage = Frequency / nrow(df) * 100,
-        Value = date
+        Value = .data[[.x]]
       ) %>%
       # Format output
       dplyr::mutate(
@@ -111,4 +111,5 @@ cb_summary_stats_time <- function(df, .x, digits = 2) {
 
 # For testing
 # data(study)
-# cb_summary_stats_time(study, date, digits = 2)
+# study$date_time[2] <- study$date_time[1]
+# cb_summary_stats_time(study, "date_time", digits = 2)
