@@ -171,36 +171,6 @@ testthat::test_that("Value labels error as expected", {
   )
 })
 
-# Issue #16: Make sure the values in all unique column values appear
-# somewhere in the value_labels.
-# Exact match between values in the column and values in value_labels should work.
-# Already tested above.
-# Values in value_labels that don't exist in the column should work.
-attr(study$sex, "value_labels") <- c("Female" = 1, "Male" = 2, "Other" = 3)
-df <- cb_get_col_attributes(study, "sex", keep_blank_attributes = FALSE)
-testthat::test_that("Value labels error as expected", {
-  testthat::expect_equal(
-    df$value[df$Attribute == "Value labels:"],
-    "1 = Female"
-  )
-  testthat::expect_equal(
-    df$value[df$Attribute == ""][1],
-    "2 = Male"
-  )
-  testthat::expect_equal(
-    df$value[df$Attribute == ""][2],
-    "3 = Other"
-  )
-})
-
-# Values in the column that don't exist in value_labels should throw an error.
-study$sex[[1]] <- 7
-testthat::test_that("Value labels error as expected", {
-  testthat::expect_error(
-    cb_get_col_attributes(study, "sex", keep_blank_attributes = FALSE)
-  )
-})
-
 
 # =============================================================================
 # Clean up

@@ -157,18 +157,6 @@ cb_get_col_attributes <- function(df, .x, keep_blank_attributes = keep_blank_att
         "it may be because all of the names are blank/missing."
       )
     }
-    # Issue #16: Make sure the values in all unique column values appear
-    # somewhere in the value_labels.
-    vals_in_col <- sort(stats::na.omit(unique(df[[.x]])))
-    if (!all(vals_in_col %in% value_labels)) {
-      stop(
-        "Codebook expects all unique nonmissing values for a column to be ",
-        "included in the value_labels attribute if the value_labels attribute exists. ",
-        .x, " has the following unique values ", paste0(vals_in_col, sep = " "),
-        " and the value_labels attribute has the following unique values ",
-        paste0(value_labels, sep = " ")
-      )
-    }
     # Without some manipulation, only the values (i.e., 1 and 2) will end up in
     # the column attributes table. We need to convert the values and value labels
     # into a more human readable format.
