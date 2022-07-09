@@ -1,0 +1,132 @@
+---
+title: "Codebook is Slow"
+---
+
+Working on issue #17. Codebook is slow.
+
+```{r}
+library(dplyr)
+library(codebookr)
+library(microbenchmark)
+library(profvis)
+```
+
+```{r}
+data(study)
+data_stata <- haven::read_dta("inst/extdata/study.dta")
+```
+
+How long does it take to run regular data?
+
+```{r}
+microbenchmark(
+  codebook(study),
+  times = 10L
+) # 2-3 seconds each run.
+```
+
+How long does it to run on Stata data?
+
+```{r}
+microbenchmark(
+  codebook(data_stata),
+  times = 10L
+) # 2-3 seconds each run
+```
+
+So, that doesn't seem to make a huge difference. 
+
+What are the slow parts?
+
+```{r}
+profvis(codebook(study))
+```
+
+The Flextable stuff is the slowest part. I'm not sure if I can speed that up or not. 
+
+```{r}
+profvis(codebook(data_stata))
+```
+
+Flextable stuff for this one too. 
+
+Can I do the Flextable stuff at once outside of a loop? Will that make any difference?
+
+
+Do more rows slow it down?
+
+```{r}
+df_short <- tibble(x = rnorm(100)) # 100 rows
+df_medium <- tibble(x = rnorm(10000)) # 10,000 rows
+df_long <- tibble(x = rnorm(10000000)) # 10,000,000 rows
+```
+
+```{r}
+microbenchmark(
+  codebook(df_short),  # Mean = 347	milliseconds
+  codebook(df_medium), # Mean = 1589 milliseconds
+  codebook(df_long),   # Mean = 4212	milliseconds
+  times = 10L
+)
+```
+
+So, adding more observations slows it down.
+100 to 10,000 = 4 times as long
+100 to 10,000,000 = 12 times as long
+
+Do more columns slow it down?
+
+```{r}
+# Keep the first 100 rows of df_long only
+df_medium <- df_medium[1:100,]
+# Make 100 column names from combinations of letters
+set.seed(123)
+cols <- unique(paste0(sample(letters, 100, TRUE), sample(letters, 100, TRUE), sample(letters, 100, TRUE)))
+for (col in cols) {
+  df_medium[[col]] <- rnorm(100)
+}
+```
+
+```{r}
+microbenchmark(
+  codebook(df_short),  # Mean = 300	milliseconds
+  codebook(df_medium), # Mean = 52776	milliseconds (52 seconds)
+  times = 1L
+)
+```
+
+So, adding more columns slows it down A LOT!
+1 to 100 = 175 times as long!
+
+What parts of the code take the longest to run?
+
+```{r}
+profvis(codebook(df_short))
+```
+
+The flextable parts take the longest (i.e., body_add_flextable and regular_table).
+
+```{r}
+profvis(codebook(df_medium))
+```
+
+The flextable parts take the longest (i.e., body_add_flextable, body_add_par, and regular_table).
+
+```{r}
+profvis(codebook(df_long))
+```
+
+unique.default and cb_add_summary stats take the longest.
+
+There isn't a way for me to change the internals of the flextable functions, but I do wonder if me applying them in a different way would speed things up?
+
+
+
+
+
+
+
+
+
+
+
