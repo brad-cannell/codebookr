@@ -8,3 +8,5 @@
 ^codebookr_graphics\.pptx$
 ^img$
 [.]docx$
+^cran-comments\.md$
+^CRAN-SUBMISSION$

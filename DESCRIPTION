@@ -1,6 +1,6 @@
 Package: codebookr
-Title: Create Codebooks From Data Frames
-Version: 0.0.0.9000
+Title: Create Codebooks from Data Frames
+Version: 0.1.0
 Authors@R: person("Brad", "Cannell", email = "brad.cannell@gmail.com",
   role = c("aut", "cre", "cph"))
 Maintainer: Brad Cannell <brad.cannell@gmail.com>
@@ -10,16 +10,15 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
-URL: https://github.com/mbcann01/codebook
-BugReports: https://github.com/mbcann01/codebook/issues
+URL: https://github.com/brad-cannell/codebookr
+BugReports: https://github.com/brad-cannell/codebookr/issues
 Depends: 
     R (>= 2.10)
 LazyData: true
 Suggests: 
     haven,
     hms,
-    testthat (>= 3.0.0)
-Config/testthat/edition: 3
+    testthat
 Imports: 
     flextable,
     dplyr,
