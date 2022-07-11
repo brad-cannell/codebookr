@@ -154,7 +154,7 @@ Although the `cb_add_col_attributes()` function will allow you to add any attrib
 
 * **description**: Although you may add any text you desire to the `description` attribute, it is intended to be used describe the question/process that generated the data contained in the column. Many statistical software packages refer to this as a variable label. 
 
-  - As [demonstrated below]({#already-labeled}), if the data was imported from SAS, Stata, or SPSS with variable labels using the `haven` package, `codebook` will automatically recognize them. There is no need to manually create them. However, you may overwrite the imported variable label for any column by adding a `description` attribute as shown in the example below. 
+  - As [demonstrated below](#already-labeled), if the data was imported from SAS, Stata, or SPSS with variable labels using the `haven` package, `codebook` will automatically recognize them. There is no need to manually create them. However, you may overwrite the imported variable label for any column by adding a `description` attribute as shown in the example below. 
 
 * **source**: Although you may add any text you desire to the `source` attribute, it is intended to be used describe where the data contained in the column originally came from. For example, if the current data frame was created by merging multiple data sets together, you may want to use the source attribute to identify the data set it originates from. As another example, if the current data frame contains longitudinal data, you may want to use the source attribute to identify the wave(s) in which data for this column was collected.
 
@@ -166,7 +166,7 @@ Although the `cb_add_col_attributes()` function will allow you to add any attrib
 
   - Add value labels to columns as a named vector to the `value_labels` attribute. For example, `value_labels` = c("No" = 0, "Yes" = 1). As another example, you may view hypothetical value labels added to the `likert` column below. 
   
-  - As [demonstrated below]({#already-labeled}), if the data was imported from SAS, Stata, or SPSS with value labels using the `haven` package, `codebook` will automatically recognize them. There is no need to manually create them. However, you may overwrite the imported value labels for any column by adding a `value_labels` attribute as shown in the example below.
+  - As [demonstrated below](#already-labeled), if the data was imported from SAS, Stata, or SPSS with value labels using the `haven` package, `codebook` will automatically recognize them. There is no need to manually create them. However, you may overwrite the imported value labels for any column by adding a `value_labels` attribute as shown in the example below.
   
 * **skip_pattern**: Although you may add any text you desire to the `skip_pattern` attribute, it is intended to be used describe skip patterns in the data collection tools that impacts which study participants were exposed to each study item. For example, If the `likert` question in our hypothetical study data was only asked of participants who were enrolled in the study for at least 10 days, then you may want to add a note like "Not asked if days < 10" to the skip pattern section of the column attributes table.
 
