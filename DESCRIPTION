@@ -16,10 +16,10 @@ Depends:
     R (>= 2.10)
 LazyData: true
 Suggests: 
-    haven,
     hms,
     testthat
 Imports: 
+    haven (>= 2.5.0),
     flextable,
     dplyr,
     officer,
