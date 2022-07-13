@@ -161,7 +161,13 @@ codebook <- function(df, title = NA, subtitle = NA, description = NA, keep_blank
 
     # Get column attributes
     table_var_attributes <- df %>%
-      cb_get_col_attributes(col_nms[[i]], keep_blank_attributes = keep_blank_attributes) %>%
+      cb_get_col_attributes(col_nms[[i]], keep_blank_attributes = keep_blank_attributes)
+    # Iss 10: Add column number to the column attributes table
+    table_var_attributes$Column <- i
+    table_var_attributes$Column[-1] <- NA
+    table_var_attributes <- table_var_attributes[, c("Column", "Attribute", "value")]
+    # Make into a flextable and format
+    table_var_attributes <- table_var_attributes %>%
       flextable::flextable() %>%
       cb_theme_col_attr()
 
@@ -186,12 +192,8 @@ codebook <- function(df, title = NA, subtitle = NA, description = NA, keep_blank
   # tempfiles contains all generated docx paths from the loop. We will
   # iteratively add each of the temporary Word documents to the main
   # rdocx object.
-  for(tempfile in tempfiles){
+  for (tempfile in tempfiles){
     rdocx <- rdocx %>%
-      # Add two blank lines above the attributes table
-      officer::body_add_par("") %>%
-      officer::body_add_par("") %>%
-      # Add the temporary Word document
       officer::body_add_docx(src = tempfile)
   }
 
@@ -203,4 +205,5 @@ codebook <- function(df, title = NA, subtitle = NA, description = NA, keep_blank
 
 # For testing
 # devtools::load_all()
+# codebook(study)
 # print(codebook(study), "test.docx")
