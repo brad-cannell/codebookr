@@ -192,7 +192,7 @@ codebook <- function(df, title = NA, subtitle = NA, description = NA, keep_blank
       officer::body_add_par("") %>%
       officer::body_add_par("") %>%
       # Add the temporary Word document
-      body_add_docx(src = tempfile)
+      officer::body_add_docx(src = tempfile)
   }
 
   # ===========================================================================
