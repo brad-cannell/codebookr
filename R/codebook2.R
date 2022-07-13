@@ -39,7 +39,7 @@
 #' # Create the Word codebook document
 #' print(study_codebook, path = "study_codebook.docx")
 #' }
-codebook <- function(df, title = NA, subtitle = NA, description = NA, keep_blank_attributes = FALSE) {
+codebook2 <- function(df, title = NA, subtitle = NA, description = NA, keep_blank_attributes = FALSE) {
 
   # ===========================================================================
   # Checks
@@ -125,16 +125,19 @@ codebook <- function(df, title = NA, subtitle = NA, description = NA, keep_blank
   }
 
   # ===========================================================================
-  # Iterate over every column in df
+  # Iterate over every column in df - control with dplyr::select
   # Add column attributes and summary statistics to rdocx object
   #
   # Issue 17: Codebook is really slow when the data frame is even moderately
   # large. Upon investigation, it appears as though the time it takes to
   # complete each iteration of the loop below grows almost exponentially with
-  # the number of variables. The solution for this problem came from:
-  # https://ardata-fr.github.io/officeverse/officer-for-word.html#external-documents
-  # It is necessary to generate smaller Word documents and to insert them into
-  # the main Word document using .
+  # the number of variables for some reason. We will break the loop up into
+  # smaller components to see if that solves the problem or at least gives us
+  # more details about what the problem is.
+  # The flextable and officer stuff is the slowest part of the process. I
+  # wonder if we can't speed up the overall time by storing calculated tables to
+  # lists and then calling the flextable functions on the lists in a vectorized
+  # way?
   # ===========================================================================
 
   # Add column Attributes header
@@ -144,9 +147,16 @@ codebook <- function(df, title = NA, subtitle = NA, description = NA, keep_blank
   # Create vector of column names
   col_nms <- names(df)
 
+  # Delete when done testing
+  diagnostics <- tibble(
+    var_num = vector("integer", length(col_nms)),
+    var = vector("character", length(col_nms)),
+    seconds = vector("double", length(col_nms)),
+  )
+
   # External documents approach to speed up the function
   # Create temporary external files. These will be filled with a single
-  # Word document for each column. Then, each temporary Word document will be
+  # Word document for each column. Then, each temporty Word document will be
   # added to the main document
   tmpdir <- tempfile()
   dir.create(tmpdir, showWarnings = FALSE, recursive = TRUE)
@@ -156,7 +166,9 @@ codebook <- function(df, title = NA, subtitle = NA, description = NA, keep_blank
   # ------------------------
   for (i in seq_along(col_nms)) {
 
-    # Create a temporary rdocx object just for the current column
+    # Delete when done testing
+    start <- lubridate::now()
+
     temp_doc <- officer::read_docx()
 
     # Get column attributes
@@ -165,7 +177,12 @@ codebook <- function(df, title = NA, subtitle = NA, description = NA, keep_blank
       flextable::flextable() %>%
       cb_theme_col_attr()
 
-    # Add column attributes flextable to the temporary rdocx object
+    # Add two blank lines above the attributes table
+    # rdocx <- rdocx %>%
+    #   officer::body_add_par("") %>%
+    #   officer::body_add_par("")
+
+    # Add column attributes flextable to the rdocx object
     temp_doc <- temp_doc %>%
       flextable::body_add_flextable(table_var_attributes)
 
@@ -178,20 +195,25 @@ codebook <- function(df, title = NA, subtitle = NA, description = NA, keep_blank
     temp_doc <- temp_doc %>%
       flextable::body_add_flextable(summary_stats)
 
-    # Create temporary Word document from the temporary rdocx object
-    # Put it in one of the tempory files created above the loop.
+    # Create temporary Word document
     print(temp_doc, target = tempfiles[i])
+
+    # Delete when done testing
+    end <- lubridate::now()
+    time <- end - start
+    time <- lubridate::make_difftime(time, units = "seconds")
+    diagnostics$var_num[i] <- i
+    diagnostics$var[i] <- col_nms[[i]]
+    diagnostics$seconds[i] <- time
+    # print(paste(i, col_nms[[i]], time))
   }
 
-  # tempfiles contains all generated docx paths from the loop. We will
-  # iteratively add each of the temporary Word documents to the main
-  # rdocx object.
+  # tempfiles contains all generated docx paths
   for(tempfile in tempfiles){
+    # Add two blank lines above the attributes table
     rdocx <- rdocx %>%
-      # Add two blank lines above the attributes table
       officer::body_add_par("") %>%
       officer::body_add_par("") %>%
-      # Add the temporary Word document
       body_add_docx(src = tempfile)
   }
 
@@ -199,8 +221,9 @@ codebook <- function(df, title = NA, subtitle = NA, description = NA, keep_blank
   # Return rdocx object that can be printed to a Word document
   # ===========================================================================
   rdocx
+  # diagnostics
 }
 
 # For testing
 # devtools::load_all()
-# print(codebook(study), "test.docx")
+# print(codebook2(study), "test.docx")
