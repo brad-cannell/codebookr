@@ -17,3 +17,4 @@ rdocx object
 \description{
 Create Formatted Text
 }
+\keyword{internal}

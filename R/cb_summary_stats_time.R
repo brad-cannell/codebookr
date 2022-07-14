@@ -7,6 +7,7 @@
 #' @return A tibble
 #' @family add_summary_stats
 #' @importFrom dplyr %>%
+#' @keywords internal
 cb_summary_stats_time <- function(df, .x, digits = 2) {
 
   # ===========================================================================

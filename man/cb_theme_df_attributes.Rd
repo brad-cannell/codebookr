@@ -15,3 +15,4 @@ A flextable object
 \description{
 Format Data Frame Attributes Flextable
 }
+\keyword{internal}

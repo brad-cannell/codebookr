@@ -27,3 +27,4 @@ Other add_summary_stats:
 \code{\link{cb_summary_stats_numeric}()}
 }
 \concept{add_summary_stats}
+\keyword{internal}

@@ -95,7 +95,7 @@ print(codebook(study), "basic_study_codebook.docx")
 
 The code above produces the following document, which you can click to view/download on Dropbox. You may also download it from the files pane above.
 
-[![](img/basic_codebook.png)](https://www.dropbox.com/s/qcijxgyeh4ib4d3/basic_study_codebook.docx?dl=0)
+[![](man/figures/basic_codebook.png)](https://www.dropbox.com/s/qcijxgyeh4ib4d3/basic_study_codebook.docx?dl=0)
 
 As you may see in the example document above, the default codebook document includes two major sections. They are:
 
@@ -272,7 +272,7 @@ print(x = study_codebook, target = "study_codebook_1.docx")
 
 Where `x` is the rdocx object and `target` is a path for the Word document you want to create (which may or may not already exist). The code above produces the following document, which you can click to view/download on Dropbox. You may also download it from the files pane above.
 
-[![](img/study_codebook_1.png)](https://www.dropbox.com/s/tjzayqh0sdytjz4/study_codebook_1.docx?dl=0)
+[![](man/figures/study_codebook_1.png)](https://www.dropbox.com/s/tjzayqh0sdytjz4/study_codebook_1.docx?dl=0)
 
 In the example above, the title and metadata table are unchanged compared to [Example 1][Example 1: The most basic use case]. However, the column attributes tables now look a little different. 
 
@@ -296,7 +296,7 @@ print(x = codebook(study), target = "study_codebook_2.docx")
 
 The code above produces the following document, which you can click to view/download on Dropbox. You may also download it from the files pane above.
 
-[![](img/study_codebook_2.png)](https://www.dropbox.com/s/l2mph09x48q5cya/study_codebook_2.png?dl=0)
+[![](man/figures/study_codebook_2.png)](https://www.dropbox.com/s/l2mph09x48q5cya/study_codebook_2.png?dl=0)
 
 As shown in the codebook above, the bottom half of the column attributes table now shows the frequency, cumulative frequency, and percentage for each value in the `likert` column. You may also notice that the `value_labels` we applied above are also displayed in column attributes table.
 
@@ -321,7 +321,7 @@ print(study_codebook, "study_codebook_3.docx")
 
 The code above produces the following document, which you can click to view/download on Dropbox. You may also download it from the files pane above.
 
-[![](img/study_codebook_3.png)](https://www.dropbox.com/s/ysz53v23kinr9ht/study_codebook_3.png?dl=0)
+[![](man/figures/study_codebook_3.png)](https://www.dropbox.com/s/ysz53v23kinr9ht/study_codebook_3.png?dl=0)
 
 As shown in the codebook above, the codebook now contains a title, subtitle, and description.
 
@@ -415,7 +415,7 @@ print(stata_codebook, "stata_codebook_1.docx")
 
 The code above produces the following document, which you can click to view/download on Dropbox. You may also download it from the files pane above.
 
-[![](img/stata_codebook_1.png)](https://www.dropbox.com/s/0ny97mwqhrc0eom/stata_codebok.png?dl=0)
+[![](man/figures/stata_codebook_1.png)](https://www.dropbox.com/s/0ny97mwqhrc0eom/stata_codebok.png?dl=0)
 
 As shown in the codebook above, the `Column description` portion of the column attributes table is automatically populated with the value of the each column's `label` attribute. Additionally, the `Value labels` portion of the column attributes table is automatically populated with the value of each column's `labels` attribute; although, only the `sex` column has a `labels` attribute in this data frame. 
 
@@ -442,7 +442,7 @@ print(stata_codebook, "stata_codebook_2.docx")
 
 The code above produces the following document, which you can click to view/download on Dropbox. You may also download it from the files pane above.
 
-[![](img/stata_codebook_2.png)](https://www.dropbox.com/s/05myqf3mqbig43s/stata_codebook_2.png?dl=0)
+[![](man/figures/stata_codebook_2.png)](https://www.dropbox.com/s/05myqf3mqbig43s/stata_codebook_2.png?dl=0)
 
 As shown in the codebook above, the `Column description` portion of the column attributes table is still automatically populated with the value of the each column's `label` attribute -- **except where we manually added a description attribute**. So, when a column has both a `label` and a `description` attribute, the `description` attribute wins out. The idea is that if we have taken the time to manually type out a `description`, it should win out over whatever happened to be in `label`.
 
@@ -469,6 +469,6 @@ print(study_codebook, "study_codebook_4.docx")
 
 The code above produces the following document, which you can click to view/download on Dropbox. You may also download it from the files pane above.
 
-[![](img/study_codebook_4.png)](https://www.dropbox.com/s/bnkz2hqc2huqa3e/study_codebook_4.docx?dl=0)
+[![](man/figures/study_codebook_4.png)](https://www.dropbox.com/s/bnkz2hqc2huqa3e/study_codebook_4.docx?dl=0)
 
 As shown in the screenshot above, all rows of the column attributes table now exist in the codebook document for each column of the data frame. However, the values are blank where relevant attributes were not set.

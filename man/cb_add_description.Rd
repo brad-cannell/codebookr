@@ -18,3 +18,4 @@ rdocx object
 Basically, just checks for the number of paragraphs in the description and
 then runs cb_add_text for each one.
 }
+\keyword{internal}

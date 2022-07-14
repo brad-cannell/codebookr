@@ -4,6 +4,7 @@
 #'
 #' @return A flextable object
 #' @importFrom dplyr %>%
+#' @keywords internal
 cb_theme_df_attributes <- function(ft) {
 
   ft <- ft %>%

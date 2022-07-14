@@ -15,3 +15,4 @@ A flextable object
 \description{
 Format Column Attributes Flextable
 }
+\keyword{internal}

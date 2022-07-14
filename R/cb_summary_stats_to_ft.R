@@ -6,6 +6,7 @@
 #'
 #' @return Flextable object
 #' @importFrom dplyr %>%
+#' @keywords internal
 
 # =============================================================================
 # S3 Generic function

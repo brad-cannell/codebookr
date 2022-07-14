@@ -9,6 +9,7 @@
 #'
 #' @return rdocx object
 #' @importFrom dplyr %>%
+#' @keywords internal
 cb_add_title <- function(rdocx, title = NA, subtitle = NA) {
 
   # ===========================================================================

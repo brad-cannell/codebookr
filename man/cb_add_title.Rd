@@ -20,3 +20,4 @@ rdocx object
 This function is not intended to be a stand-alone function. It is indented
 to be used by the \code{codebook} function.
 }
+\keyword{internal}

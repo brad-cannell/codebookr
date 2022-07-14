@@ -17,3 +17,4 @@ rdocx object
 \description{
 Create Formatted Section Header
 }
+\keyword{internal}

@@ -5,6 +5,7 @@
 #'
 #' @return rdocx object
 #' @importFrom dplyr %>%
+#' @keywords internal
 cb_add_text <- function(rdocx, text = NA) {
 
   # ===========================================================================

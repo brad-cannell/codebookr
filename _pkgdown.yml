@@ -1,0 +1,16 @@
+url: https://brad-cannell.github.io/codebookr/
+template:
+  bootstrap: 5
+
+reference:
+- title: "Making codebooks"
+  contents:
+  - codebook
+  - cb_add_col_attributes
+- title: "Data"
+  desc: "Datasets included in the codebookr package."
+  contents:
+  - study
+
+# For testing: pkgdown::build_reference_index()
+# You may need to run devtools::document() for changes to the reference section to take effect.

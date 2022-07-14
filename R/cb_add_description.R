@@ -8,6 +8,7 @@
 #'
 #' @return rdocx object
 #' @importFrom dplyr %>%
+#' @keywords internal
 cb_add_description <- function(rdocx, description) {
 
   # ===========================================================================

@@ -7,6 +7,7 @@
 #' @return A tibble
 #' @family add_summary_stats
 #' @importFrom dplyr %>%
+#' @keywords internal
 cb_summary_stats_many_cats <- function(df, .x, n_extreme_cats = 5) {
 
   # ===========================================================================

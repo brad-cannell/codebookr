@@ -31,3 +31,4 @@ Flextable object
 \description{
 Create Formatted Flextable From Summary Statistics
 }
+\keyword{internal}

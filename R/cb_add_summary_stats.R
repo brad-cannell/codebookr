@@ -67,6 +67,7 @@
 #' @return A tibble of results
 #' @family add_summary_stats
 #' @importFrom dplyr %>%
+#' @keywords internal
 cb_add_summary_stats <- function(df,
                                  .x,
                                  many_cats = 10,

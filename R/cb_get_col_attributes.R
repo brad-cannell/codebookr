@@ -87,6 +87,7 @@
 #'
 #' @return A tibble of column attributes
 #' @importFrom dplyr %>%
+#' @keywords internal
 cb_get_col_attributes <- function(df, .x, keep_blank_attributes = keep_blank_attributes) {
 
   # ===========================================================================

@@ -4,6 +4,7 @@
 #'
 #' @return A flextable object
 #' @importFrom dplyr %>%
+#' @keywords internal
 cb_theme_col_attr <- function(ft) {
 
   # Set border attributes

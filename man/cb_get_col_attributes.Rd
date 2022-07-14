@@ -98,3 +98,4 @@ to correctly interpret numerically coded categorical variables. Adding value
 labels to your codebook is one way of doing so.
 }
 }
+\keyword{internal}

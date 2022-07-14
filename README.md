@@ -123,7 +123,7 @@ The code above produces the following document, which you can click to
 view/download on Dropbox. You may also download it from the files pane
 above.
 
-[![](img/basic_codebook.png)](https://www.dropbox.com/s/qcijxgyeh4ib4d3/basic_study_codebook.docx?dl=0)
+[![](man/figures/basic_codebook.png)](https://www.dropbox.com/s/qcijxgyeh4ib4d3/basic_study_codebook.docx?dl=0)
 
 As you may see in the example document above, the default codebook
 document includes two major sections. They are:
@@ -477,7 +477,7 @@ code above produces the following document, which you can click to
 view/download on Dropbox. You may also download it from the files pane
 above.
 
-[![](img/study_codebook_1.png)](https://www.dropbox.com/s/tjzayqh0sdytjz4/study_codebook_1.docx?dl=0)
+[![](man/figures/study_codebook_1.png)](https://www.dropbox.com/s/tjzayqh0sdytjz4/study_codebook_1.docx?dl=0)
 
 In the example above, the title and metadata table are unchanged
 compared to [Example 1](#example-1-the-most-basic-use-case). However,
@@ -523,7 +523,7 @@ The code above produces the following document, which you can click to
 view/download on Dropbox. You may also download it from the files pane
 above.
 
-[![](img/study_codebook_2.png)](https://www.dropbox.com/s/l2mph09x48q5cya/study_codebook_2.png?dl=0)
+[![](man/figures/study_codebook_2.png)](https://www.dropbox.com/s/l2mph09x48q5cya/study_codebook_2.png?dl=0)
 
 As shown in the codebook above, the bottom half of the column attributes
 table now shows the frequency, cumulative frequency, and percentage for
@@ -561,7 +561,7 @@ The code above produces the following document, which you can click to
 view/download on Dropbox. You may also download it from the files pane
 above.
 
-[![](img/study_codebook_3.png)](https://www.dropbox.com/s/ysz53v23kinr9ht/study_codebook_3.png?dl=0)
+[![](man/figures/study_codebook_3.png)](https://www.dropbox.com/s/ysz53v23kinr9ht/study_codebook_3.png?dl=0)
 
 As shown in the codebook above, the codebook now contains a title,
 subtitle, and description.
@@ -767,7 +767,7 @@ The code above produces the following document, which you can click to
 view/download on Dropbox. You may also download it from the files pane
 above.
 
-[![](img/stata_codebook_1.png)](https://www.dropbox.com/s/0ny97mwqhrc0eom/stata_codebok.png?dl=0)
+[![](man/figures/stata_codebook_1.png)](https://www.dropbox.com/s/0ny97mwqhrc0eom/stata_codebok.png?dl=0)
 
 As shown in the codebook above, the `Column description` portion of the
 column attributes table is automatically populated with the value of the
@@ -812,7 +812,7 @@ The code above produces the following document, which you can click to
 view/download on Dropbox. You may also download it from the files pane
 above.
 
-[![](img/stata_codebook_2.png)](https://www.dropbox.com/s/05myqf3mqbig43s/stata_codebook_2.png?dl=0)
+[![](man/figures/stata_codebook_2.png)](https://www.dropbox.com/s/05myqf3mqbig43s/stata_codebook_2.png?dl=0)
 
 As shown in the codebook above, the `Column description` portion of the
 column attributes table is still automatically populated with the value
@@ -867,7 +867,7 @@ The code above produces the following document, which you can click to
 view/download on Dropbox. You may also download it from the files pane
 above.
 
-[![](img/study_codebook_4.png)](https://www.dropbox.com/s/bnkz2hqc2huqa3e/study_codebook_4.docx?dl=0)
+[![](man/figures/study_codebook_4.png)](https://www.dropbox.com/s/bnkz2hqc2huqa3e/study_codebook_4.docx?dl=0)
 
 As shown in the screenshot above, all rows of the column attributes
 table now exist in the codebook document for each column of the data
