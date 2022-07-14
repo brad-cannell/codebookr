@@ -12,6 +12,7 @@ library(hms, warn.conflicts = FALSE)
 set.seed(123)
 study <- tibble(
   id        = as.character(seq(1001, 1020, 1)),
+  address   = paste("101", LETTERS[1:20], "st."),
   sex       = factor(sample(c("Female", "Male"), 20, TRUE)),
   date      = sample(seq.Date(as.Date("2021-09-15"), as.Date("2021-10-26"), "day"), 20, TRUE),
   sec       = sample(0:60, 20, TRUE),

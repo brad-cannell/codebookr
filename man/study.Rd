@@ -5,9 +5,10 @@
 \alias{study}
 \title{Simulated study data.}
 \format{
-A data frame with 20 rows and 9 variables:
+A data frame with 20 rows and 10 variables:
 \describe{
 \item{id}{Participant's study identification number}
+\item{address}{Participant's home address}
 \item{sex}{Biological sex of the participant assigned at birth, female/male}
 \item{date}{Participant's date of enrollment}
 \item{time}{Participant's time of enrollment}

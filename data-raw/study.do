@@ -52,10 +52,11 @@ order date_time, after(time)
 encode sex, gen(sex2)
 drop sex
 rename sex2 sex
-order sex, after(id)
+order sex, after(address)
 
 // Add labels to the data
 la var id "Participant's study identification number"
+la var address "Participant's home address"
 la var sex "Biological sex of the participant assigned at birth"
 la var date "Participant's date of enrollment"
 la var time "Participant's time of enrollment"
