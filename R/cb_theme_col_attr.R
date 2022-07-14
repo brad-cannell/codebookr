@@ -14,7 +14,7 @@ cb_theme_col_attr <- function(ft) {
     # Delete the header row
     flextable::delete_part(part = "header") %>%
     # Set the width of both columns
-    flextable::width(width = c(2.31, 4.18)) %>%
+    flextable::width(width = c(0.44, 2.25, 3.61)) %>%
 
     # Format font
     # Set font to TNR 11
@@ -32,8 +32,6 @@ cb_theme_col_attr <- function(ft) {
     flextable::hline_top(border = border_thick) %>%
     # Add thick bottom border to header (not actually the header)
     flextable::hline(i = 1, border = border_thick) %>%
-    # Add light gray vertical line
-    flextable::vline(j = 1, border = border_lt_gr) %>%
 
     # Set background color
     flextable::bg(i = 1, bg = "gray95")
