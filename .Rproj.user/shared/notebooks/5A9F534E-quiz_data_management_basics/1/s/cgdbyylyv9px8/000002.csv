@@ -1,0 +1,5 @@
+"0","clients_june %>% rename_with(tolower) # Works
+clients_june %>% rename_all(tolower) # Works
+clients_june %>% rename_each(tolower) # Doesn't work
+clients_june %>% rename(cols = everything(), .fn = tolower) # Doesn't work
+clients_june %>% tolower() # Doesn't work"

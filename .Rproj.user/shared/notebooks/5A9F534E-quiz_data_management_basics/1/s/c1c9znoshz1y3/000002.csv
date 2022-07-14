@@ -1,0 +1,12 @@
+"0","```r
+clients_june <- clients_june %>% 
+  rename_with(tolower) %>% 
+  rename(
+    \"name_first\"          = \"first name\",
+    \"name_last\"           = \"last name\",
+    \"dep_little_interest\" = \"depression 1\",
+    \"dep_down\"            = \"depression 2\",
+    \"dep_sleep\"           = \"depression 3\",
+    \"dep_appetite\"        = \"depression 4\"
+  )
+```"

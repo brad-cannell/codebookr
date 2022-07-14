@@ -1,0 +1,2 @@
+"0","clients_june %>% 
+  select(-c(7:10)) # Works"

@@ -1,0 +1,2 @@
+"0","# Correct. However, I prefer read_csv() over read.csv().
+choco_2 <- read.csv(\"Chocolate Study 2.csv\")"

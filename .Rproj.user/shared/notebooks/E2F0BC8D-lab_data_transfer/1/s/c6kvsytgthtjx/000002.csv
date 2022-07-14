@@ -1,0 +1,10 @@
+"0","```r
+alq_i <- alq_i %>% 
+  mutate(
+    alq101_f  = factor(alq101, yn_levs, yn_labs),
+    alq110_f  = factor(alq110, yn_levs, yn_labs),
+    alq120u_f = factor(alq120u, time_levs, time_labs),
+    alq141u_f = factor(alq141u, time_levs, time_labs),
+    alq151_f  = factor(alq151, yn_levs, yn_labs)
+  )
+```"

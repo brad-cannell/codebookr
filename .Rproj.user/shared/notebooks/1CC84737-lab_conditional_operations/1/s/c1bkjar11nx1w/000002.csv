@@ -1,0 +1,20 @@
+"0","```r
+class_survey <- class_survey %>% 
+  mutate(
+    insurance_f   = factor(insurance, yn_levs, yn_labs),
+    persdoc_f     = factor(persdoc, \"0\":\"2\", c(\"No\", \"Yes, only one\", \"Yes, more than one\")),
+    veteran_f     = factor(veteran, yn_levs, yn_labs),
+    marital_f     = factor(
+      marital, \"1\":\"5\", 
+      c(\"Married\", \"Divorced\", \"Widowed\", \"Separated\", \"Never Married\")
+    ),
+    employment_f  = factor(
+      employment, \"1\":\"8\",
+      c(\"Employed for wages\", \"Self-employed\", \"Out of work for 1 year or more\", 
+        \"Out of work for less than 1 year\", \"A Homemaker\", \"A student\", \"Retired\",
+        \"Unable to work\")
+    ),
+    birth_month_f = factor(birth_month, \"1\":\"12\", month.name),
+    gender_f      = factor(gender, \"1\":\"2\", c(\"Female\", \"Male\"))
+  )
+```"

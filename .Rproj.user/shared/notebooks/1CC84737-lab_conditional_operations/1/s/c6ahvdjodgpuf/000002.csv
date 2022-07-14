@@ -1,0 +1,8 @@
+"0","```r
+# Remove the second row -- data labels
+# Also remove the last column of all NA's
+# Coerce all names to lowercase
+class_survey <- class_survey %>%
+  slice(-1) %>% 
+  rename_with(str_to_lower)
+```"

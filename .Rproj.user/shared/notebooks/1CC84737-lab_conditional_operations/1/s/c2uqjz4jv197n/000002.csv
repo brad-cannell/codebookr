@@ -1,0 +1,9 @@
+"0","```r
+class_survey <- read_csv(\"/Users/bradcannell/Dropbox/Datasets/Day one survey/Class Survey 5141.csv\")
+```"
+"1","Parsed with column specification:
+cols(
+  .default = col_character()
+)
+See spec(...) for full column specifications.
+"

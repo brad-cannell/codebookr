@@ -1,0 +1,26 @@
+{
+    "id": "094B0148",
+    "path": "~/Dropbox/R/Packages/codebookr/R/cb_summary_stats_many_cats.R",
+    "project_path": "R/cb_summary_stats_many_cats.R",
+    "type": "r_source",
+    "hash": "3824266405",
+    "contents": "",
+    "dirty": false,
+    "created": 1651882617920.0,
+    "source_on_save": false,
+    "relative_order": 6,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "69,13",
+        "scrollLine": "37"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1651883427,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1651883427882,
+    "read_only": false,
+    "read_only_alternatives": []
+}

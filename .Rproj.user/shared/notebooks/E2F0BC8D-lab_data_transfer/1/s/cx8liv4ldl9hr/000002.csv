@@ -1,0 +1,2 @@
+"0","# Incorrect: readr is the name of an R package, not a function.
+choco_1 <- readr(\"Chocolate Study 1.xls\")"

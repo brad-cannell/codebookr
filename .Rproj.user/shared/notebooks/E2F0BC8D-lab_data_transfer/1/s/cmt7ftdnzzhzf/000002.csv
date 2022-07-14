@@ -1,0 +1,2 @@
+"0","# Incorrect: There is a read.csv() function that will import this data. However, it isn't in the readr package. The double colon syntax used in the code readr::read.csv() tells R to look for the read.csv() function in the readr package, which doesn't exist. The read_csv() function is a base R function. 
+choco_2 <- readr::read.csv(\"Chocolate Study 2.csv\")"

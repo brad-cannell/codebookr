@@ -1,0 +1,4 @@
+"0","```r
+# For Dr. Cannell's computer.
+choco_1 <- read_excel(\"/Users/bradcannell/Dropbox/Datasets/Chocolate/Chocolate Study 1.xls\")
+```"

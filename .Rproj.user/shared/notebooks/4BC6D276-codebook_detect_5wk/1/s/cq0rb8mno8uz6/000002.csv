@@ -1,0 +1,9 @@
+"0","```r
+codebook_detect_5wk <- codebook(
+  df = detect_5wk,
+  path = \"../data/detect_5wk.csv\",
+  title = \"Detection of Elder abuse Through Emergency Care Technicians (DETECT)\",
+  subtitle = \"5-Week Pilot Study\",
+  description = description
+)
+```"

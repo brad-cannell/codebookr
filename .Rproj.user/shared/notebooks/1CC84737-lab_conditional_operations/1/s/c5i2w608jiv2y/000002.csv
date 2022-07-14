@@ -1,0 +1,4 @@
+"0","```r
+class_survey <- class_survey %>% 
+  mutate(persdoc = if_else(persdoc == \"9\", NA_character_, persdoc))
+```"

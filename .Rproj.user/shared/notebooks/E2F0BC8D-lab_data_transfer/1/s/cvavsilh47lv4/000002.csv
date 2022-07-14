@@ -1,0 +1,2 @@
+"0","# Incorrect: This code does not tell R how to correctly identify missing values in the raw data.
+choco_3 <- read_table(\"Chocolate Study 3.txt\", na.rm = TRUE)"

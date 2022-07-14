@@ -1,0 +1,21 @@
+"0","```r
+```r
+library(tidyverse)
+```
+```"
+"1","The following attribute(s) are being added to a variable in the data frame for the first time: label, source, col_type. Check for typos.
+"
+"0","```r
+```r
+attributes(test_2$x)
+```
+```"
+"1"," [1] 0 1 0 0 0 0 0 1 0 0
+attr(,\"label\")
+[1] \"Felling down, depressed, or hopeless dicot\"
+attr(,\"labels\")
+[1] \"Little interest or pleasure in doing things dicot\"            
+[2] \"Felling down, depressed, or hopeless dicot\"                   
+[3] \"Trouble falling or staying asleep, or sleeping too much dicot\"
+[4] \"Feeling tired or having little energy dicot\"                  
+"

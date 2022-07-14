@@ -1,0 +1,4 @@
+"0","```r
+# Correct.
+names(alq_i) <- names(alq_i) %>% tolower()
+```"

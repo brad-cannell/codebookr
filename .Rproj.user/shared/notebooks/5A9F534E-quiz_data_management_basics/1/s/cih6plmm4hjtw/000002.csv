@@ -1,0 +1,4 @@
+"0","```r
+clients_june <- clients_june %>% 
+  select(-`alcohol 1`, -`alcohol 2`, -`alcohol 3`, -`alcohol 4`)
+```"

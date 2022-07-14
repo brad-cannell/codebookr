@@ -1,0 +1,56 @@
+"0","```r
+str(choco_3)
+```"
+"1","spec_tbl_df [10 × 21] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+ $ UIN    : num [1:10] 1440 1444 1449 1465 1470 ...
+ $ last   : chr [1:10] \"Lemus\" \"Whitlock\" \"Staples\" \"Boykin\" ...
+ $ first  : chr [1:10] \"Rob\" \"Brian\" \"Moises\" \"Cliff\" ...
+ $ age    : num [1:10] 12 13 10 11 11 11 12 10 12 12
+ $ grade  : num [1:10] 7 8 5 6 6 6 7 5 6 6
+ $ school : chr [1:10] \"Flower\" \"Flower\" \"Central\" \"Williamson\" ...
+ $ parent : chr [1:10] \"Grove\" \"Grove\" \"Mother\" \"Guardian\" ...
+ $ marry  : chr [1:10] \"Guardian\" \"Guardian\" \"Married\" \"Divorced\" ...
+ $ math1  : chr [1:10] \"Married\" \"Divorced\" \"2\" \"2.2\" ...
+ $ math2  : num [1:10] 1 1 2 3.3 4 4 5 3 3 4
+ $ math3  : num [1:10] 5 2 2 1 3 1.2 4 5 3 3
+ $ read1  : num [1:10] 2 2 4 2 3.7 3.4 5 2 3 3
+ $ read2  : num [1:10] 2 3 4 1 5 3 1 1 5 4
+ $ read3  : num [1:10] 3 3 5 2 4.4 2 5 5 3 1
+ $ overall: num [1:10] 1 5 19 11.5 4.6 14.6 1 1 19 2
+ $ choco1 : num [1:10] 14 16 1 0 24.7 2 21 17 1 17
+ $ choco2 : num [1:10] 0 1 0 0 1 1 1 0 0 0
+ $ choco3 : num [1:10] 0 0 1 0 0 NA 0 0 1 0
+ $ extra1 : num [1:10] NA 1 1 0 0 0 1 NA 1 NA
+ $ extra2 : chr [1:10] \"0\" \"0\" \"soccer\" NA ...
+ $ veggie : chr [1:10] NA NA \"0\" \"0\" ...
+ - attr(*, \"problems\")= tibble [6 × 5] (S3: tbl_df/tbl/data.frame)
+  ..$ row     : int [1:6] 1 2 5 7 8 10
+  ..$ col     : chr [1:6] NA NA NA NA ...
+  ..$ expected: chr [1:6] \"21 columns\" \"21 columns\" \"21 columns\" \"21 columns\" ...
+  ..$ actual  : chr [1:6] \"22 columns\" \"22 columns\" \"22 columns\" \"22 columns\" ...
+  ..$ file    : chr [1:6] \"'/Users/bradcannell/Dropbox/Datasets/Chocolate/Chocolate Study 3.txt'\" \"'/Users/bradcannell/Dropbox/Datasets/Chocolate/Chocolate Study 3.txt'\" \"'/Users/bradcannell/Dropbox/Datasets/Chocolate/Chocolate Study 3.txt'\" \"'/Users/bradcannell/Dropbox/Datasets/Chocolate/Chocolate Study 3.txt'\" ...
+ - attr(*, \"spec\")=
+  .. cols(
+  ..   UIN = col_double(),
+  ..   last = col_character(),
+  ..   first = col_character(),
+  ..   age = col_double(),
+  ..   grade = col_double(),
+  ..   school = col_character(),
+  ..   parent = col_character(),
+  ..   marry = col_character(),
+  ..   math1 = col_character(),
+  ..   math2 = col_double(),
+  ..   math3 = col_double(),
+  ..   read1 = col_double(),
+  ..   read2 = col_double(),
+  ..   read3 = col_double(),
+  ..   overall = col_double(),
+  ..   choco1 = col_double(),
+  ..   choco2 = col_double(),
+  ..   choco3 = col_double(),
+  ..   extra1 = col_double(),
+  ..   extra2 = col_character(),
+  ..   veggie = col_character()
+  .. )
+"

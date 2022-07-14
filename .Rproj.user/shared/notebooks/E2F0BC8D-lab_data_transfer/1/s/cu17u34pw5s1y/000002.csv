@@ -1,0 +1,2 @@
+"0","# Incorrect: This code overwrites the alq_i data frame with a vector of lowercase variable names from the alq_i data frame.
+alq_i <- names(alq_i) %>% tolower()"

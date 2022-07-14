@@ -1,0 +1,12 @@
+"0","```r
+clients_june <- read_csv(\"/Users/bradcannell/Dropbox/Datasets/NTRHD Clients/ntrhd_clients_june.csv\")
+```"
+"1","Rows: 57 Columns: 14
+── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────
+Delimiter: \",\"
+chr  (3): First Name, Last Name, Language
+dbl (11): Age, Height, Weight, Alcohol 1, Alcohol 2, Alcohol 3, Alcohol 4, Depression 1, Depression 2, Depression...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+"

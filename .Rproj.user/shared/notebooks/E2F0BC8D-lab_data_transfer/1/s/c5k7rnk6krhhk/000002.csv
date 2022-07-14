@@ -1,0 +1,10 @@
+"0","```r
+# Create a numeric vector you can reuse for all yes/no factor levels
+yn_levs <- c(1, 2, 7, 9)
+# Create a character vector you can reuse for all yes/no factor labels
+yn_labs <- c(\"Yes\", \"No\", \"Refused\", \"Don't know\")
+# Create a numeric vector you can reuse for all unit of time factor levels
+time_levs <- c(1, 2, 3, 7, 9)
+# Create a character vector you can reuse for all unit of time factor labels
+time_labs <- c(\"Week\", \"Month\", \"Year\", \"Refused\", \"Don't know\")
+```"

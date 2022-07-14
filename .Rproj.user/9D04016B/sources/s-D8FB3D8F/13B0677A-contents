@@ -1,0 +1,35 @@
+# =============================================================================
+# codebookr notes
+# =============================================================================
+
+Use NOTES for notes, but not tasks. Why or how, but not what.
+
+Originally used codebook functions to create a codebook for the DETECT 5wk
+data (DETECT 2014-MU-CX-0102/r_proj_detect_pilot_5_week/markdown/codebook_detect_5wk.Rmd).
+The codebook files were in bfuncs. I beleive I've moved everything useful over
+from bfuncs at this point.
+
+Commit message:
+---------------
+A properly formed Git commit subject line should always be able to complete the following sentence: If applied, this commit will {your subject line here}
+
+
+
+
+
+Submission Notes:
+-----------------
+* Useful website: http://r-pkgs.had.co.nz/release.html
+* Update README before submission. It should roughly match the examples in the roxygen documentation.
+  - Update README.Rmd, not README.md.
+  - Knit README.Rmd after making changes. This will automatically update README.md
+* Update vignettes devtools::build_vignettes()
+* Update news.md. Here's dplyr's (https://raw.githubusercontent.com/tidyverse/dplyr/master/NEWS.md)
+* Make sure you using the most updated code before checks. devtools::load_all()
+* Use devtools::check()
+* Use devtools::check_win_devel() to test the package on Windows
+* Use devtools::check_rhub()
+* Update cran-comments.
+  - If this is a resubmission, add a bulleted list of changes made under ## Resubmission.
+* Submit with devtools::release()
+* After the package is accepted, do this stuff: http://r-pkgs.had.co.nz/release.html#post-release

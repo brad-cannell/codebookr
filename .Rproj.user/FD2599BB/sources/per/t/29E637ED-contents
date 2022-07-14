@@ -1,0 +1,15 @@
+# What is being handed from codebook to cb_add_summary_stats?
+load_all()
+data(study)
+study <- cb_add_col_attributes(
+  study,
+  id,
+  description = "Study identification variable",
+  col_type = "many_cats"
+) %>%
+  select(id)
+codebook(study)
+
+
+# study %>%
+#   count(!!rlang::sym("id"))

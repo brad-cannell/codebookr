@@ -1,0 +1,23 @@
+"0","study_codebook <- codebook("
+"0","  df = study,"
+"0","  title = ""My Example Study"","
+"0","  subtitle = ""A Subtitle for My Example Study Codebook"""
+"0",")"
+"2","Warning in officer::body_remove(.) :"
+"2","
+ "
+"2"," There is nothing left to remove in the document
+"
+"1","[1m[33mError[39m in [38;5;252m`stop_vctrs()`[39m:[22m
+[33m![39m `x` must be a vector, not a <tbl_df/tbl/data.frame/summary_many_cats> object.
+Backtrace:
+[90m  1. [39m[1mcodebookr[22m::codebook(df = study, title = ""My Example Study"", subtitle = ""A Subtitle for My Example Study Codebook"")
+[90m 18. [39m[1mdplyr[22m::mutate_all(., as.character)
+[90m 20. [39mdplyr:::mutate.data.frame(.tbl, !!!funs)
+[90m 22. [39mdplyr:::dplyr_col_modify.data.frame(.data, cols)
+[90m 24. [39mdplyr:::dplyr_vec_data(data)
+[90m 25. [39m[1mvctrs[22m::vec_data(x)
+[90m 26. [39mvctrs::vec_assert(x)
+[90m 27. [39mvctrs:::stop_scalar_type(x, arg)
+[90m 28. [39mvctrs:::stop_vctrs(msg, ""vctrs_error_scalar_type"", actual = x)
+"

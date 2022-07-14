@@ -1,0 +1,13 @@
+"0","```r
+class_survey <- class_survey %>% 
+  mutate(
+    salary_4cat = case_when(
+      is.na(salary)  ~ NA_real_,
+      salary < 3534  ~ 1,
+      salary < 11492 ~ 2,
+      salary < 35068 ~ 3,
+      TRUE           ~ 4
+    ),
+    salary_4cat_f = factor(salary_4cat)
+  )
+```"

@@ -1,0 +1,2 @@
+"0","clients_june %>% 
+  select(name_first:dep_appetite) # Doesn't work. "

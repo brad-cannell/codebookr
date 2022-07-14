@@ -1,0 +1,14 @@
+"0","```r
+class_survey <- class_survey %>% 
+  rename(
+    insurance   = q13,
+    persdoc     = q14, 
+    veteran     = q17, 
+    marital     = q18, 
+    employment  = q20, 
+    salary      = q21_1, 
+    birth_year  = q24, 
+    birth_month = q25, 
+    gender      = q26
+  )
+```"

@@ -1,0 +1,7 @@
+"0","```r
+class_survey %>% 
+  filter(!is.na(salary_4cat_f) & !is.na(gender_f)) %>% 
+  group_by(gender_f) %>% 
+  count(salary_4cat_f, .drop = FALSE) %>% 
+  mutate(group_percent = n / sum(n) * 100)
+```"

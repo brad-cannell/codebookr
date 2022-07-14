@@ -1,0 +1,9 @@
+"0","```r
+df %>% 
+  mutate({
+    data <- across(phq1:phq4)
+    data
+  }) %>% class()
+```"
+"1","[1] \"tbl_df\"     \"tbl\"        \"data.frame\"
+"

@@ -1,0 +1,2 @@
+"0","clients_june %>% 
+  select(-starts_with(\"alcohol\")) # Works"

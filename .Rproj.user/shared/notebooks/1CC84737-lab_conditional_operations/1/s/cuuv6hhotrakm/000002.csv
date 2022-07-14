@@ -1,0 +1,4 @@
+"0","```r
+# Must coerce salary to numeric type first
+class_survey$salary <- as.numeric(class_survey$salary)
+```"

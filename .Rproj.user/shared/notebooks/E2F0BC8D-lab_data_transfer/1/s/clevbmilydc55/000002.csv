@@ -1,0 +1,2 @@
+"0","# Incorrect: This code passes the entire alq_i data frame, not just the column names from alq_i, to the tolower() function.
+names(alq_i) <- alq_i %>% tolower()"

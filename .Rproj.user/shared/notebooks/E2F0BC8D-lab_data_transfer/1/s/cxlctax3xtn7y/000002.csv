@@ -1,0 +1,13 @@
+"0","```r
+# For Dr. Cannell's computer.
+choco_2 <- read_csv(\"/Users/bradcannell/Dropbox/Datasets/Chocolate/Chocolate Study 2.csv\")
+```"
+"1","Rows: 20 Columns: 21
+── Column specification ───────────────────────────────────────────────────────────────────────────────
+Delimiter: \",\"
+chr  (6): last, first, school, parent, marry, extra2
+dbl (15): UIN, age, grade, math1, math2, math3, read1, read2, read3, overall, choco1, choco2, choco...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+"

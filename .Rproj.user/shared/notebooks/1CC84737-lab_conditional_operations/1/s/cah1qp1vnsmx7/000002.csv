@@ -1,0 +1,5 @@
+"0","```r
+mean(class_survey$age, na.rm = TRUE) %>% round()
+```"
+"1","[1] 26
+"

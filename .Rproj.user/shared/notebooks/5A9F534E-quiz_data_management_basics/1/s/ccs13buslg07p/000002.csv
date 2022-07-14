@@ -1,0 +1,6 @@
+"0","```r
+```r
+clients_june <- clients_june %>% 
+  filter(!is.na(age))
+```
+```"

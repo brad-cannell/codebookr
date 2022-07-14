@@ -1,0 +1,5 @@
+"0","```r
+is.na(class_survey$age) %>% sum()
+```"
+"1","[1] 3
+"

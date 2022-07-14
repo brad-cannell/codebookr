@@ -1,0 +1,2 @@
+"0","# Correct.
+choco_3 <- read_table(\"Chocolate Study 3.txt\", na = \".\")"

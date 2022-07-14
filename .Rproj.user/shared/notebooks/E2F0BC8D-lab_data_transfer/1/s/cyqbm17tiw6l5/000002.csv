@@ -1,0 +1,32 @@
+"0","```r
+# For Dr. Cannell's computer.
+choco_3 <- read_table(
+  \"/Users/bradcannell/Dropbox/Datasets/Chocolate/Chocolate Study 3.txt\",
+  na = \".\"
+)
+```"
+"1","
+── Column specification ───────────────────────────────────────────────────────────────────────────────
+cols(
+  .default = col_double(),
+  last = col_character(),
+  first = col_character(),
+  school = col_character(),
+  parent = col_character(),
+  marry = col_character(),
+  math1 = col_character(),
+  extra2 = col_character(),
+  veggie = col_character()
+)
+ℹ Use `spec()` for the full column specifications.
+"
+"1","Warning: 6 parsing failures.
+row col   expected     actual                                                                  file
+  1  -- 21 columns 22 columns '/Users/bradcannell/Dropbox/Datasets/Chocolate/Chocolate Study 3.txt'
+  2  -- 21 columns 22 columns '/Users/bradcannell/Dropbox/Datasets/Chocolate/Chocolate Study 3.txt'
+  5  -- 21 columns 22 columns '/Users/bradcannell/Dropbox/Datasets/Chocolate/Chocolate Study 3.txt'
+  7  -- 21 columns 22 columns '/Users/bradcannell/Dropbox/Datasets/Chocolate/Chocolate Study 3.txt'
+  8  -- 21 columns 22 columns '/Users/bradcannell/Dropbox/Datasets/Chocolate/Chocolate Study 3.txt'
+... ... .......... .......... .....................................................................
+See problems(...) for more details.
+"

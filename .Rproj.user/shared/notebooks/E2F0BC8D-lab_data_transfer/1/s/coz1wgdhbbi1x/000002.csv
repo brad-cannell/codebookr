@@ -1,0 +1,2 @@
+"0","# Incorrect: Although you can open chocolate_study_1.csv in Excel, it doesn't have a .xls or .xlsx file extension, which is what read_excel expects.
+choco_2 <- read_excel(\"Chocolate Study 2.csv\")"

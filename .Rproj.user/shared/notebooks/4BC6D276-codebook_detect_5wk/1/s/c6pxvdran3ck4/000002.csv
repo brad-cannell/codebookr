@@ -1,0 +1,5 @@
+"0","```r
+print(codebook_detect_5wk, target = \"codebook_detect_5wk.docx\")
+```"
+"1","[1] \"/Users/bradcannell/Dropbox/Research/Elder Abuse/DETECT 2014-MU-CX-0102/r_proj_detect_pilot_5_week/markdown/codebook_detect_5wk.docx\"
+"

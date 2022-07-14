@@ -1,0 +1,11 @@
+"0","```r
+class_survey %>% 
+  summarise(
+    insurance    = sum(insurance == \"9\", na.rm = TRUE),
+    persdoc      = sum(persdoc == \"9\", na.rm = TRUE),
+    veteran      = sum(veteran == \"9\", na.rm = TRUE),
+    marital      = sum(marital == \"9\", na.rm = TRUE),
+    employment   = sum(employment == \"9\", na.rm = TRUE),
+    gender       = sum(gender == \"9\", na.rm = TRUE)
+  )
+```"

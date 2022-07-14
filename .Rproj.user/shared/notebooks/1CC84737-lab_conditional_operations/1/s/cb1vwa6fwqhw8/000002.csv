@@ -1,0 +1,6 @@
+"0","```r
+# Create a character vector you can reuse for all yes/no factor levels
+yn_levs <- c(\"0\", \"1\")
+# Create a character vector you can reuse for all yes/no factor labels
+yn_labs <- c(\"No\", \"Yes\")
+```"

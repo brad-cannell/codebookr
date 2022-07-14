@@ -1,0 +1,9 @@
+"0","```r
+clients_june <- clients_june %>% 
+  group_by(name_first, name_last) %>% 
+  mutate(
+    count = row_number(),
+    dup   = count > 1
+  ) %>% 
+  ungroup()
+```"

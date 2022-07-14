@@ -1,0 +1,4 @@
+"0","```r
+class_survey <- class_survey %>% 
+  select(q13, q14, q17, q18, q20, q21_1, q24, q25, q26)
+```"
