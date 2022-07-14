@@ -1,9 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- For generating new README after build and check of new version: devtools::build_readme() -->
 
 # codebookr
 
 <!-- badges: start -->
+
+[![CRAN
+status](https://www.r-pkg.org/badges/version/codebookr)](https://cran.r-project.org/package=codebookr)
+[![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/codebookr)](https://www.r-pkg.org/pkg/codebookr)
 <!-- badges: end -->
 
 The `codebookr` package is intended to make it easy for users to create
@@ -53,6 +58,8 @@ library(dplyr, warn.conflicts = FALSE)
 library(haven)
 ```
 
+<!-- For testing: devtools::load_all() -->
+
 ### Load data
 
 For the purposes of making a self-contained example, the `codebookr`
@@ -97,8 +104,19 @@ Finally, we will pass the `study_codebook` object we just created to the
 `print()` function along with the path to Word document we want to
 create.
 
+<!-- 
+This and other print code chunks are set to eval=FALSE so that the Word documents won't be recreated each time we rebuild the README/package.
+-->
+
 ``` r
 print(study_codebook, "basic_study_codebook.docx")
+```
+
+Alternatively, you can generate the rdocx file and print it as a Word
+document in one step like this.
+
+``` r
+print(codebook(study), "basic_study_codebook.docx")
 ```
 
 The code above produces the following document, which you can click to
@@ -498,11 +516,7 @@ study <- study %>%
 ```
 
 ``` r
-study_codebook <- codebook(df = study)
-```
-
-``` r
-print(x = study_codebook, target = "study_codebook_2.docx")
+print(x = codebook(study), target = "study_codebook_2.docx")
 ```
 
 The code above produces the following document, which you can click to
@@ -540,7 +554,7 @@ We pilot tested using the DETECT screening tool with medics in the field between
 ```
 
 ``` r
-print(x = study_codebook, target = "study_codebook_3.docx")
+print(study_codebook, "study_codebook_3.docx")
 ```
 
 The code above produces the following document, which you can click to
@@ -597,23 +611,14 @@ for(i in admin_vars) {
 
 ``` r
 attributes(study$id)
-#> $description
-#> [1] "Participant's study identification number"
-#> 
 #> $source
 #> [1] "Administrative data"
-#> 
-#> $other_attribute
-#> [1] "What happens?"
 ```
 
 ``` r
 attributes(study$date)
 #> $class
 #> [1] "Date"
-#> 
-#> $description
-#> [1] "Participant's date of enrollment"
 #> 
 #> $source
 #> [1] "Administrative data"
@@ -626,9 +631,6 @@ attributes(study$time)
 #> 
 #> $class
 #> [1] "hms"      "difftime"
-#> 
-#> $description
-#> [1] "Participant's time of enrollemnt"
 #> 
 #> $source
 #> [1] "Administrative data"

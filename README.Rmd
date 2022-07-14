@@ -409,7 +409,7 @@ All we need to do is pass the data frame to the `codebook()` function and print 
 stata_codebook <- codebook(study)
 ```
 
-```{r}
+```{r eval=FALSE}
 print(stata_codebook, "stata_codebook_1.docx")
 ```
 
@@ -436,7 +436,7 @@ attributes(study$id)
 stata_codebook <- codebook(study)
 ```
 
-```{r}
+```{r eval=FALSE}
 print(stata_codebook, "stata_codebook_2.docx")
 ```
 
@@ -463,7 +463,7 @@ data(study)
 study_codebook <- codebook(study, keep_blank_attributes = TRUE)
 ```
 
-```{r}
+```{r eval=FALSE}
 print(study_codebook, "study_codebook_4.docx")
 ```
 
