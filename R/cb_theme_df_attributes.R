@@ -31,3 +31,7 @@ cb_theme_df_attributes <- function(ft) {
   # Return formatted flextable
   ft
 }
+
+# cb_get_col_attributes(study, "likert", keep_blank_attributes = FALSE) %>%
+#   flextable::flextable() %>%
+#   cb_theme_df_attributes()
