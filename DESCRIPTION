@@ -1,11 +1,10 @@
 Package: codebookr
 Title: Create Codebooks from Data Frames
-Version: 0.1.2
+Version: 0.1.3
 Authors@R: person("Brad", "Cannell", email = "brad.cannell@gmail.com",
   role = c("aut", "cre", "cph"))
 Maintainer: Brad Cannell <brad.cannell@gmail.com>
-Description: The codebook package is intended to make it easy for users to 
-  create codebooks (i.e. data dictionaries) directly from data frame.
+Description: Quickly and easily create codebooks (i.e. data dictionaries) directly from a data frame.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

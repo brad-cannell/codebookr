@@ -52,9 +52,6 @@ study_codebook <- codebook(
   description = "Brief (or long) description of the data."
 )
 
-\dontrun{
-
 # Create the Word codebook document
-print(study_codebook, path = "study_codebook.docx")
-}
+print(study_codebook, path = "example_codebook.docx")
 }
