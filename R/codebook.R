@@ -201,6 +201,7 @@ codebook <- function(df, title = NA, subtitle = NA, description = NA, keep_blank
 }
 
 # For testing
+# data(study)
 # devtools::load_all()
 # codebook(study)
 # print(codebook(study), "test.docx")

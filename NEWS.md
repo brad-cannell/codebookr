@@ -1,3 +1,7 @@
+# codebookr (development version)
+
+* Update `cb_summary_stats_time()`. Previously, if the mode value for a date/time column was NA, then the Value in the summary stats table looked blank. Now, the mode of non-missing values is returned instead. Additionally, if all values are `NA`, then the summary stats table says that explicitly. 
+
 # codebookr 0.1.3
 
 * Add column numbers to the column attributes tables. See: https://github.com/brad-cannell/codebookr/issues/10
