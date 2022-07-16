@@ -1,8 +1,8 @@
 pandoc: 2.7.3
-pkgdown: 2.0.5
+pkgdown: 2.0.6
 pkgdown_sha: ~
 articles: {}
-last_built: 2022-07-14T19:22Z
+last_built: 2022-07-16T21:18Z
 urls:
   reference: https://brad-cannell.github.io/codebookr/reference
   article: https://brad-cannell.github.io/codebookr/articles
