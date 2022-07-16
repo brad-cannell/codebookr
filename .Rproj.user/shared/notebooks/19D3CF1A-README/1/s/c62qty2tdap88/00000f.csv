@@ -1,0 +1,7 @@
+"0","study <- study %>%"
+"0","  cb_add_col_attributes("
+"0","    likert,"
+"0","    col_type = ""Categorical"""
+"0","  )"
+"2","The following attribute(s) are being added to a variable in the data frame for the first time: col_type. If you believe this/these attribute(s) were previously added, then check for a typo in the attribute name. If you are adding this/these attribute(s) for the first time, you can probably safely ignore this message.
+"
