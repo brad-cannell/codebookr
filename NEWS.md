@@ -1,4 +1,4 @@
-# codebookr (development version)
+# codebookr 0.1.4
 
 * Add option to prevent summary stats table for selected columns. The `no_summary_stats` argument of the `codebook()` function will prevent the summary statistics from being added to column attributes table for any column passed to this argument.
 

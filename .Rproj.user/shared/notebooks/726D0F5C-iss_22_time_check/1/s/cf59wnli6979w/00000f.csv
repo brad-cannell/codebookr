@@ -1,3 +1,0 @@
-"0","start <- lubridate::now()"
-"0","test_cb <- codebook(test)"
-"0","end <- lubridate::now()"
