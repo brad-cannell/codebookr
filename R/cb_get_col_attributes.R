@@ -31,15 +31,15 @@
 #' to use the source attribute to identify the wave(s) in which data for this
 #' column was collected.
 #'
-#' * **col_type**: Although you may add any text you desire to the `col_type`
-#' attribute, it is intended to be used to provide additional information above
-#' and beyond the `Data type` (i.e., column class) about the values in the
-#' column. For example, you may have a column of 0's and 1's, which will have
-#' a _numeric_ data type. However, you may want to inform data users that this
-#' is really a dummy variable where the 0's and 1's represent discrete
-#' categories (No and Yes). Another way to think about it is that the
-#' `Data type` attribute is how _R_ understands the column and the `Column type`
-#' attribute is how _humans_ should understand the column.
+#' * **col_type**: The `col_type` attribute is intended to provide additional
+#' information above and beyond the `Data type` (i.e., column class) about
+#' the values in the column. For example, you may have a column of 0's and 1's,
+#' which will have a _numeric_ data type. However, you may want to inform data
+#' users that this is really a dummy variable where the 0's and 1's represent
+#' discrete categories (No and Yes). Another way to think about it is that the
+#' `Data type` attribute is how _R_ understands the column and the
+#' `Column type` attribute is how _humans_ should understand the column.
+#' Currently accepted values are: `Numeric`, `Categorical`, or `Time`.
 #'
 #'    - Perhaps even more importantly, setting the `col_type` attribute helps R
 #'  determine which descriptive statistics to calculate for the bottom half of
@@ -53,7 +53,7 @@
 #'  calculate by providing by adding a `col_type` attribute to a column with
 #'  one of the following values: `Numeric`, `Categorical`, or `Time`.
 #'
-#' * **value_labels**: Although you may add any text you desire to the `value_labels`
+#' * **value_labels**: Although you may pass any named vector you desire to the `value_labels`
 #' attribute, it is intended to inform your data users about how to correctly
 #' interpret numerically coded categorical variables. For example, you may have
 #' a column of 0's and 1's that represent discrete categories (i.e., "No" and
@@ -65,7 +65,7 @@
 #' software applications do. R users can (and typically should) coerce
 #' numerically coded categorical variables into
 #' [factors](https://www.r4epi.com/numerical-descriptions-of-categorical-variables.html#factor-vectors);
-#' however, coercing to a factor is not the same as adding value labels to a
+#' however, coercing a numeric vector to a factor is not the same as adding value labels to a
 #' numeric vector because the underlying numeric values can change in the
 #' process of creating the factor. For this, and other reasons, many R
 #' programmers choose to create a _new_ factor version of a numerically encoded

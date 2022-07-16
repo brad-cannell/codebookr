@@ -54,15 +54,15 @@ source attribute to identify the data set it originates from. As another
 example, if the current data frame contains longitudinal data, you may want
 to use the source attribute to identify the wave(s) in which data for this
 column was collected.
-\item \strong{col_type}: Although you may add any text you desire to the \code{col_type}
-attribute, it is intended to be used to provide additional information above
-and beyond the \verb{Data type} (i.e., column class) about the values in the
-column. For example, you may have a column of 0's and 1's, which will have
-a \emph{numeric} data type. However, you may want to inform data users that this
-is really a dummy variable where the 0's and 1's represent discrete
-categories (No and Yes). Another way to think about it is that the
-\verb{Data type} attribute is how \emph{R} understands the column and the \verb{Column type}
-attribute is how \emph{humans} should understand the column.
+\item \strong{col_type}: The \code{col_type} attribute is intended to provide additional
+information above and beyond the \verb{Data type} (i.e., column class) about
+the values in the column. For example, you may have a column of 0's and 1's,
+which will have a \emph{numeric} data type. However, you may want to inform data
+users that this is really a dummy variable where the 0's and 1's represent
+discrete categories (No and Yes). Another way to think about it is that the
+\verb{Data type} attribute is how \emph{R} understands the column and the
+\verb{Column type} attribute is how \emph{humans} should understand the column.
+Currently accepted values are: \code{Numeric}, \code{Categorical}, or \code{Time}.
 \itemize{
 \item Perhaps even more importantly, setting the \code{col_type} attribute helps R
 determine which descriptive statistics to calculate for the bottom half of
@@ -76,7 +76,7 @@ user can directly tell \code{cb_add_summary_stats()} which summary stats to
 calculate by providing by adding a \code{col_type} attribute to a column with
 one of the following values: \code{Numeric}, \code{Categorical}, or \code{Time}.
 }
-\item \strong{value_labels}: Although you may add any text you desire to the \code{value_labels}
+\item \strong{value_labels}: Although you may pass any named vector you desire to the \code{value_labels}
 attribute, it is intended to inform your data users about how to correctly
 interpret numerically coded categorical variables. For example, you may have
 a column of 0's and 1's that represent discrete categories (i.e., "No" and
@@ -88,7 +88,7 @@ not really have value labels in the same way that other popular statistical
 software applications do. R users can (and typically should) coerce
 numerically coded categorical variables into
 \href{https://www.r4epi.com/numerical-descriptions-of-categorical-variables.html#factor-vectors}{factors};
-however, coercing to a factor is not the same as adding value labels to a
+however, coercing a numeric vector to a factor is not the same as adding value labels to a
 numeric vector because the underlying numeric values can change in the
 process of creating the factor. For this, and other reasons, many R
 programmers choose to create a \emph{new} factor version of a numerically encoded

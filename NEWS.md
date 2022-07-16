@@ -1,5 +1,7 @@
 # codebookr (development version)
 
+* Add option to prevent summary stats table for selected columns. The `no_summary_stats` argument of the `codebook()` function will prevent the summary statistics from being added to column attributes table for any column passed to this argument.
+
 * Update `cb_summary_stats_time()`. Previously, if the mode value for a date/time column was NA, then the Value in the summary stats table looked blank. Now, the mode of non-missing values is returned instead. Additionally, if all values are `NA`, then the summary stats table says that explicitly. 
 
 # codebookr 0.1.3

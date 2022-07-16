@@ -10,17 +10,27 @@
 #' added to the codebook document.
 #'
 #' @param df The data frame the codebook will describe
-#' @param title An optional title that will appear at the top of the Word codebook document
-#' @param subtitle An optional subtitle that will appear at the top of the Word codebook document
-#' @param description An optional text description of the dataset that will appear on the first page of the Word codebook document
-#' @param keep_blank_attributes By default, the column attributes table will omit
-#'   the Column description, Source information, Column type, and value labels
-#'   rows from the column attributes table in the codebook document if those
-#'   attributes haven't been set. In other words, it won't show blank rows for
-#'   those attributes. Passing `TRUE` to the keep_blank_attributes argument
-#'   will cause the opposite to happen. The column attributes table will include
-#'   a Column description, Source information, Column type, and value labels
-#'   row for every column in the data frame - even if they don't have a value.
+#' @param title An optional title that will appear at the top of the Word
+#'   codebook document
+#' @param subtitle An optional subtitle that will appear at the top of the Word
+#'   codebook document
+#' @param description An optional text description of the dataset that will
+#'   appear on the first page of the Word codebook document
+#' @param keep_blank_attributes TRUE or FALSE. By default, the column attributes
+#'   table will omit the Column description, Source information, Column type,
+#'   value labels, and skip pattern rows from the column attributes table in
+#'   the codebook document if those attributes haven't been set. In other
+#'   words, it won't show blank rows for those attributes. Passing `TRUE` to
+#'   the keep_blank_attributes argument will cause the opposite to happen.
+#'   The column attributes table will include a Column description, Source
+#'   information, Column type, and value labels row for every column in the
+#'   data frame - even if they don't have those attributes set.
+#' @param no_summary_stats A character vector of column names. The summary
+#'   statistics will not be added to column attributes table for any
+#'   column passed to this argument. This can be useful when a column contains
+#'   values that are sensitive or may be used to identify individual people
+#'   (e.g., names, addresses, etc.) and the individual values for that column
+#'   should not appear in the codebook.
 #'
 #' @return An rdocx object that can be printed to a Word document
 #' @importFrom dplyr %>%
@@ -36,7 +46,9 @@
 #'
 #' # Create the Word codebook document
 #' print(study_codebook, path = "example_codebook.docx")
-codebook <- function(df, title = NA, subtitle = NA, description = NA, keep_blank_attributes = FALSE) {
+codebook <- function(
+    df, title = NA, subtitle = NA, description = NA,
+    keep_blank_attributes = FALSE, no_summary_stats = NULL) {
 
   # ===========================================================================
   # Checks
@@ -173,13 +185,16 @@ codebook <- function(df, title = NA, subtitle = NA, description = NA, keep_blank
       flextable::body_add_flextable(table_var_attributes)
 
     # Get summary statistics
-    summary_stats <- df %>%
-      cb_add_summary_stats(col_nms[[i]]) %>%
-      cb_summary_stats_to_ft()
+    # Iss 22. Add option to prevent summary stats table for selected columns
+    if (!(col_nms[[i]] %in% no_summary_stats)) {
+      summary_stats <- df %>%
+        cb_add_summary_stats(col_nms[[i]]) %>%
+        cb_summary_stats_to_ft()
 
-    # Add summary statistics flextable to the codebook object
-    temp_doc <- temp_doc %>%
-      flextable::body_add_flextable(summary_stats)
+      # Add summary statistics flextable to the codebook object
+      temp_doc <- temp_doc %>%
+        flextable::body_add_flextable(summary_stats)
+    }
 
     # Create temporary Word document from the temporary rdocx object
     # Put it in one of the tempory files created above the loop.
@@ -205,3 +220,4 @@ codebook <- function(df, title = NA, subtitle = NA, description = NA, keep_blank
 # devtools::load_all()
 # codebook(study)
 # print(codebook(study), "test.docx")
+# print(codebook(study, no_summary_stats = "address"), "test.docx")

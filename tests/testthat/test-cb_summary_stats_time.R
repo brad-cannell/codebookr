@@ -30,6 +30,28 @@ testthat::test_that("The digits parameter of cb_summary_stats_time works as expe
   testthat::expect_equal(df$Percentage, c("10.000", "15.000", "10.000"))
 })
 
+# Issue #15: Make time appear in a human readable format
+testthat::test_that("Time appears in a human readable format", {
+  df <- cb_summary_stats_time(study, "time")
+  testthat::expect_equal(df$Value, c("08:37:26", "All 20 values", "16:59:31"))
+})
+
+# Update `cb_summary_stats_time()`. Previously, if the mode value for a
+# date/time column was NA, then the Value in the summary stats table looked
+# blank. Now, the mode of non-missing values is returned instead. Additionally,
+# if all values are `NA`, then the summary stats table says that explicitly.
+testthat::test_that("NA values are ignored in date/time columns", {
+  df <- data.frame(time = hms::as_hms(c("08:37:26", NA, NA)))
+  df <- cb_summary_stats_time(df, "time")
+  testthat::expect_equal(df$Value, c("08:37:26", "All 1 values", "08:37:26"))
+})
+
+testthat::test_that("All NA values in date/time columns produces expected result", {
+  df <- data.frame(time = hms::as_hms(c(NA, NA, NA)))
+  df <- cb_summary_stats_time(df, "time")
+  testthat::expect_equal(df$Value, c("All values are missing", "All values are missing", "All values are missing"))
+})
+
 # =============================================================================
 # Clean up
 # =============================================================================
