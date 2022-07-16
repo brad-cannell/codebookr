@@ -477,7 +477,7 @@ As shown in the screenshot above, all rows of the column attributes table now ex
 
 There may be times when a column contains values that are sensitive or may be used to identify individual people (e.g., names, addresses, etc.) and the individual values for that column should not appear in the codebook. For example, the study data includes an address column. If we wanted to make the codebook for the study data available to the public, but not the data itself, we may not want the individual addresses to show in the summary statistics portion of the column attributes table as they do by default. 
 
-![](man/figures/addresses.png)]
+![](man/figures/addresses.png)
 
 Of course, we could just drop the address column from the data frame entirely, but it's better to have the codebook acknowledge all of the columns that exist in the data frame. In cases like this, we can pass a character vector of column names to the `no_summary_stats` argument of the `codebook()` function. Doing so will prevent the summary statistics from being added to column attributes table for any column passed to this argument.
 

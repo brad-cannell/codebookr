@@ -906,7 +906,7 @@ but not the data itself, we may not want the individual addresses to
 show in the summary statistics portion of the column attributes table as
 they do by default.
 
-![](man/figures/addresses.png)\]
+![](man/figures/addresses.png)
 
 Of course, we could just drop the address column from the data frame
 entirely, but it’s better to have the codebook acknowledge all of the
