@@ -1,6 +1,6 @@
 Package: codebookr
 Title: Create Codebooks from Data Frames
-Version: 0.1.4
+Version: 0.1.4.9000
 Authors@R: person("Brad", "Cannell", email = "brad.cannell@gmail.com",
   role = c("aut", "cre", "cph"))
 Maintainer: Brad Cannell <brad.cannell@gmail.com>

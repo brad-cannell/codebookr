@@ -1,3 +1,9 @@
+# codebookr (development version)
+
+* Make the column number column wider #10. So that the column number won't wrap to a new line when there are more than 1,000 columns in the data frame.
+
+* Fix (!mode_char) error #15
+
 # codebookr 0.1.4
 
 * Add option to prevent summary stats table for selected columns. The `no_summary_stats` argument of the `codebook()` function will prevent the summary statistics from being added to column attributes table for any column passed to this argument.
