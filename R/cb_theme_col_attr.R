@@ -15,7 +15,7 @@ cb_theme_col_attr <- function(ft) {
     # Delete the header row
     flextable::delete_part(part = "header") %>%
     # Set the width of both columns
-    flextable::width(width = c(0.44, 2.25, 3.61)) %>%
+    flextable::width(width = c(0.66, 2.28, 3.6)) %>%
 
     # Format font
     # Set font to TNR 11
