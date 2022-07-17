@@ -133,7 +133,7 @@ cb_summary_stats_time <- function(df, .x, digits = 2) {
       mode_char <- grepl("All", summary$Value[summary$Statistic == "Mode"])
       # If mode_char is TRUE, then do nothing so that the value for mode will still
       # "All X values"
-      if (!mode_char) {
+      if (!all(mode_char)) {
         # Otherwise, convert the number into an hms value
         summary$Value[summary$Statistic == "Mode"] <- as.character(hms::as_hms(summary$Value[summary$Statistic == "Mode"]))
       }
@@ -151,6 +151,7 @@ cb_summary_stats_time <- function(df, .x, digits = 2) {
 # For testing
 # devtools::load_all()
 # data(study)
-# study$date_time[2] <- study$date_time[1]
+# study$date_visit[2] <- study$date_visit[1]
 # study$time[2] <- study$time[1]
-# cb_summary_stats_time(study, "date_visit", digits = 2)
+# study$time[4] <- study$time[3]
+# cb_summary_stats_time(study, "time")
