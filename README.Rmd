@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# codebookr
+# codebookr <img style="padding: 15px;" align="left" src="man/figures/codebookr_hex/codebookr_hex.png" alt="codebookr hex logo" width="250" height="289">
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/codebookr)](https://cran.r-project.org/package=codebookr)
@@ -27,7 +27,13 @@ Under the hood, `codebookr` uses the [flextable](https://ardata-fr.github.io/fle
 
 ## Installation
 
-You can install the development version of codebookr like so:
+You can install the released version of `codebookr` from [CRAN](https://CRAN.R-project.org) with:
+
+```{r eval=FALSE}
+install.packages("codebookr")
+```
+
+And the development version from [GitHub](https://github.com/) with:
 
 ```{r eval=FALSE}
 # install.packages("devtools")
