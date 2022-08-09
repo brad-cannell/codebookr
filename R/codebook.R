@@ -34,6 +34,7 @@
 #'
 #' @return An rdocx object that can be printed to a Word document
 #' @importFrom dplyr %>%
+#' @import haven
 #' @export
 #'
 #' @examples
