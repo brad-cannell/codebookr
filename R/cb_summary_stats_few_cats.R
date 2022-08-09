@@ -34,7 +34,7 @@ cb_summary_stats_few_cats <- function(df, .x, digits = 2) {
     dplyr::mutate(
       cum_freq = cumsum(n),
       prop     = n / max(cum_freq),
-      percent  = prop * 100
+      percent  = round(prop * 100, digits)
     ) %>%
     # Keep columns of interest
     dplyr::select(cat, n, cum_freq, percent) %>%
