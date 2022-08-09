@@ -1,6 +1,6 @@
 Package: codebookr
 Title: Create Codebooks from Data Frames
-Version: 0.1.4.9000
+Version: 0.1.5
 Authors@R: person("Brad", "Cannell", email = "brad.cannell@gmail.com",
   role = c("aut", "cre", "cph"))
 Maintainer: Brad Cannell <brad.cannell@gmail.com>
@@ -8,7 +8,7 @@ Description: Quickly and easily create codebooks (i.e. data dictionaries) direct
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 URL: https://github.com/brad-cannell/codebookr,
     https://brad-cannell.github.io/codebookr/
 BugReports: https://github.com/brad-cannell/codebookr/issues

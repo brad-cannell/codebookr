@@ -1,4 +1,6 @@
-# codebookr (development version)
+# codebookr 0.1.5
+
+* Fix bug where percent column doesn't correctly round when column type is categorical few cats (#29).
 
 * Make the column number column wider #10. So that the column number won't wrap to a new line when there are more than 1,000 columns in the data frame.
 
