@@ -130,6 +130,27 @@
 #'   with column attributes added.
 #' @importFrom dplyr %>%
 #' @export
+#'
+#' @examples
+#' library(dplyr, warn.conflicts = FALSE)
+#' library(codebookr)
+#' data(study)
+#'
+#' study <- study %>%
+#'   cb_add_col_attributes(
+#'     .x = likert,
+#'     description = "An example Likert scale item",
+#'     source = "Exposure questionnaire",
+#'     col_type = "categorical",
+#'     value_labels = c(
+#'       "Very dissatisfied" = 1,
+#'       "Somewhat dissatisfied" = 2,
+#'       "Neither satisfied nor dissatisfied" = 3,
+#'       "Somewhat satisfied" = 4,
+#'       "Very satisfied" = 5
+#'     ),
+#'     skip_pattern = "Not asked if days < 10"
+#'   )
 cb_add_col_attributes <- function(df, .x, ...) {
 
   # ===========================================================================
