@@ -1,3 +1,8 @@
+# codebookr (dev version)
+
+* Placeholder
+
+
 # codebookr 0.1.5
 
 * Fix bug where percent column doesn't correctly round when column type is categorical few cats (#29).
