@@ -17,6 +17,8 @@ Depends:
 LazyData: true
 Suggests: 
     hms,
+    knitr,
+    rmarkdown,
     testthat
 Imports: 
     haven (>= 2.5.0),
@@ -28,3 +30,4 @@ Imports:
     stringr,
     tibble,
     tidyr
+VignetteBuilder: knitr

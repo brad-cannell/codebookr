@@ -1,7 +1,6 @@
 # codebookr (dev version)
 
-* Placeholder
-
+* Improve help documentation for `cb_add_col_attributes()` and `codebook()` (#6)
 
 # codebookr 0.1.5
 

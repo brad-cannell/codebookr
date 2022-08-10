@@ -9,6 +9,16 @@
 #' those attributes in a data frame, which is later turned into a flextable and
 #' added to the codebook document.
 #'
+#' @details Typically, though not necessarily, the first step in creating your
+#'   codebook will be to add column attributes to your data. The
+#'   `cb_add_col_attributes()` function is a convenience function that allows
+#'   you to add arbitrary attributes to the columns of the data frame. These
+#'   attributes can later be accessed to fill in the column attributes table of
+#'   the codebook document. Column attributes _can_ serve a similar function to
+#'   variable labels in SAS or Stata; however, you can assign many different
+#'   attributes to a column and they can contain any kind of information you want.
+#'   For details see \link{cb_add_col_attributes}
+#'
 #' @param df The data frame the codebook will describe
 #' @param title An optional title that will appear at the top of the Word
 #'   codebook document

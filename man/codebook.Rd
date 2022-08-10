@@ -55,6 +55,16 @@ from a saved data file. Please provide the path to the saved data file. This
 function gets selected attributes about file saved at \code{path} and stores
 those attributes in a data frame, which is later turned into a flextable and
 added to the codebook document.
+
+Typically, though not necessarily, the first step in creating your
+codebook will be to add column attributes to your data. The
+\code{cb_add_col_attributes()} function is a convenience function that allows
+you to add arbitrary attributes to the columns of the data frame. These
+attributes can later be accessed to fill in the column attributes table of
+the codebook document. Column attributes \emph{can} serve a similar function to
+variable labels in SAS or Stata; however, you can assign many different
+attributes to a column and they can contain any kind of information you want.
+For details see \link{cb_add_col_attributes}
 }
 \examples{
 study_codebook <- codebook(
