@@ -499,3 +499,8 @@ print(study_codebook, "study_codebook_5.docx")
 
 As shown in the screenshot above, the column attributes table for the `address` column no longer shows any of the idividual addresses. 
 
+Further, we can omit the summary statistics for all of the columns in our data frame using the following code.
+
+```{r eval=FALSE}
+codebook(study, no_summary_stats = names(study))
+```

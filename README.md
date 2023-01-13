@@ -37,14 +37,14 @@ devtools::install_github("brad-cannell/codebookr")
 
 ## codebookr functions
 
--   **codebook:** The `codebook()` function assists with the creation of
-    a codebook for a given R data frame.
+- **codebook:** The `codebook()` function assists with the creation of a
+  codebook for a given R data frame.
 
--   **cb_add_col_attributes:** This is a helper function that makes it
-    easier to add arbitrary attributes to R data frame columns (e.g.,
-    description, source, column type). These attributes can later be
-    accessed by the `codebook()` function to fill in the column
-    attributes table for each column in the codebook.
+- **cb_add_col_attributes:** This is a helper function that makes it
+  easier to add arbitrary attributes to R data frame columns (e.g.,
+  description, source, column type). These attributes can later be
+  accessed by the `codebook()` function to fill in the column attributes
+  table for each column in the codebook.
 
 ## Example 1: The most basic use case
 
@@ -153,11 +153,10 @@ document includes two major sections. They are:
     displayed depends on the what type of data the column contains. This
     is discussed in greater detail below.
 
-    -   The value for `Data type` is just the value returned by passing
-        the column to base R’s `class()` function. Below, we will
-        discuss adding the `Column type` attribute, which allows the
-        user to add additional information about the values in each
-        column.
+    - The value for `Data type` is just the value returned by passing
+      the column to base R’s `class()` function. Below, we will discuss
+      adding the `Column type` attribute, which allows the user to add
+      additional information about the values in each column.
 
 ## Example 2: A more informative codebook
 
@@ -254,111 +253,106 @@ information you want.
 
 The arguments to `cb_add_col_attributes()` are:
 
--   **df:** The data frame containing the column you want to add the
-    attribute to.  
--   **.x:** The name of the column you want to add the attribute to in
-    `df`.  
--   **…:** Arbitrary list of attributes in the form
-    `attribute = "value"`.
+- **df:** The data frame containing the column you want to add the
+  attribute to.  
+- **.x:** The name of the column you want to add the attribute to in
+  `df`.  
+- **…:** Arbitrary list of attributes in the form `attribute = "value"`.
 
 Although the `cb_add_col_attributes()` function will allow you to add
 any attributes you want, there are currently **only five** special
 attributes that the `codebook()` function will recognize and add to the
 column attributes table of the codebook document. They are:
 
--   **description**: Although you may add any text you desire to the
-    `description` attribute, it is intended to be used describe the
-    question/process that generated the data contained in the column.
-    Many statistical software packages refer to this as a variable
-    label.
+- **description**: Although you may add any text you desire to the
+  `description` attribute, it is intended to be used describe the
+  question/process that generated the data contained in the column. Many
+  statistical software packages refer to this as a variable label.
 
-    -   As [demonstrated below](#already-labeled), if the data was
-        imported from SAS, Stata, or SPSS with variable labels using the
-        `haven` package, `codebook` will automatically recognize them.
-        There is no need to manually create them. However, you may
-        overwrite the imported variable label for any column by adding a
-        `description` attribute as shown in the example below.
+  - As [demonstrated below](#already-labeled), if the data was imported
+    from SAS, Stata, or SPSS with variable labels using the `haven`
+    package, `codebook` will automatically recognize them. There is no
+    need to manually create them. However, you may overwrite the
+    imported variable label for any column by adding a `description`
+    attribute as shown in the example below.
 
--   **source**: Although you may add any text you desire to the `source`
-    attribute, it is intended to be used describe where the data
-    contained in the column originally came from. For example, if the
-    current data frame was created by merging multiple data sets
-    together, you may want to use the source attribute to identify the
-    data set it originates from. As another example, if the current data
-    frame contains longitudinal data, you may want to use the source
-    attribute to identify the wave(s) in which data for this column was
-    collected.
+- **source**: Although you may add any text you desire to the `source`
+  attribute, it is intended to be used describe where the data contained
+  in the column originally came from. For example, if the current data
+  frame was created by merging multiple data sets together, you may want
+  to use the source attribute to identify the data set it originates
+  from. As another example, if the current data frame contains
+  longitudinal data, you may want to use the source attribute to
+  identify the wave(s) in which data for this column was collected.
 
--   **col_type**: The `col_type` attribute is intended to provide
-    additional information above and beyond the `Data type` (i.e.,
-    column class) about the values in the column. For example, you may
-    have a column of 0’s and 1’s, which will have a *numeric* data type.
-    However, you may want to inform data users that this is really a
-    dummy variable where the 0’s and 1’s represent discrete categories
-    (No and Yes). Another way to think about it is that the `Data type`
-    attribute is how *R* understands the column and the `Column type`
-    attribute is how *humans* should understand the column. Currently
-    accepted values are: `Numeric`, `Categorical`, or `Time`.
+- **col_type**: The `col_type` attribute is intended to provide
+  additional information above and beyond the `Data type` (i.e., column
+  class) about the values in the column. For example, you may have a
+  column of 0’s and 1’s, which will have a *numeric* data type. However,
+  you may want to inform data users that this is really a dummy variable
+  where the 0’s and 1’s represent discrete categories (No and Yes).
+  Another way to think about it is that the `Data type` attribute is how
+  *R* understands the column and the `Column type` attribute is how
+  *humans* should understand the column. Currently accepted values are:
+  `Numeric`, `Categorical`, or `Time`.
 
-    -   Perhaps even more importantly, setting the `col_type` attribute
-        helps R determine which descriptive statistics to calculate for
-        the bottom half of the column attributes table. Inside of the
-        `codebook()` function, the `cb_add_summary_stats()` function
-        will attempt to figure out whether the column is **numeric**,
-        **categorical - many categories (e.g. participant id)**,
-        **categorical - few categories (e.g. sex)**, or **time -
-        including dates**. Again, this matters because the table of
-        summary stats shown in the codebook document depends on the
-        value `cb_add_summary_stats()` chooses. However, the user can
-        directly tell `cb_add_summary_stats()` which summary stats to
-        calculate by providing a `col_type` attribute to a column with
-        one of the following values: `Numeric`, `Categorical`, or
-        `Time`.
+  - Perhaps even more importantly, setting the `col_type` attribute
+    helps R determine which descriptive statistics to calculate for the
+    bottom half of the column attributes table. Inside of the
+    `codebook()` function, the `cb_add_summary_stats()` function will
+    attempt to figure out whether the column is **numeric**,
+    **categorical - many categories (e.g. participant id)**,
+    **categorical - few categories (e.g. sex)**, or **time - including
+    dates**. Again, this matters because the table of summary stats
+    shown in the codebook document depends on the value
+    `cb_add_summary_stats()` chooses. However, the user can directly
+    tell `cb_add_summary_stats()` which summary stats to calculate by
+    providing a `col_type` attribute to a column with one of the
+    following values: `Numeric`, `Categorical`, or `Time`.
 
--   **value_labels**: Although you may pass any named vector you desire
-    to the `value_labels` attribute, it is intended to inform your data
-    users about how to correctly interpret numerically coded categorical
-    variables. For example, you may have a column of 0’s and 1’s that
-    represent discrete categories (i.e., “No” and “Yes”) instead of
-    numerical quantities. In many other software packages (e.g., SAS,
-    Stata, and SPSS), you can layer “No” and “Yes” labels on top of the
-    0’s and 1’s to improve the readability of your analysis output.
-    These are commonly referred to as *value labels*. The R programming
-    language does not really have value labels in the same way that
-    other popular statistical software applications do. R users can (and
-    typically should) coerce numerically coded categorical variables
-    into
-    [factors](https://www.r4epi.com/numerical-descriptions-of-categorical-variables.html#factor-vectors);
-    however, coercing a numeric vector to a factor is not the same as
-    adding value labels to a numeric vector because the underlying
-    numeric values can change in the process of creating the factor. For
-    this, and other reasons, many R programmers choose to create a *new*
-    factor version of a numerically encoded variable as opposed to
-    overwriting/transforming the numerically encoded variable. In those
-    cases, you may want to inform your data users about how to correctly
-    interpret numerically coded categorical variables. Adding value
-    labels to your codebook is one way of doing so.
+- **value_labels**: Although you may pass any named vector you desire to
+  the `value_labels` attribute, it is intended to inform your data users
+  about how to correctly interpret numerically coded categorical
+  variables. For example, you may have a column of 0’s and 1’s that
+  represent discrete categories (i.e., “No” and “Yes”) instead of
+  numerical quantities. In many other software packages (e.g., SAS,
+  Stata, and SPSS), you can layer “No” and “Yes” labels on top of the
+  0’s and 1’s to improve the readability of your analysis output. These
+  are commonly referred to as *value labels*. The R programming language
+  does not really have value labels in the same way that other popular
+  statistical software applications do. R users can (and typically
+  should) coerce numerically coded categorical variables into
+  [factors](https://www.r4epi.com/numerical-descriptions-of-categorical-variables.html#factor-vectors);
+  however, coercing a numeric vector to a factor is not the same as
+  adding value labels to a numeric vector because the underlying numeric
+  values can change in the process of creating the factor. For this, and
+  other reasons, many R programmers choose to create a *new* factor
+  version of a numerically encoded variable as opposed to
+  overwriting/transforming the numerically encoded variable. In those
+  cases, you may want to inform your data users about how to correctly
+  interpret numerically coded categorical variables. Adding value labels
+  to your codebook is one way of doing so.
 
-    -   Add value labels to columns as a named vector to the
-        `value_labels` attribute. For example, `value_labels` = c(“No” =
-        0, “Yes” = 1). As another example, you may view hypothetical
-        value labels added to the `likert` column below.
+  - Add value labels to columns as a named vector to the `value_labels`
+    attribute. For example, `value_labels` = c(“No” = 0, “Yes” = 1). As
+    another example, you may view hypothetical value labels added to the
+    `likert` column below.
 
-    -   As [demonstrated below](#already-labeled), if the data was
-        imported from SAS, Stata, or SPSS with value labels using the
-        `haven` package, `codebook` will automatically recognize them.
-        There is no need to manually create them. However, you may
-        overwrite the imported value labels for any column by adding a
-        `value_labels` attribute as shown in the example below.
+  - As [demonstrated below](#already-labeled), if the data was imported
+    from SAS, Stata, or SPSS with value labels using the `haven`
+    package, `codebook` will automatically recognize them. There is no
+    need to manually create them. However, you may overwrite the
+    imported value labels for any column by adding a `value_labels`
+    attribute as shown in the example below.
 
--   **skip_pattern**: Although you may add any text you desire to the
-    `skip_pattern` attribute, it is intended to be used describe skip
-    patterns in the data collection tools that impact which study
-    participants were exposed to each study item. For example, If the
-    `likert` question in our hypothetical study data was only asked of
-    participants who were enrolled in the study for at least 10 days,
-    then you may want to add a note like “Not asked if days \< 10” to
-    the skip pattern section of the column attributes table.
+- **skip_pattern**: Although you may add any text you desire to the
+  `skip_pattern` attribute, it is intended to be used describe skip
+  patterns in the data collection tools that impact which study
+  participants were exposed to each study item. For example, If the
+  `likert` question in our hypothetical study data was only asked of
+  participants who were enrolled in the study for at least 10 days, then
+  you may want to add a note like “Not asked if days \< 10” to the skip
+  pattern section of the column attributes table.
 
 ``` r
 study <- study %>%
@@ -454,30 +448,29 @@ function.
 
 The arguments to the `codebook()` function are:
 
--   **df:** The saved file at `path`, read into memory as a data
-    frame.  
--   **title:** An optional title that will appear at the top of the Word
-    codebook document.  
--   **subtitle:** An optional subtitle that will appear at the top of
-    the Word codebook document.  
--   **description:** An optional text description of the dataset that
-    will appear on the first page of the Word codebook document.
--   **keep_blank_attributes:** By default, the column attributes table
-    will omit the Column description, Source information, Column type,
-    value labels, and skip pattern rows from the column attributes table
-    in the codebook document if those attributes haven’t been set. In
-    other words, it won’t show blank rows for those attributes. Passing
-    `TRUE` to the keep_blank_attributes argument will cause the opposite
-    to happen. The column attributes table will include a Column
-    description, Source information, Column type, value labels, and skip
-    pattern row for every column in the data frame - even if they don’t
-    have those attributes set.
--   **no_summary_stats:** A character vector of column names. The
-    summary statistics will not be added to column attributes table for
-    any column passed to this argument. This can be useful when a column
-    contains values that are sensitive or may be used to identify
-    individual people (e.g., names, addresses, etc.) and the individual
-    values for that column should not appear in the codebook.
+- **df:** The saved file at `path`, read into memory as a data frame.  
+- **title:** An optional title that will appear at the top of the Word
+  codebook document.  
+- **subtitle:** An optional subtitle that will appear at the top of the
+  Word codebook document.  
+- **description:** An optional text description of the dataset that will
+  appear on the first page of the Word codebook document.
+- **keep_blank_attributes:** By default, the column attributes table
+  will omit the Column description, Source information, Column type,
+  value labels, and skip pattern rows from the column attributes table
+  in the codebook document if those attributes haven’t been set. In
+  other words, it won’t show blank rows for those attributes. Passing
+  `TRUE` to the keep_blank_attributes argument will cause the opposite
+  to happen. The column attributes table will include a Column
+  description, Source information, Column type, value labels, and skip
+  pattern row for every column in the data frame - even if they don’t
+  have those attributes set.
+- **no_summary_stats:** A character vector of column names. The summary
+  statistics will not be added to column attributes table for any column
+  passed to this argument. This can be useful when a column contains
+  values that are sensitive or may be used to identify individual people
+  (e.g., names, addresses, etc.) and the individual values for that
+  column should not appear in the codebook.
 
 First, we will once again create our codebook without passing any values
 to the `title`, `subtitle`, or `description` arguments. This will allow
@@ -514,27 +507,26 @@ In the example above, the title and metadata table are unchanged
 compared to [Example 1](#example-1-the-most-basic-use-case). However,
 the column attributes tables now look a little different.
 
--   Notice that the **column attributes tables** for each variable now
-    includes the attributes that we [added as column attributes
-    above](#add-column-attributes-to-the-data-frame-you-want-to-document-with-a-codebook).
+- Notice that the **column attributes tables** for each variable now
+  includes the attributes that we [added as column attributes
+  above](#add-column-attributes-to-the-data-frame-you-want-to-document-with-a-codebook).
 
--   Notice that we added an `other_attribute = "What happens?"`
-    attribute to the `id` column when we [added column attributes
-    above](#add-column-attributes-to-the-data-frame-you-want-to-document-with-a-codebook).
-    That attribute is still attached to the `id` column, but it is
-    ignored by `codebook()`. Again, there are currently **only five**
-    special attributes that the `codebook()` function will recognize and
-    add to the column attributes table of the codebook document –
-    `description`, `source`, `col_type`, `value_labels`, and
-    `skip_pattern`.
+- Notice that we added an `other_attribute = "What happens?"` attribute
+  to the `id` column when we [added column attributes
+  above](#add-column-attributes-to-the-data-frame-you-want-to-document-with-a-codebook).
+  That attribute is still attached to the `id` column, but it is ignored
+  by `codebook()`. Again, there are currently **only five** special
+  attributes that the `codebook()` function will recognize and add to
+  the column attributes table of the codebook document – `description`,
+  `source`, `col_type`, `value_labels`, and `skip_pattern`.
 
--   Notice that `codebook()` guessed what type of values were contained
-    in each column and returned the most useful descriptive statistics
-    for that type. In this case we are may be very happy with these
-    guesses. But what if we weren’t? For example, what if we would
-    prefer for `codebook()` to treat the `likert` column as categorical
-    data instead of numeric data? We can do so by simply adding the
-    `col_type = "Categorical"` attribute as demonstrated below.
+- Notice that `codebook()` guessed what type of values were contained in
+  each column and returned the most useful descriptive statistics for
+  that type. In this case we are may be very happy with these guesses.
+  But what if we weren’t? For example, what if we would prefer for
+  `codebook()` to treat the `likert` column as categorical data instead
+  of numeric data? We can do so by simply adding the
+  `col_type = "Categorical"` attribute as demonstrated below.
 
 ``` r
 study <- study %>%
@@ -935,3 +927,10 @@ print(study_codebook, "study_codebook_5.docx")
 
 As shown in the screenshot above, the column attributes table for the
 `address` column no longer shows any of the idividual addresses.
+
+Further, we can omit the summary statistics for all of the columns in
+our data frame using the following code.
+
+``` r
+codebook(study, no_summary_stats = names(study))
+```
