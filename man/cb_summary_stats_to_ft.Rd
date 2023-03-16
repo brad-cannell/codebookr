@@ -10,13 +10,13 @@
 \usage{
 cb_summary_stats_to_ft(df, ...)
 
-\method{cb_summary_stats_to_ft}{summary_numeric}(df, col_width = 1.3)
+\method{cb_summary_stats_to_ft}{summary_numeric}(df, col_width = 1.3, ...)
 
-\method{cb_summary_stats_to_ft}{summary_many_cats}(df, col_width = 1.62)
+\method{cb_summary_stats_to_ft}{summary_many_cats}(df, col_width = 1.62, ...)
 
-\method{cb_summary_stats_to_ft}{summary_few_cats}(df, col_width = 1.62)
+\method{cb_summary_stats_to_ft}{summary_few_cats}(df, col_width = 1.62, ...)
 
-\method{cb_summary_stats_to_ft}{summary_time}(df, col_width = 1.62)
+\method{cb_summary_stats_to_ft}{summary_time}(df, col_width = 1.62, ...)
 }
 \arguments{
 \item{df}{Data frame of summary statistics}

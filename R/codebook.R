@@ -48,6 +48,7 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' study_codebook <- codebook(
 #'   df = study,
 #'   title = "My Example Study",
@@ -57,6 +58,7 @@
 #'
 #' # Create the Word codebook document
 #' print(study_codebook, path = "example_codebook.docx")
+#' }
 codebook <- function(
     df, title = NA, subtitle = NA, description = NA,
     keep_blank_attributes = FALSE, no_summary_stats = NULL) {
