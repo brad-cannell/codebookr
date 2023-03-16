@@ -1,6 +1,8 @@
-# codebookr (dev version)
+# codebookr 0.1.6
 
 * Improve help documentation for `cb_add_col_attributes()` and `codebook()` (#6)
+
+* Fix failed CRAN package check (#40)
 
 # codebookr 0.1.5
 

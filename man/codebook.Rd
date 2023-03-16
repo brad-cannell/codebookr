@@ -67,6 +67,7 @@ attributes to a column and they can contain any kind of information you want.
 For details see \link{cb_add_col_attributes}
 }
 \examples{
+\dontrun{
 study_codebook <- codebook(
   df = study,
   title = "My Example Study",
@@ -76,4 +77,5 @@ study_codebook <- codebook(
 
 # Create the Word codebook document
 print(study_codebook, path = "example_codebook.docx")
+}
 }
