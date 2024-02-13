@@ -87,7 +87,7 @@ many_cats parameter and/or the num_to_cat parameter -- depending on the class
 of the column.
 }
 \seealso{
-Other add_summary_stats: 
+Other add_summary_stats:
 \code{\link{cb_summary_stats_few_cats}()},
 \code{\link{cb_summary_stats_many_cats}()},
 \code{\link{cb_summary_stats_numeric}()},

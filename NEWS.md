@@ -1,3 +1,10 @@
+# codebookr 0.1.7
+
+* Fix dplyr warning, "Warning: Returning more (or less) than 1 row per `summarise()` group was deprecated in
+dplyr 1.1.0. Please use `reframe()` instead." (#45)
+
+* Fix dplyr warning, "The `...` argument of `across()` is deprecated as of dplyr 1.1.0. Supply arguments directly to `.fns` through an anonymous function instead."
+
 # codebookr 0.1.6
 
 * Improve help documentation for `cb_add_col_attributes()` and `codebook()` (#6)
