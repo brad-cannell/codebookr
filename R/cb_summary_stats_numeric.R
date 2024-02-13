@@ -27,8 +27,8 @@ cb_summary_stats_numeric <- function(df, .x, digits = 2) {
       SD     = sd(.data[[.x]], na.rm = TRUE)
     ) %>%
     # Format output
-    dplyr::mutate(dplyr::across(dplyr::everything(), round, digits = digits)) %>%
-    dplyr::mutate(dplyr::across(dplyr::everything(), format, nsmall = digits))
+    dplyr::mutate(dplyr::across(dplyr::everything(), \(x) round(x, digits = digits))) %>%
+    dplyr::mutate(dplyr::across(dplyr::everything(), \(x) format(x, nsmall = digits)))
 
   # ===========================================================================
   # Return tibble of results

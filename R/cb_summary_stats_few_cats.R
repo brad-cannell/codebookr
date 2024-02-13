@@ -54,4 +54,4 @@ cb_summary_stats_few_cats <- function(df, .x, digits = 2) {
 
 # For testing
 # data(study)
-# cb_summary_stats_few_cats(study, sex, digits = 2)
+# cb_summary_stats_few_cats(study, "sex", digits = 2)
