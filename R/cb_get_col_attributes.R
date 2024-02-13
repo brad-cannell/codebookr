@@ -191,7 +191,7 @@ cb_get_col_attributes <- function(df, .x, keep_blank_attributes = keep_blank_att
   }
 
   attr_df <- df %>%
-    dplyr::summarise(
+    dplyr::reframe(
       `Column name:`                    = .x,
       `Column description:`             = description,
       `Source information:`             = attributes(df[[.x]])[["source"]],
