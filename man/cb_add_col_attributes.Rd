@@ -47,8 +47,7 @@ If the data was imported from SAS, Stata, or SPSS with variable labels
 using the \code{haven} package, \code{codebook} will automatically recognize them.
 There is no need to manually create them. However, you may overwrite the
 imported variable label for any column by adding a \code{description}
-attribute.
-}
+attribute.}
 \item{source:}{
 Although you may add any text you desire to the \code{source}
 attribute, it is intended to be used describe where the data contained
@@ -57,8 +56,7 @@ frame was created by merging multiple data sets together, you may want
 to use the source attribute to identify the data set it originates from.
 As another example, if the current data frame contains longitudinal
 data, you may want to use the source attribute to identify the wave(s)
-in which data for this column was collected.
-}
+in which data for this column was collected.}
 \item{col_type:}{
 The \code{col_type} attribute is intended to provide additional
 information above and beyond the \verb{Data type} (i.e., column class) about
@@ -91,8 +89,7 @@ codebook document depends on the value \code{cb_add_summary_stats()}
 chooses. However, the user can directly tell \code{cb_add_summary_stats()}
 which summary stats to calculate by providing a \code{col_type} attribute
 to a column with one of the following values: \code{Numeric},
-\code{Categorical}, or \code{Time}.
-}
+\code{Categorical}, or \code{Time}.}
 \item{value_labels:}{
 Although you may pass any named vector you desire to the \code{value_labels}
 attribute, it is intended to inform your data users about how to
@@ -127,8 +124,7 @@ them. There is no need to manually create them. However, you may
 overwrite the imported value labels for any column by adding a
 \code{value_labels} attribute as shown in the example below.
 }{}
-}
-}
+}}
 \item{skip_pattern:}{
 Although you may add any text you desire to the \code{skip_pattern}
 attribute, it is intended to be used describe skip patterns in the
@@ -137,8 +133,7 @@ to each study item. For example, If a question in your data was only
 asked of participants who were enrolled in the study for at least
 10 days, then you may want to add a note like "Not asked if
 days < 10" to the skip pattern section of
-the column attributes table.
-}
+the column attributes table.}
 }
 }
 \examples{

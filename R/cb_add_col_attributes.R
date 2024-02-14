@@ -28,8 +28,7 @@
 #'       using the `haven` package, `codebook` will automatically recognize them.
 #'       There is no need to manually create them. However, you may overwrite the
 #'       imported variable label for any column by adding a `description`
-#'       attribute.
-#'     }
+#'       attribute.}
 #'     \item{source:}{
 #'       Although you may add any text you desire to the `source`
 #'       attribute, it is intended to be used describe where the data contained
@@ -38,8 +37,7 @@
 #'       to use the source attribute to identify the data set it originates from.
 #'       As another example, if the current data frame contains longitudinal
 #'       data, you may want to use the source attribute to identify the wave(s)
-#'       in which data for this column was collected.
-#'     }
+#'       in which data for this column was collected.}
 #'     \item{col_type:}{
 #'       The `col_type` attribute is intended to provide additional
 #'       information above and beyond the `Data type` (i.e., column class) about
@@ -72,8 +70,7 @@
 #'       chooses. However, the user can directly tell `cb_add_summary_stats()`
 #'       which summary stats to calculate by providing a `col_type` attribute
 #'       to a column with one of the following values: `Numeric`,
-#'       `Categorical`, or `Time`.
-#'     }
+#'       `Categorical`, or `Time`.}
 #'     \item{value_labels:}{
 #'       Although you may pass any named vector you desire to the `value_labels`
 #'       attribute, it is intended to inform your data users about how to
@@ -108,8 +105,7 @@
 #'           overwrite the imported value labels for any column by adding a
 #'           `value_labels` attribute as shown in the example below.
 #'         }{}
-#'       }
-#'     }
+#'       }}
 #'     \item{skip_pattern:}{
 #'       Although you may add any text you desire to the `skip_pattern`
 #'       attribute, it is intended to be used describe skip patterns in the
@@ -118,8 +114,7 @@
 #'       asked of participants who were enrolled in the study for at least
 #'       10 days, then you may want to add a note like "Not asked if
 #'       days < 10" to the skip pattern section of
-#'       the column attributes table.
-#'     }
+#'       the column attributes table.}
 #'   }
 #'
 #' @param df Data frame of interest
