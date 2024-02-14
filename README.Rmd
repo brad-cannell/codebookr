@@ -497,7 +497,7 @@ print(study_codebook, "study_codebook_5.docx")
 
 [![](man/figures/study_codebook_5.png)](https://www.dropbox.com/s/bnkz2hqc2huqa3e/study_codebook_4.docx?dl=0)
 
-As shown in the screenshot above, the column attributes table for the `address` column no longer shows any of the idividual addresses. 
+As shown in the screenshot above, the column attributes table for the `address` column no longer shows any of the individual addresses. 
 
 Further, we can omit the summary statistics for all of the columns in our data frame using the following code.
 
