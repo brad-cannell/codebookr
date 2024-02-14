@@ -37,7 +37,7 @@ attributes you want, there are currently \strong{only five} special attributes
 that the \code{codebook()} function will recognize and add to the column
 attributes table of the codebook document. They are:
 
-\itemize{
+\describe{
 \item{description:}{
 Although you may add any text you desire to the
 \code{description} attribute, it is intended to be used describe the
