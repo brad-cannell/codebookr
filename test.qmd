@@ -1,0 +1,161 @@
+# Stylizing the description section
+
+Maybe turn this into a vignette eventually.
+
+Notes on stylizing with officer
+- https://davidgohel.github.io/officer/
+- https://ardata-fr.github.io/flextable-book/
+- https://brad-cannell.github.io/r_notes/officer.html
+
+```{r}
+library(dplyr, warn.conflicts = FALSE)
+library(codebookr)
+library(officer)
+```
+
+Load data
+
+```{r}
+data(study)
+```
+
+# Create codebook with basic description
+
+```{r}
+description_basic <- "In collaboration with Texas Adult Protective Services (APS) and one of the largest mobile healthcare providers in North Texas — MedStar Mobile Healthcare (MedStar) — our team developed and piloted an EA screening tool: Detection of Elder Abuse Through Emergency Care Technicians (DETECT). The DETECT tool was designed specifically to help medics identify potential EA among community-dwelling older adults during an emergency response. DETECT relies entirely on the medics’ systematic observations of the older adults’ physical and social environment — no direct questioning of the older adult or their caregivers is involved. The intent was to create an EA screening tool that was easy for medics to use in the field and that helped medics capture information about older adults, their environments, and their caregivers that is thought to be associated with the occurrence of EA. 
+
+We pilot tested using the DETECT screening tool with medics in the field between September 17th and October 26th, 2015. During the pilot test, MedStar’s Electronic Patient Care Reporting system (ePCR) was programmed to automatically prompt all medics to complete an EA screening using the DETECT tool while on an eligible 911 response. An eligible 911 response was defined as a call for a community-dwelling patient who was 65 years of age or older, the setting was the patient’s residence, and the patient resided in the community (e.g., private home, unlicensed adult foster homes, unlicensed board and care homes, etc.). Other types of residences (e.g., licensed skilled nursing facilities) were excluded because reports of EA in these settings are generally not investigated by APS in Texas. By definition, older adults who participated in the pilot study had to live in MedStar’s service area of an estimated (978,000 residents), which included Fort Worth, Texas, and 14 surrounding communities."
+```
+
+```{r}
+study_codebook_basic <- codebook(
+  df = study,
+  title = "My Example Study",
+  subtitle = "A Subtitle for My Example Study Codebook",
+  description = description_basic
+)
+```
+
+View result
+
+```{r}
+print(study_codebook_basic, "study_codebook_description_basic.docx")
+```
+
+# Create a codebook with headings
+
+Here's a basic formatting example that has nothing to do with the study data.
+
+```{r}
+doc <- read_docx() %>%
+  body_add_par("DETECT LEAD Panel Initial Review Report", style = "heading 1") %>%
+  body_add_par(paste("Updated: ", Sys.Date())) %>%
+  body_add_par("") %>%
+  body_add_fpar(
+    fpar(
+      ftext(
+        "Total Initial Assessments:",
+        prop = fp_text(
+          font.family = "Times New Roman", font.size = 11
+        )
+      )
+    )
+  )
+```
+
+```{r}
+print(
+  doc, 
+  "officer_formatted_text.docx"
+)
+```
+
+Try applying that process to the study data.
+
+First, can I just pass ` body_add_par()` to the `codebook()` function?
+
+```{r}
+#| error: true
+study_codebook_first_attempt <- codebook(
+  df = study,
+  title = "My Example Study",
+  subtitle = "A Subtitle for My Example Study Codebook",
+  description = body_add_par("DETECT LEAD Panel Initial Review Report", style = "heading 1")
+)
+```
+
+Just passing formatted `officer` paragraphs to the `description` argument of the `codebook()` function doesn't work. This is because the `description` argument is just looking for a character vector.
+- If the `description` argument isn't missing, then it passes the value to `cb_add_description`.
+- That function is only set up to handle character strings.
+
+Solution options:
+- Use `officer` to add post hoc styling.
+- Update `cb_add_description` to accept `officer` code.
+
+# Option 1: Use `officer` to add post hoc styling
+
+```{r}
+study_codebook_post_hoc_01 <- codebook(
+  df = study,
+  title = "My Example Study",
+  subtitle = "A Subtitle for My Example Study Codebook",
+  description = description_basic
+)
+```
+
+```{r}
+class(study_codebook_post_hoc_01)
+```
+
+This is just an officer (`rdocx`) object. So, we should be able to add post hoc styling.
+
+Move cursor to the description section (https://davidgohel.github.io/officer/reference/cursor.html)
+
+```{r}
+cursor_reach_test(study_codebook_post_hoc_01, "Description:")
+```
+
+```{r}
+study_codebook_post_hoc_01 <- cursor_reach(study_codebook_post_hoc_01, "Description:")
+```
+
+Now add a space and a stylized header
+
+```{r}
+study_codebook_post_hoc_01 <- study_codebook_post_hoc_01 |> 
+  body_add_par("") |> 
+  body_add_par("Overview of the Study", style = "heading 1")
+```
+
+```{r}
+print(study_codebook_post_hoc_01, "study_codebook_description_basic_header_1.docx")
+```
+
+Now move the cursor to below the description paragraph.
+
+```{r}
+end_of_description_paragraph <- stringr::str_extract(description_basic, "\\s(\\w+).$")
+```
+
+```{r}
+study_codebook_post_hoc_02 <- cursor_reach(study_codebook_post_hoc_01, end_of_description_paragraph)
+```
+
+Now add a space and a stylized header
+
+```{r}
+study_codebook_post_hoc_02 <- study_codebook_post_hoc_02 |> 
+  body_add_par("") |> 
+  body_add_par("Study Sections", style = "heading 1")
+```
+
+```{r}
+print(study_codebook_post_hoc_02, "study_codebook_description_basic_header_2.docx")
+```
+
+Now add a bulleted list
+
+```{r}
+
+```
+
