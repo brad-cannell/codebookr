@@ -96,7 +96,7 @@ codebook <- function(
   # ===========================================================================
   # Optionally add title and subtitle to top of codebook
   # ===========================================================================
-  cb_shell <- cb_add_title(
+  rdocx <- cb_add_title(
     rdocx = rdocx,
     title = title,
     subtitle = subtitle
