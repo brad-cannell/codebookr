@@ -12,8 +12,10 @@ There were 2 NOTEs
 1. We encountered this note on Windows Server 2022, R-devel, 64 bit running `devtools::check_rhub()`.
 
 checking for non-standard things in the check directory ... NOTE
+Found the following files/directories:
+    ''NULL''
 
-There is no file name given. We aren't sure what this note is referrring to. Therefore, no action was taken.
+There is no file name given. We aren't sure what this note is referring to. Therefore, no action was taken.
 
 2. We encountered this note on Windows Server 2022, R-devel, 64 bit running `devtools::check_rhub()`.
 

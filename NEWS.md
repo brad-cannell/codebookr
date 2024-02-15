@@ -1,3 +1,7 @@
+# codebookr 0.1.8
+
+* Fix issue where the word "Codebook" that was previously printed at the top of the codebook document printed at the bottom of the codebook document. Additionally, if there was a title or subtitle, that was printed at the bottom of the codebook as well.
+
 # codebookr 0.1.7
 
 * Fix dplyr warning, "Warning: Returning more (or less) than 1 row per `summarise()` group was deprecated in
