@@ -9,7 +9,14 @@ There were no WARNINGs
 
 There were 2 NOTEs
 
-1. We encountered this note on Windows Server 2022, R-devel, 64 bit running `devtools::check_rhub()`.
+1. checking CRAN incoming feasibility ... [17s] NOTE
+  Maintainer: 'Brad Cannell <brad.cannell@gmail.com>'
+  
+  Days since last update: 2
+  
+We realize that it has only been two days since we submitted our last update, but this bug fix is important.
+
+2. We encountered this note on Windows Server 2022, R-devel, 64 bit running `devtools::check_rhub()`.
 
 checking for non-standard things in the check directory ... NOTE
 Found the following files/directories:
@@ -17,7 +24,7 @@ Found the following files/directories:
 
 There is no file name given. We aren't sure what this note is referring to. Therefore, no action was taken.
 
-2. We encountered this note on Windows Server 2022, R-devel, 64 bit running `devtools::check_rhub()`.
+3. We encountered this note on Windows Server 2022, R-devel, 64 bit running `devtools::check_rhub()`.
 
 checking for detritus in the temp directory ... NOTE
 Found the following files/directories:
