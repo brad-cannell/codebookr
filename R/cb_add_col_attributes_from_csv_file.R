@@ -11,7 +11,8 @@
 #'   attributes can later be accessed to fill in the column attributes table of
 #'   the codebook document. Column attributes _can_ serve a similar function to
 #'   variable labels in SAS or Stata; however, you can assign many different
-#'   attributes to a column and they can contain any kind of information you want.
+#'   attributes to a column and they can contain any kind of information you
+#'   want.
 #'
 #'   Although the `cb_add_col_attributes()` function will allow you to add any
 #'   attributes you want, there are currently **only five** special attributes
@@ -25,19 +26,19 @@
 #'       question/process that generated the data contained in the column.
 #'       Many statistical software packages refer to this as a variable label.
 #'       If the data was imported from SAS, Stata, or SPSS with variable labels
-#'       using the `haven` package, `codebook` will automatically recognize them.
-#'       There is no need to manually create them. However, you may overwrite the
-#'       imported variable label for any column by adding a `description`
-#'       attribute.}
+#'       using the `haven` package, `codebook` will automatically recognize
+#'       them. There is no need to manually create them. However, you may
+#'       overwrite the imported variable label for any column by adding a
+#'       `description`attribute.}
 #'     \item{source:}{
 #'       Although you may add any text you desire to the `source`
 #'       attribute, it is intended to be used describe where the data contained
 #'       in the column originally came from. For example, if the current data
 #'       frame was created by merging multiple data sets together, you may want
-#'       to use the source attribute to identify the data set it originates from.
-#'       As another example, if the current data frame contains longitudinal
-#'       data, you may want to use the source attribute to identify the wave(s)
-#'       in which data for this column was collected.}
+#'       to use the source attribute to identify the data set it originates
+#'       from. As another example, if the current data frame contains
+#'       longitudinal data, you may want to use the source attribute to identify
+#'       the wave(s) in which data for this column was collected.}
 #'     \item{col_type:}{
 #'       The `col_type` attribute is intended to provide additional
 #'       information above and beyond the `Data type` (i.e., column class) about
@@ -120,17 +121,27 @@
 #' @param df Data frame of interest
 #' @param attr_csv_path CSV file containing the column attributes.
 #' @examples
-#' +-----------+-------------------------------+--------+-------------+--------------------------------------------+-----------------------+
-#' | variable  | description                   | source | col_type    |value_labels                                |skip_pattern           |
-#' +===========+===============================+========+=============+============================================+=======================+
-#' | id        | Study identification variable | study  |             |                                            |                       |
-#' +-----------+-------------------------------+----------------------+--------------------------------------------+-----------------------+
-#' | likert    | An example Likert scale item  | study  | Categorical | c("Very dissatisfied" = 1,                 |Not asked if days < 10 |
-#' |           |                               |        |             |   "Somewhat dissatisfied" = 2,             |                       |
-#' |           |                               |        |             |   "Neither satisfied nor dissatisfied" = 3,|                       |
-#' |           |                               |        |             |   "Somewhat satisfied" = 4,                |                       |
-#' |           |                               |        |             |   "Very satisfied" = 5)                    |                       |
-#' +-----------+-------------------------------+--------+-------------+--------------------------------------------+-----------------------+
+#'
+#' +--------+--------------+------+-----------+-------------------+------------+
+#' |variable|description   |source|col_type   |value_labels       |skip_pattern|
+#' +========+==============+======+===========+===================+============+
+#' |id      |Study         |study |           |                   |            |
+#' |        |identification|      |           |                   |            |
+#' |        |variable      |      |           |                   |            |
+#' +--------+--------------+------+-----------+-------------------+------------+
+#' |likert  |An example    |study |Categorical|c(                 |Not asked if|
+#' |        |Likert scale  |      |           |"Very dissatisfied"|days < 10   |
+#' |        |item          |      |           |              = 1, |            |
+#' |        |              |      |           |"Somewhat          |            |
+#' |        |              |      |           |dissatisfied" = 2, |            |
+#' |        |              |      |           |"Neither satisfied |            |
+#' |        |              |      |           |nor dissatisfied   |            |
+#' |        |              |      |           |              = 3, |            |
+#' |        |              |      |           |"Somewhat satisfied|            |
+#' |        |              |      |           |              = 4, |            |
+#' |        |              |      |           |"Very satisfied    |            |
+#' |        |              |      |           |              = 5) |            |
+#' +--------+--------------+------+-----------+-------------------+------------+
 #'
 #' @return Returns the same data frame (or tibble) passed to the `df` argument
 #'   with column attributes added.
@@ -149,16 +160,17 @@ cb_add_column_attributes_from_csv_file <- function(df, attr_csv_path){
   # Create list of variable names
   attr_vars <- attr_df %>% select(variable) %>% as.vector() %>% unlist()
 
-  # Iteratively add list of attributes from input attributes data frame for each variable to the large nested list
+  # Iteratively add list of attributes from input attributes data frame for each
+  # variable to the large nested list
   for (i in attr_vars){
-    test <- attr_df %>% filter(variable == i) %>% select(-c(variable)) %>%
+    var_attr <- attr_df %>% filter(variable == i) %>% select(-c(variable)) %>%
       as.list()
 
     # Remove any elements with missing values
-    test <- Filter(Negate(anyNA), test)
+    var_attr <- Filter(Negate(anyNA), var_attr)
 
     # Add attributes to large list
-    attr_list <- append(attr_list, list(test))
+    attr_list <- append(attr_list, list(var_attr))
   }
 
   # Name each sublist by variable
@@ -166,7 +178,11 @@ cb_add_column_attributes_from_csv_file <- function(df, attr_csv_path){
 
   for (i in attr_vars){
     # Convert input strings of value_labels to named lists
-    attr_list[[i]][["value_labels"]] <- eval(parse(text = attr_list[[i]]["value_labels"]))
+    attr_list[[i]][["value_labels"]] <- eval(
+      parse(
+        text = attr_list[[i]]["value_labels"]
+        )
+      )
     # Set df attributes from nested list of attributes
     attributes(df[[i]]) <- attr_list[[i]]
   }
@@ -175,7 +191,8 @@ cb_add_column_attributes_from_csv_file <- function(df, attr_csv_path){
 
 # # Test
 # # Set column attributes
-# test_study <- cb_add_column_attributes_from_csv_file(df = study, attr_csv_path = here::here("data", "test_attributes.csv"))
+# test_study <- cb_add_column_attributes_from_csv_file(df = study,
+# attr_csv_path = here::here("data", "test_attributes.csv"))
 #
 # # Generate codebook
 # test_codebook <- codebook(
@@ -183,5 +200,5 @@ cb_add_column_attributes_from_csv_file <- function(df, attr_csv_path){
 #   title = "Test study",
 #   description = "Testing! Testing"
 # )
-
+#
 # print(test_codebook, "test.docx")
