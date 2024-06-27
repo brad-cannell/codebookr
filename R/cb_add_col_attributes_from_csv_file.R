@@ -145,7 +145,6 @@
 #'
 #' @return Returns the same data frame (or tibble) passed to the `df` argument
 #'   with column attributes added.
-#' @importFrom dplyr %>%
 #' @export
 #'
 
@@ -158,12 +157,12 @@ cb_add_column_attributes_from_csv_file <- function(df, attr_csv_path){
   attr_list <- list()
 
   # Create list of variable names
-  attr_vars <- attr_df %>% select(variable) %>% as.vector() %>% unlist()
+  attr_vars <- attr_df |> select(variable) |> as.vector() |> unlist()
 
   # Iteratively add list of attributes from input attributes data frame for each
   # variable to the large nested list
   for (i in attr_vars){
-    var_attr <- attr_df %>% filter(variable == i) %>% select(-c(variable)) %>%
+    var_attr <- attr_df |> filter(variable == i) |> select(-c(variable)) |>
       as.list()
 
     # Remove any elements with missing values
