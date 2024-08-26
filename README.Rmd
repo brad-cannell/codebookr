@@ -163,7 +163,7 @@ codebookr:::cb_summary_stats_numeric(study, "height") %>% knitr::kable()
 
 ### Add column attributes to the data frame you want to document with a codebook
 
-Typically, though not necessarily (see [What if the variables already have labels?](#already-labeled})), the first step in creating your codebook will be to add column attributes to your data. The `cb_add_col_attributes()` function is a convenience function that allows you to add arbitrary attributes to the columns of the data frame. These attributes can later be accessed to fill in the column attributes table of the codebook document. Column attributes _can_ serve a similar function to variable labels in SAS or Stata; however, you can assign many different attributes to a column and they can contain any kind of information you want. 
+Typically, though not necessarily (see [What if the variables already have labels?](#what-if-the-variables-already-have-labels)), the first step in creating your codebook will be to add column attributes to your data. The `cb_add_col_attributes()` function is a convenience function that allows you to add arbitrary attributes to the columns of the data frame. These attributes can later be accessed to fill in the column attributes table of the codebook document. Column attributes _can_ serve a similar function to variable labels in SAS or Stata; however, you can assign many different attributes to a column and they can contain any kind of information you want. 
 
 The arguments to `cb_add_col_attributes()` are:
 
