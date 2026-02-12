@@ -110,8 +110,7 @@ column attributes table of the codebook document. They are:
   are commonly referred to as *value labels*. The R programming language
   does not really have value labels in the same way that other popular
   statistical software applications do. R users can (and typically
-  should) coerce numerically coded categorical variables into
-  [factors](https://www.r4epi.com/numerical-descriptions-of-categorical-variables.html#factor-vectors);
+  should) coerce numerically coded categorical variables into factors;
   however, coercing a numeric vector to a factor is not the same as
   adding value labels to a numeric vector because the underlying numeric
   values can change in the process of creating the factor. For this, and
