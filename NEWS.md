@@ -1,3 +1,7 @@
+# codebookr 0.1.9
+
+* Set R dependency to >= 4.1.0 and restore shorthand lambdas.
+
 # codebookr 0.1.8
 
 * Fix issue where the word "Codebook" that was previously printed at the top of the codebook document printed at the bottom of the codebook document. Additionally, if there was a title or subtitle, that was printed at the bottom of the codebook as well.

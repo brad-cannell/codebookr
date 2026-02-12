@@ -86,8 +86,7 @@ the 0's and 1's to improve the readability of your analysis output. These
 are commonly referred to as \emph{value labels}. The R programming language does
 not really have value labels in the same way that other popular statistical
 software applications do. R users can (and typically should) coerce
-numerically coded categorical variables into
-\href{https://www.r4epi.com/numerical-descriptions-of-categorical-variables.html#factor-vectors}{factors};
+numerically coded categorical variables into factors;
 however, coercing a numeric vector to a factor is not the same as adding value labels to a
 numeric vector because the underlying numeric values can change in the
 process of creating the factor. For this, and other reasons, many R

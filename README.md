@@ -1,5 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 <!-- For generating new README after build and check of new version: devtools::build_readme() -->
 
 # codebookr <img style="padding: 15px;" align="left" src="man/figures/codebookr_hex/codebookr_hex.png" alt="codebookr hex logo" width="250" height="289">
@@ -62,6 +63,7 @@ Let’s start by loading `codebookr` and `dplyr`.
 ``` r
 library(codebookr)
 library(dplyr, warn.conflicts = FALSE)
+#> Warning: package 'dplyr' was built under R version 4.5.2
 library(haven)
 ```
 
@@ -321,8 +323,7 @@ column attributes table of the codebook document. They are:
   are commonly referred to as *value labels*. The R programming language
   does not really have value labels in the same way that other popular
   statistical software applications do. R users can (and typically
-  should) coerce numerically coded categorical variables into
-  [factors](https://www.r4epi.com/numerical-descriptions-of-categorical-variables.html#factor-vectors);
+  should) coerce numerically coded categorical variables into factors;
   however, coercing a numeric vector to a factor is not the same as
   adding value labels to a numeric vector because the underlying numeric
   values can change in the process of creating the factor. For this, and
