@@ -1,0 +1,99 @@
+# Automate creation of a data codebook
+
+The codebook function assists with the creation of a codebook for a
+given data frame.
+
+## Usage
+
+``` r
+codebook(
+  df,
+  title = NA,
+  subtitle = NA,
+  description = NA,
+  keep_blank_attributes = FALSE,
+  no_summary_stats = NULL
+)
+```
+
+## Arguments
+
+- df:
+
+  The data frame the codebook will describe
+
+- title:
+
+  An optional title that will appear at the top of the Word codebook
+  document
+
+- subtitle:
+
+  An optional subtitle that will appear at the top of the Word codebook
+  document
+
+- description:
+
+  An optional text description of the dataset that will appear on the
+  first page of the Word codebook document
+
+- keep_blank_attributes:
+
+  TRUE or FALSE. By default, the column attributes table will omit the
+  Column description, Source information, Column type, value labels, and
+  skip pattern rows from the column attributes table in the codebook
+  document if those attributes haven't been set. In other words, it
+  won't show blank rows for those attributes. Passing `TRUE` to the
+  keep_blank_attributes argument will cause the opposite to happen. The
+  column attributes table will include a Column description, Source
+  information, Column type, and value labels row for every column in the
+  data frame - even if they don't have those attributes set.
+
+- no_summary_stats:
+
+  A character vector of column names. The summary statistics will not be
+  added to column attributes table for any column passed to this
+  argument. This can be useful when a column contains values that are
+  sensitive or may be used to identify individual people (e.g., names,
+  addresses, etc.) and the individual values for that column should not
+  appear in the codebook.
+
+## Value
+
+An rdocx object that can be printed to a Word document
+
+## Details
+
+Codebook expects that `df ` is a data frame that you have read into
+memory from a saved data file. Please provide the path to the saved data
+file. This function gets selected attributes about file saved at `path`
+and stores those attributes in a data frame, which is later turned into
+a flextable and added to the codebook document.
+
+Typically, though not necessarily, the first step in creating your
+codebook will be to add column attributes to your data. The
+[`cb_add_col_attributes()`](https://brad-cannell.github.io/codebookr/reference/cb_add_col_attributes.md)
+function is a convenience function that allows you to add arbitrary
+attributes to the columns of the data frame. These attributes can later
+be accessed to fill in the column attributes table of the codebook
+document. Column attributes *can* serve a similar function to variable
+labels in SAS or Stata; however, you can assign many different
+attributes to a column and they can contain any kind of information you
+want. For details see
+[cb_add_col_attributes](https://brad-cannell.github.io/codebookr/reference/cb_add_col_attributes.md)
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+study_codebook <- codebook(
+  df = study,
+  title = "My Example Study",
+  subtitle = "A Subtitle for My Example Study Codebook",
+  description = "Brief (or long) description of the data."
+)
+
+# Create the Word codebook document
+print(study_codebook, path = "example_codebook.docx")
+} # }
+```
