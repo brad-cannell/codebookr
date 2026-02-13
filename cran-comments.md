@@ -7,30 +7,26 @@ There were no ERRORs
 
 There were no WARNINGs
 
-There were 2 NOTEs
+There was one NOTE
 
-1. checking CRAN incoming feasibility ... [17s] NOTE
-  Maintainer: 'Brad Cannell <brad.cannell@gmail.com>'
-  
-  Days since last update: 2
-  
-We realize that it has only been two days since we submitted our last update, but this bug fix is important.
+1. checking CRAN incoming feasibility ... NOTE
+Maintainer: 'Brad Cannell <brad.cannell@gmail.com>'
 
-2. We encountered this note on Windows Server 2022, R-devel, 64 bit running `devtools::check_rhub()`.
+New submission
 
-checking for non-standard things in the check directory ... NOTE
-Found the following files/directories:
-    ''NULL''
+Package was archived on CRAN
 
-There is no file name given. We aren't sure what this note is referring to. Therefore, no action was taken.
+Possibly misspelled words in DESCRIPTION:
+  Codebooks (2:15)
+  codebooks (7:40)
 
-3. We encountered this note on Windows Server 2022, R-devel, 64 bit running `devtools::check_rhub()`.
+CRAN repository db overrides:
+  X-CRAN-Comment: Archived on 2026-02-12 as issues were not corrected
+    in time.
 
-checking for detritus in the temp directory ... NOTE
-Found the following files/directories:
-  'lastMiKTeXException'
-  
-We aren't able to locate this file/directory or recreate this problem on any other system. Therefore, no action was taken.
+We realize we didn't get the corrections made in time, and this will be viewed as a new submission. We apologize for th delay.
+
+Codebook is not mispelled. Therefore, no action was taken on that note.
 
 ## Downstream dependencies
 There are currently no downstream dependencies for this package.
