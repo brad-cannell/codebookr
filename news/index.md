@@ -2,6 +2,8 @@
 
 ## codebookr 0.1.9
 
+CRAN release: 2026-02-13
+
 - Set R dependency to \>= 4.1.0 and restore shorthand lambdas.
 
 ## codebookr 0.1.8
