@@ -1,0 +1,5 @@
+variable,description,source,col_type,value_labels,skip_pattern
+id,Study identification variable,study,,,
+address,Participant address,study,,,
+sex,Participant sex,study,Categorical,,
+likert,An example Likert scale item,study,Categorical,"c(""Very dissatisfied"" = 1, ""Somewhat dissatisfied"" = 2, ""Neither satisfied nor dissatisfied"" = 3,""Somewhat satisfied"" = 4,""Very satisfied"" = 5)",Not asked if days < 10
