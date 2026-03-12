@@ -1,3 +1,5 @@
+#' Adjust the codebook function so that it allows for the injection of arbitrary summary tables into the codebook.
+
 #' Automate creation of a data codebook
 #'
 #' The codebook function assists with the creation of a codebook for a given
@@ -46,9 +48,6 @@
 #' that has a corresponding data frame in this list will have a table containing
 #' user-prepared statistics in the codebook instead of generated summary
 #' statistics.
-#' @param omit_na_columns A list of variable names. Variables in this list will
-#' have all missing values omitted and 'Missing' will not be included as a
-#' category for each of these variables in the resulting codebook file.
 #' @return An rdocx object that can be printed to a Word document
 #' @importFrom dplyr %>%
 #' @import haven
@@ -68,9 +67,7 @@
 #' }
 codebook <- function(
     df, title = NA, subtitle = NA, description = NA,
-    keep_blank_attributes = FALSE, no_summary_stats = NULL,
-    custom_summary_stats_list = NULL,
-    omit_na_columns = NULL) {
+    keep_blank_attributes = FALSE, no_summary_stats = NULL, custom_summary_stats_list = NULL) {
 
   # Create character vector of column names in custom_summary_stats_list
   custom_summary_stats_cols <- names(custom_summary_stats_list)
@@ -195,13 +192,11 @@ codebook <- function(
 
     # Get column attributes
     table_var_attributes <- df %>%
-      cb_get_col_attributes(col_nms[[i]], keep_blank_attributes =
-                              keep_blank_attributes)
+      cb_get_col_attributes(col_nms[[i]], keep_blank_attributes = keep_blank_attributes)
     # Iss 10: Add column number to the column attributes table
     table_var_attributes$Column <- i
     table_var_attributes$Column[-1] <- NA
-    table_var_attributes <- table_var_attributes[, c("Column", "Attribute",
-                                                     "value")]
+    table_var_attributes <- table_var_attributes[, c("Column", "Attribute", "value")]
     # Make into a flextable and format
     table_var_attributes <- table_var_attributes %>%
       flextable::flextable() %>%
@@ -213,25 +208,13 @@ codebook <- function(
 
     # Get summary statistics
     # Iss 22. Add option to prevent summary stats table for selected columns
-    if (!(col_nms[[i]] %in% no_summary_stats) & !(col_nms[[i]] %in%
-                                                  custom_summary_stats_cols)) {
-      # Add option to remove missing values for each column
-      if (!(col_nms[[i]] %in% no_summary_stats) & !(col_nms[[i]] %in%
-                                                    custom_summary_stats_cols) &
-          col_nms[[i]] %in% omit_na_columns){
-        summary_stats <- df %>% select(col_nms[[i]]) %>% drop_na(.) %>%
-          cb_add_summary_stats(col_nms[[i]]) %>%
-          cb_summary_stats_to_ft()
-      }
-      else{
-        summary_stats <- df %>%
-          cb_add_summary_stats(col_nms[[i]]) %>%
-          cb_summary_stats_to_ft()
-      }
+    if (!(col_nms[[i]] %in% no_summary_stats) & !(col_nms[[i]] %in% custom_summary_stats_cols)) {
+      summary_stats <- df %>%
+        cb_add_summary_stats(col_nms[[i]]) %>%
+        cb_summary_stats_to_ft()
     }
 
-    # Use arbitrary summary stats instead of generated summary stats for
-    # specified columns
+    # Use arbitrary summary stats instead of generated summary stats for specified columns
     else if (col_nms[[i]] %in% custom_summary_stats_cols){
       summary_stats <- custom_summary_stats_list[[paste0(col_nms[[i]])]] %>%
         cb_custom_summary_stats_to_ft()
@@ -265,7 +248,7 @@ codebook <- function(
 
 # data(study)
 # devtools::load_all()
-#
+
 # # Test named list of data frames
 # days <- data.frame(y1 = c(1, 2, 3),
 #                    y2 = c(4, 5, 6))
@@ -279,8 +262,7 @@ codebook <- function(
 #   df = study,
 #   title = "Test study",
 #   description = "Testing! Testing",
-#   custom_summary_stats_list = list_test,
-#   omit_na_columns = c("sex")
+#   custom_summary_stats_list = list_test
 # )
 #
 # print(test_codebook, "test.docx")
