@@ -91,15 +91,16 @@ cb_summary_stats_to_ft.summary_many_cats <- function(df, col_width = 1.62, ...) 
 #' @export
 #' @rdname cb_summary_stats_to_ft
 
-cb_summary_stats_to_ft.summary_few_cats <- function(df, col_width = 1.62, ...) {
+cb_summary_stats_to_ft.summary_few_cats <- function(df, col_width = 1.3, ...) {
   ft <- df %>%
     flextable::regulartable() %>%
     # Change header text
     flextable::set_header_labels(
-      cat      = "Categories",
-      n        = "Frequency",
-      percent  = "Percent",
-      cum_freq = "Cumulative Frequency"
+      cat           = "Categories",
+      n             = "Frequency",
+      percent       = "Percent",
+      valid_percent = "Valid Percent",
+      cum_freq      = "Cumulative Frequency"
     ) %>%
     # Set font to TNR 11
     flextable::font(fontname = "Times New Roman", part = "all") %>%
