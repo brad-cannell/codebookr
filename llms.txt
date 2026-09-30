@@ -8,18 +8,34 @@ Under the hood, `codebookr` uses the
 [officer](https://davidgohel.github.io/officer/index.html) packages
 extensively to create the codebook as a Word document.
 
+## Scope
+
+`codebookr` describes the shape and content of a data set as it is
+stored. The summary statistics in a codebook report the values that
+appear in each column and how often they appear, with missing values
+reported as their own category. `codebookr` does not make analysis
+decisions, such as which values count as missing or valid, how to recode
+or combine categories, or which rows to exclude from a denominator.
+Those decisions belong to the analyst and to the packages used for
+analysis. The one exception is numeric summaries like the mean and
+standard deviation, which exclude `NA` values because they can’t be
+computed otherwise; the number of missing values is always reported in
+the column attributes table.
+
 ## Installation
 
 You can install the released version of `codebookr` from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
+
 install.packages("codebookr")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
+
 # install.packages("devtools")
 devtools::install_github("brad-cannell/codebookr")
 ```
@@ -56,6 +72,7 @@ cases.
 Let’s start by loading `codebookr` and `dplyr`.
 
 ``` r
+
 library(codebookr)
 library(dplyr, warn.conflicts = FALSE)
 #> Warning: package 'dplyr' was built under R version 4.5.2
@@ -70,11 +87,13 @@ some of the features of real study data. We will use it to demonstrate
 how to use `codebookr` below.
 
 ``` r
+
 # Load example data
 data(study)
 ```
 
 ``` r
+
 glimpse(study)
 #> Rows: 20
 #> Columns: 10
@@ -99,6 +118,7 @@ function without making any alterations. We will save the resulting
 environment as the `study_codebook` object.
 
 ``` r
+
 study_codebook <- codebook(study)
 ```
 
@@ -109,6 +129,7 @@ Finally, we will pass the `study_codebook` object we just created to the
 path to Word document we want to create.
 
 ``` r
+
 print(study_codebook, "basic_study_codebook.docx")
 ```
 
@@ -116,6 +137,7 @@ Alternatively, you can generate the rdocx file and print it as a Word
 document in one step like this.
 
 ``` r
+
 print(codebook(study), "basic_study_codebook.docx")
 ```
 
@@ -163,11 +185,13 @@ a **labeled** data frame.
 Once again, we will begin by loading the example `study` data.
 
 ``` r
+
 # Load example data
 data(study)
 ```
 
 ``` r
+
 glimpse(study)
 #> Rows: 20
 #> Columns: 10
@@ -361,6 +385,7 @@ codebook document. They are:
   pattern section of the column attributes table.
 
 ``` r
+
 study <- study %>%
   cb_add_col_attributes(
     id,
@@ -491,6 +516,7 @@ a result of adding attributes to the columns. After viewing those
 changes, we will add a title, subtitle, and description.
 
 ``` r
+
 study_codebook <- codebook(df = study)
 ```
 
@@ -506,6 +532,7 @@ step in creating the Word document is to
 it.
 
 ``` r
+
 print(x = study_codebook, target = "study_codebook_1.docx")
 ```
 
@@ -549,6 +576,7 @@ the column attributes tables now look a little different.
   attribute as demonstrated below.
 
 ``` r
+
 study <- study %>%
   cb_add_col_attributes(
     likert,
@@ -558,6 +586,7 @@ study <- study %>%
 ```
 
 ``` r
+
 print(x = codebook(study), target = "study_codebook_2.docx")
 ```
 
@@ -586,6 +615,7 @@ project](https://github.com/brad-cannell/detect_pilot_test_5w) for
 example purposes only.
 
 ``` r
+
 study_codebook <- codebook(
   df = study,
   title = "My Example Study",
@@ -597,6 +627,7 @@ We pilot tested using the DETECT screening tool with medics in the field between
 ```
 
 ``` r
+
 print(study_codebook, "study_codebook_3.docx")
 ```
 
@@ -621,6 +652,7 @@ Below, we demonstrate two techniques that can reduce some of the pain.
 Perhaps we will develop even better methods in the future.
 
 ``` r
+
 # Load study again to remove the attributes we added above
 data(study)
 ```
@@ -646,6 +678,7 @@ of allowing us to use [tidy-select selection
 features](https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html).
 
 ``` r
+
 admin_vars <- study %>% 
   select(id, date, time) %>% 
   names()
@@ -656,12 +689,14 @@ for(i in admin_vars) {
 ```
 
 ``` r
+
 attributes(study$id)
 #> $source
 #> [1] "Administrative data"
 ```
 
 ``` r
+
 attributes(study$date)
 #> $class
 #> [1] "Date"
@@ -671,6 +706,7 @@ attributes(study$date)
 ```
 
 ``` r
+
 attributes(study$time)
 #> $units
 #> [1] "secs"
@@ -692,6 +728,7 @@ do and help ensure that we don’t accidentally forget to add attributes
 to any of the columns.
 
 ``` r
+
 for (i in seq_along(names(study))) {
   cat(paste0('
     codebook_add_col_attributes( \n    ',
@@ -770,6 +807,7 @@ using the
 function from the [haven](https://haven.tidyverse.org/) package.
 
 ``` r
+
 study <- read_dta("inst/extdata/study.dta")
 ```
 
@@ -779,6 +817,7 @@ to the imported columns as `label`, `format`, and `labels` attributes
 respectively.
 
 ``` r
+
 attributes(study$sex)
 #> $label
 #> [1] "Biological sex of the participant assigned at birth"
@@ -798,6 +837,7 @@ Additionally, `haven` will add the `haven_labelled` and `vctrs_vctr`
 class to any column that has *value labels*.
 
 ``` r
+
 class(study$sex)
 #> [1] "haven_labelled" "vctrs_vctr"     "double"
 ```
@@ -814,6 +854,7 @@ All we need to do is pass the data frame to the
 function and print the `rdocx` object as before.
 
 ``` r
+
 print(codebook(study), "stata_codebook_1.docx")
 ```
 
@@ -837,12 +878,14 @@ attribute. In the code chunk below, we also add a `description`
 attribute. Which one will end up in the codebook document?
 
 ``` r
+
 study <- study %>% 
   cb_add_col_attributes(id, description = "My new description")
 #> The following attribute(s) are being added to a variable in the data frame for the first time: description. If you believe this/these attribute(s) were previously added, then check for a typo in the attribute name. If you are adding this/these attribute(s) for the first time, you can probably safely ignore this message.
 ```
 
 ``` r
+
 attributes(study$id)
 #> $label
 #> [1] "Participant's study identification number"
@@ -855,6 +898,7 @@ attributes(study$id)
 ```
 
 ``` r
+
 print(codebook(study), "stata_codebook_2.docx")
 ```
 
@@ -904,15 +948,18 @@ to keep `Column description:`, `Source information:`, `Column type:`,
 if those attributes don’t exist in the data frame.
 
 ``` r
+
 # Refresh data
 data(study)
 ```
 
 ``` r
+
 study_codebook <- codebook(study, keep_blank_attributes = TRUE)
 ```
 
 ``` r
+
 print(study_codebook, "study_codebook_4.docx")
 ```
 
@@ -950,10 +997,12 @@ function. Doing so will prevent the summary statistics from being added
 to column attributes table for any column passed to this argument.
 
 ``` r
+
 study_codebook <- codebook(study, no_summary_stats = "address")
 ```
 
 ``` r
+
 print(study_codebook, "study_codebook_5.docx")
 ```
 
@@ -966,6 +1015,7 @@ Further, we can omit the summary statistics for all of the columns in
 our data frame using the following code.
 
 ``` r
+
 codebook(study, no_summary_stats = names(study))
 ```
 

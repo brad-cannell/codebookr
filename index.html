@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Create Codebooks from Data Frames • codebookr</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Create Codebooks from Data Frames">
 <meta name="description" content="Quickly and easily create codebooks (i.e. data dictionaries) directly from a data frame.">
@@ -53,6 +53,11 @@
 
 <p>The <code>codebookr</code> package is intended to make it easy for users to create codebooks (also called data dictionaries) directly from an R data frame.</p>
 <p>Under the hood, <code>codebookr</code> uses the <a href="https://ardata-fr.github.io/flextable-book/" class="external-link">flextable</a> and <a href="https://davidgohel.github.io/officer/index.html" class="external-link">officer</a> packages extensively to create the codebook as a Word document.</p>
+<div class="section level2">
+<h2 id="scope">Scope<a class="anchor" aria-label="anchor" href="#scope"></a>
+</h2>
+<p><code>codebookr</code> describes the shape and content of a data set as it is stored. The summary statistics in a codebook report the values that appear in each column and how often they appear, with missing values reported as their own category. <code>codebookr</code> does not make analysis decisions, such as which values count as missing or valid, how to recode or combine categories, or which rows to exclude from a denominator. Those decisions belong to the analyst and to the packages used for analysis. The one exception is numeric summaries like the mean and standard deviation, which exclude <code>NA</code> values because they can’t be computed otherwise; the number of missing values is always reported in the column attributes table.</p>
+</div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -182,38 +187,38 @@ This and other print code chunks are set to eval=FALSE so that the Word document
 <h4 id="categorical-variables-with-many-different-categories">Categorical variables with many different categories<a class="anchor" aria-label="anchor" href="#categorical-variables-with-many-different-categories"></a>
 </h4>
 <table class="table">
-<thead><tr class="header">
+<thead><tr>
 <th align="left">lowest_cats</th>
 <th align="right">lowest_freq</th>
 <th align="left">highest_cats</th>
 <th align="right">highest_freq</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td align="left">1001</td>
 <td align="right">1</td>
 <td align="left">1017</td>
 <td align="right">1</td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">1002</td>
 <td align="right">1</td>
 <td align="left">1018</td>
 <td align="right">1</td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">1004</td>
 <td align="right">1</td>
 <td align="left">1019</td>
 <td align="right">1</td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">1005</td>
 <td align="right">1</td>
 <td align="left">1020</td>
 <td align="right">1</td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">1006</td>
 <td align="right">1</td>
 <td align="left">Missing</td>
@@ -226,26 +231,26 @@ This and other print code chunks are set to eval=FALSE so that the Word document
 <h4 id="categorical-variables-with-few-different-categories">Categorical variables with few different categories<a class="anchor" aria-label="anchor" href="#categorical-variables-with-few-different-categories"></a>
 </h4>
 <table class="table">
-<thead><tr class="header">
+<thead><tr>
 <th align="left">cat</th>
 <th align="left">n</th>
 <th align="left">cum_freq</th>
 <th align="left">percent</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td align="left">Female</td>
 <td align="left">11</td>
 <td align="left">11</td>
 <td align="left">55.00</td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">Male</td>
 <td align="left">8</td>
 <td align="left">19</td>
 <td align="left">40.00</td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">Missing</td>
 <td align="left">1</td>
 <td align="left">20</td>
@@ -258,26 +263,26 @@ This and other print code chunks are set to eval=FALSE so that the Word document
 <h4 id="datetime-variables">Date/Time variables<a class="anchor" aria-label="anchor" href="#datetime-variables"></a>
 </h4>
 <table class="table">
-<thead><tr class="header">
+<thead><tr>
 <th align="left">Statistic</th>
 <th align="left">Value</th>
 <th align="left">Frequency</th>
 <th align="left">Percentage</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td align="left">Minimum</td>
 <td align="left">2021-09-21</td>
 <td align="left">2</td>
 <td align="left">10.00</td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">Mode</td>
 <td align="left">2021-09-23</td>
 <td align="left">3</td>
 <td align="left">15.00</td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">Maximum</td>
 <td align="left">2021-10-26</td>
 <td align="left">2</td>
@@ -290,14 +295,14 @@ This and other print code chunks are set to eval=FALSE so that the Word document
 <h4 id="numeric-variables">Numeric variables<a class="anchor" aria-label="anchor" href="#numeric-variables"></a>
 </h4>
 <table class="table">
-<thead><tr class="header">
+<thead><tr>
 <th align="left">Min</th>
 <th align="left">Mean</th>
 <th align="left">Median</th>
 <th align="left">Max</th>
 <th align="left">SD</th>
 </tr></thead>
-<tbody><tr class="odd">
+<tbody><tr>
 <td align="left">58.79</td>
 <td align="left">73.54</td>
 <td align="left">73.39</td>
@@ -696,6 +701,12 @@ This and other print code chunks are set to eval=FALSE so that the Word document
 </ul>
 </div>
 
+<div class="community">
+<h2 data-toc-skip>Community</h2>
+<ul class="list-unstyled">
+<li><a href="CONTRIBUTING.html">Contributing guide</a></li>
+</ul>
+</div>
 
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>
@@ -722,7 +733,7 @@ This and other print code chunks are set to eval=FALSE so that the Word document
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>
