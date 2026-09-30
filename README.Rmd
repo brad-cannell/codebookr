@@ -25,6 +25,10 @@ The `codebookr` package is intended to make it easy for users to create codebook
 
 Under the hood, `codebookr` uses the [flextable](https://ardata-fr.github.io/flextable-book/) and [officer](https://davidgohel.github.io/officer/index.html) packages extensively to create the codebook as a Word document. 
 
+## Scope
+
+`codebookr` describes the shape and content of a data set as it is stored. The summary statistics in a codebook report the values that appear in each column and how often they appear, with missing values reported as their own category. `codebookr` does not make analysis decisions, such as which values count as missing or valid, how to recode or combine categories, or which rows to exclude from a denominator. Those decisions belong to the analyst and to the packages used for analysis. The one exception is numeric summaries like the mean and standard deviation, which exclude `NA` values because they can't be computed otherwise; the number of missing values is always reported in the column attributes table.
+
 ## Installation
 
 You can install the released version of `codebookr` from [CRAN](https://CRAN.R-project.org) with:
