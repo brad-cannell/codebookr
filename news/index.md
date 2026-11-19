@@ -1,5 +1,15 @@
 # Changelog
 
+## codebookr (development version)
+
+- Replace deprecated
+  [`flextable::regulartable()`](https://davidgohel.github.io/flextable/reference/regulartable.html)
+  with
+  [`flextable::flextable()`](https://davidgohel.github.io/flextable/reference/flextable.html).
+  This removes the “‘flextable::regulartable’ is deprecated” warning
+  that appeared once per variable when printing a codebook.
+  ([\#66](https://github.com/brad-cannell/codebookr/issues/66))
+
 ## codebookr 0.1.9
 
 CRAN release: 2026-02-13
