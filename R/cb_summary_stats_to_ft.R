@@ -24,7 +24,7 @@ cb_summary_stats_to_ft <- function(df, ...) {
 
 cb_summary_stats_to_ft.summary_numeric <- function(df, col_width = 1.3, ...) {
   ft <- df %>%
-    flextable::regulartable() %>%
+    flextable::flextable() %>%
     # Set font to TNR 11
     flextable::font(fontname = "Times New Roman", part = "all") %>%
     flextable::fontsize(size = 11, part = "all") %>%
@@ -56,7 +56,7 @@ cb_summary_stats_to_ft.summary_many_cats <- function(df, col_width = 1.62, ...) 
   ft <- df %>%
     # Set all variables to character first to prevent adding trailing zeros
     dplyr::mutate(dplyr::across(dplyr::everything(), as.character)) %>%
-    flextable::regulartable() %>%
+    flextable::flextable() %>%
     # Change header text
     flextable::set_header_labels(
       lowest_cats  = "Categories with Smallest Values",
@@ -93,7 +93,7 @@ cb_summary_stats_to_ft.summary_many_cats <- function(df, col_width = 1.62, ...) 
 
 cb_summary_stats_to_ft.summary_few_cats <- function(df, col_width = 1.62, ...) {
   ft <- df %>%
-    flextable::regulartable() %>%
+    flextable::flextable() %>%
     # Change header text
     flextable::set_header_labels(
       cat      = "Categories",
@@ -130,7 +130,7 @@ cb_summary_stats_to_ft.summary_few_cats <- function(df, col_width = 1.62, ...) {
 
 cb_summary_stats_to_ft.summary_time <- function(df, col_width = 1.62, ...) {
   ft <- df %>%
-    flextable::regulartable() %>%
+    flextable::flextable() %>%
     # Set font to TNR 11
     flextable::font(fontname = "Times New Roman", part = "all") %>%
     flextable::fontsize(size = 11, part = "all") %>%

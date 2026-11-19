@@ -126,7 +126,7 @@ codebook <- function(
 
   # Convert to flextable
   meta <- meta %>%
-    flextable::regulartable() %>%
+    flextable::flextable() %>%
     cb_theme_df_attributes() # Format
 
   # Add metadata to codebook
