@@ -1,3 +1,7 @@
+# codebookr (development version)
+
+* Replace deprecated `flextable::regulartable()` with `flextable::flextable()`. This removes the "'flextable::regulartable' is deprecated" warning that appeared once per variable when printing a codebook. (#66)
+
 # codebookr 0.1.9
 
 * Set R dependency to >= 4.1.0 and restore shorthand lambdas.
