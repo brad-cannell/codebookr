@@ -1,7 +1,0 @@
-"0","admin_vars <- study %>% "
-"0","  select(id, date, time) %>% "
-"0","  names()"
-"0",""
-"0","for(i in admin_vars) {"
-"0","  attr(study[[i]], ""source"") <- ""Administrative data"""
-"0","}"
